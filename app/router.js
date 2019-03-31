@@ -6,6 +6,12 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL
 });
 
-Router.map(function() {});
+Router.map(function() {
+  this.route('calendar', function() {
+    this.route('activity');
+  });
+  this.route('measures');
+  this.route('stadistics');
+});
 
 export default Router;
