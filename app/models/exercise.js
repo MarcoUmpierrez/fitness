@@ -2,8 +2,8 @@ import DS from 'ember-data';
 const { Model, attr } = DS;
 
 export default class ExerciseModel extends Model {
-  name = attr('string');
-  description = attr('string');
-  repetitions = attr('number');
-  image = attr('string');
+  @attr('string') name;
+  @attr('string') description;
+  @attr('number') repetitions;
+  @attr('string') image;
 }

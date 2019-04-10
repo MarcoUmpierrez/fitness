@@ -2,10 +2,10 @@ import DS from 'ember-data';
 const { Model, belongsTo, attr } = DS;
 
 export default class TrainingDayModel extends Model {
-  trainingRoutine = belongsTo('training-routine');
-  trainingRoutineId = attr('string');
-  measure = belongsTo('measure');
-  measureId = attr('string');
-  day = attr('date');
-  completed = attr('boolean');
+  @belongsTo('training-routine') trainingRoutine;
+  @attr('string') trainingRoutineId;
+  @belongsTo('measure') measure;
+  @attr('string') measureId;
+  @attr('date') day;
+  @attr('boolean') completed;
 }

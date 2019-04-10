@@ -10,7 +10,9 @@ Router.map(function() {
   this.route('calendar', function() {
     this.route('activity');
   });
-  this.route('measures');
+  this.route('measures', function() {
+    this.route('new');
+  });
   this.route('stadistics');
 });
 
