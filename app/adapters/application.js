@@ -6,7 +6,7 @@ export default class ApplicationAdapter extends DS.JSONAPIAdapter {
   @service storage;
 
   ajax(url, requestType, data) {
-    return this.storage.add(url, requestType, data);
+    return this.storage.request(url, requestType, data);
   }
 
   generateIdForRecord(store, inputProperties) {

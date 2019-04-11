@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { openDB, deleteDB, wrap, unwrap } from 'idb';
+import { debug } from '@ember/debug';
 
 export default class StorageService extends Service {
   async InitDatabase() {
@@ -10,31 +11,69 @@ export default class StorageService extends Service {
       }
     });
 
-    // return db.add('measures', data.data.data);
     return db;
-    //db.close();
   }
 
-  async add(url, requestType, data) {
+  destroy() {
+    if (this.db) {
+      this.db.close();
+    }
+
+    super.destroy();
+  }
+
+  async request(url, requestType, data) {
     if (!this.db) {
       this.db = await this.InitDatabase();
     }
 
     let obj = data.data.data;
-    let store = url.replace('/', '');
+    let splittedURL = url.split('/');
+    let store, objId;
+
+    if (splittedURL) {
+      if (splittedURL.length > 1) {
+        store = splittedURL[1];
+      }
+
+      if (splittedURL.length > 2) {
+        objId = splittedURL[2];
+      }
+    } else {
+      debug(`No handler for URL ${url}`);
+      return;
+    }
+
     switch (requestType) {
       case 'GET':
-        this.db.get(store, obj.id);
-        break;
+        return this.getRequest(store, objId);
       case 'POST':
-        this.db.add(store, obj);
-        break;
+        return this.postRequest(store, obj);
       case 'PUT':
-        this.db.put(store, obj);
-        break;
+        return this.putRequest(store, obj);
       case 'DELETE':
-        this.db.delete(store, obj.id);
-        break;
+        return this.deleteRequest(store, objId);
     }
+  }
+
+  getRequest(store, objId) {
+    if (objId) {
+      return this.db.get(store, objId);
+    }
+    else {
+      return this.db.getAll(store);
+    }
+  }
+
+  postRequest(store, obj) {
+    return this.db.add(store, obj);
+  }
+
+  putRequest(store, obj) {
+    return this.db.put(store, obj);
+  }
+
+  deleteRequest(store, objId) {
+    return this.db.delete(store, objId);
   }
 }
