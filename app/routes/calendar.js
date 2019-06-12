@@ -1,4 +1,6 @@
-import Route from '@ember/routing/route';
+import BaseRoute from './base';
 
-export default class CalendarRoute extends Route {
+export default class CalendarRoute extends BaseRoute {
+  leftRoute = 'index';
+  rightRoute = null;
 }

@@ -22,12 +22,12 @@ export default class StorageService extends Service {
     super.destroy();
   }
 
-  async request(url, requestType, data) {
+  async request(url, requestType, requestBody) {
     if (!this.db) {
       this.db = await this.InitDatabase();
     }
 
-    let obj = data.data.data;
+    let obj = requestBody.data.data;
     let splittedURL = url.split('/');
     let store, objId;
 
