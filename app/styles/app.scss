@@ -1,6 +1,11 @@
 // required for ember-component-css
 @import "pod-styles";
 
+body {
+  margin: 0;
+  background-color: #dddddd50;
+}
+
 .container {
   width: 100%;
   height: 90vh;
