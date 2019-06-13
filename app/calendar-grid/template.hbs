@@ -1,4 +1,5 @@
- <table style="width:100%">
+
+ <table>
   <tr>
     <th>MON</th>
     <th>TUE</th>
@@ -8,45 +9,11 @@
     <th>SAT</th>
     <th>SUN</th>
   </tr>
-  {{!-- first week --}}
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  {{!-- second week --}}
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  {{!-- third week --}}
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  {{!-- fourth week --}}
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table> 
-{{!-- {{yield}} --}}
+  {{#each this.month as |week|}}
+    <tr>
+      {{#each week as |day|}}
+        <td>{{day}}</td>
+      {{/each}}
+    </tr>
+  {{/each}}
+</table>
