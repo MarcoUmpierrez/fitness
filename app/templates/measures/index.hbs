@@ -1,1 +1,12 @@
 general measures
+{{#each model as |measure|}}
+{{log "bony: " measure.boneDensity}}
+  {{measure.trainingDayId}}
+  {{measure.weight}}
+  {{measure.water}}
+  {{measure.fat}}
+  {{measure.muscle}}
+  {{measure.boneDensity}}
+  <br>
+{{/each}}
+{{#link-to "measures.new"}}go new{{/link-to}}
