@@ -6,14 +6,14 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL
 });
 
-Router.map(function() {
-  this.route('calendar', function() {
+Router.map(function () {
+  this.route('calendar', function () {
     this.route('activity');
   });
-  this.route('measures', function() {
+  this.route('measures', function () {
     this.route('new');
   });
-  this.route('stadistics');
+  this.route('statistics');
 });
 
 export default Router;

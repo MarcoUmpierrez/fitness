@@ -1,6 +1,6 @@
 import BaseRoute from './base';
 
 export default class MeasuresRoute extends BaseRoute {
-  leftRoute = null;
+  leftRoute = 'statistics';
   rightRoute = 'index';
 }

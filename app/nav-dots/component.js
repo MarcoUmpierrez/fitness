@@ -19,4 +19,9 @@ export default class NavDotsComponent extends Component {
   get isMeasuresRoute() {
     return this.router.currentRouteName.includes('measures') ? 'light-on' : 'light-off';
   }
+
+  @computed('router.currentRouteName')
+  get isStatisticsRoute() {
+    return this.router.currentRouteName.includes('statistics') ? 'light-on' : 'light-off';
+  }
 }
