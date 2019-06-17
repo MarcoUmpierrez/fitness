@@ -6,23 +6,5 @@ body {
   background-color: #dddddd50;
 }
 
-.container {
-  width: 100%;
-  height: 90vh;
-  display: grid;
-  grid-template-areas: 
-    "body"
-    "body"
-    "body"
-    "footer";
-}
-
-.band {
-  grid-area: body;
-  background-image: linear-gradient(50deg, #4f3982, #a53c5a, #ed3a33);
-  border-radius: 10% 10% 100% 100% / 0% 0% 50% 50% ;
-}
-
-.footer {  
-  grid-area: footer;
-}
+@import "application";
+@import "measures";

@@ -1,7 +1,14 @@
-general measures
-{{#each model as |trainingDay|}}
-{{log trainingDay.day}}
-  {{format-date trainingDay.day}}
-  <br>
-{{/each}}
-{{#link-to "measures.new"}}go new{{/link-to}}
+<div class="measures-container">
+  <header>
+    Measures {{#link-to "measures.new"}}<FaIcon @icon='plus-square'/>{{/link-to}}
+  </header>
+  <section>
+    {{#each model as |trainingDay|}}
+      <div class="item">
+        {{format-date trainingDay.day}}
+        {{#link-to "measures.new"}}<FaIcon @icon='angle-right'/>{{/link-to}}
+      </div>
+      <br>
+    {{/each}}
+  </section>
+</div>
