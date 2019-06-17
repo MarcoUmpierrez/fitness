@@ -1,14 +1,7 @@
 general measures
 {{#each model as |trainingDay|}}
 {{log trainingDay.day}}
-  {{trainingDay.day}}
+  {{format-date trainingDay.day}}
   <br>
 {{/each}}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 {{#link-to "measures.new"}}go new{{/link-to}}
