@@ -1,6 +1,12 @@
 export default function () {
   // Add your transitions here, like:
   this.transition(
+    this.fromRoute('measures.index'),
+    this.toRoute('measures.new'),
+    this.use('toDown'),
+    this.reverse('toUp')
+  );
+  this.transition(
     this.fromRoute('measures'),
     this.toRoute('statistics'),
     this.use('toLeft'),

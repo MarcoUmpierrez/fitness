@@ -11,5 +11,6 @@ export default class MeasuresNewController extends Controller {
     trainingDay.set('measure', this.model);
     this.model.save();
     trainingDay.save();
+    this.transitionToRoute('measures.index');
   }
 }
