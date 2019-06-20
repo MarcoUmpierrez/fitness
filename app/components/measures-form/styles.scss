@@ -1,0 +1,72 @@
+& {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-areas: 
+    "body"
+    "body"
+    "body"
+    "footer";
+}
+
+.measures-form {
+  grid-area: body;
+  background-image: linear-gradient(50deg, #4f3982, #a53c5a, #ed3a33);
+  border-radius: 10% 10% 100% 100% / 0% 0% 50% 50% ;
+    
+  display: flex;
+  align-items: center;    
+  flex-direction: column;
+  padding-top: 40px;
+  padding-right: 20px;
+}
+
+
+.measures-input {
+  padding-top: 10px;     
+  svg {
+    width: 25px;
+    height: 25px;
+    color: white;
+    margin-right: 10px;
+  }
+}
+
+.measure-buttons {  
+  grid-area: footer;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+
+button {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0px 0px 5px 3px #ccc;
+  border: none;
+}
+
+
+button:focus{
+  background-color:#ccc;
+  box-shadow: none;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.save {
+  color: green;
+}
+
+.back {
+  color: black;
+}
+
+.delete {
+  color: red;
+}

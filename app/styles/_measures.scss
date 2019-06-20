@@ -12,7 +12,6 @@
   & header {
     background-image: linear-gradient(270deg, #4f3982, #a53c5a, #ed3a33);
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.4em;
     font-weight: bold;
     grid-area: header;
@@ -34,69 +33,12 @@
       line-height: 45px;
       border: 1px solid #bbbbbb;
       padding-left: 5px;
+      margin-top: -1px;
 
       & > a {
         float: right;
         padding-right: 10px;
         color: inherit;
-      }
-    }
-  }
-}
-
-.measures-new-container {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-areas: 
-    "body"
-    "body"
-    "body"
-    "footer";
-  .band {
-    grid-area: body;
-    background-image: linear-gradient(50deg, #4f3982, #a53c5a, #ed3a33);
-    border-radius: 10% 10% 100% 100% / 0% 0% 50% 50% ;
-      
-    display: flex;
-    align-items: center;    
-    flex-direction: column;
-    padding-top: 40px;
-    padding-right: 20px;
-    div {
-      padding-top: 10px;     
-      svg {
-        width: 25px;
-        height: 25px;
-        color: white;
-        margin-right: 10px;
-      }
-    }
-  }
-
-  .footer {  
-    grid-area: footer;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    button {
-      border-radius: 50%;
-      background-color: green;
-      width: 50px;
-      height: 50px;
-      box-shadow: none;
-      border: none;
-      svg {
-        width: 25px;
-        height: 25px;
-        color: white;
-      }
-    }
-    a {
-      svg {
-        width: 50px;
-        height: 50px;
-        color: red;
       }
     }
   }

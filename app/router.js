@@ -12,6 +12,7 @@ Router.map(function () {
   });
   this.route('measures', function () {
     this.route('new');
+    this.route('show', { path: '/:measures_id' });
   });
   this.route('statistics');
 });

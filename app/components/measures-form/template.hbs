@@ -1,0 +1,72 @@
+<form class="measures-form">
+    <div class="measures-input">
+      <FaIcon @icon="weight" title="weight"/>
+      <input 
+        id="weight"
+        type="number" 
+        step="0.1" 
+        value={{@model.weight}} 
+        placeholder="0.0" 
+        oninput={{action (mut @model.weight) value="target.value"}}
+      >
+    </div>
+
+    <div class="measures-input">
+      <FaIcon @icon="tint" title="water"/>
+      <input 
+        id="water"
+        type="number" 
+        step="0.1" 
+        value={{@model.water}} 
+        placeholder="0.0" 
+        oninput={{action (mut @model.water) value="target.value"}}
+      >      
+    </div>
+
+    <div class="measures-input">
+      <FaIcon @icon="bacon"  title="fat"/>
+      <input 
+        id="fat"
+        type="number" 
+        step="0.1" 
+        value={{@model.fat}} 
+        placeholder="0.0" 
+        oninput={{action (mut @model.fat) value="target.value"}}
+      >
+    </div>
+
+    <div class="measures-input">
+      <FaIcon @icon="dumbbell" title="muscle"/>
+      <input 
+        id="muscle"
+        type="number" 
+        step="0.1" 
+        value={{@model.muscle}} 
+        placeholder="0.0" 
+        oninput={{action (mut @model.muscle) value="target.value"}}
+      >
+    </div>
+
+    <div class="measures-input">
+      <FaIcon @icon="bone" title="bone density"/>
+      <input 
+        id="bone-density"
+        type="number" 
+        step="0.1" 
+        value={{@model.boneDensity}} 
+        placeholder="0.0" 
+        oninput={{action (mut @model.boneDensity) value="target.value"}}
+      >
+    </div>
+  </form>
+  <div class="measure-buttons">
+    {{#if @transitionBack}}
+      <button class="" onclick={{@transitionBack}}><FaIcon class="icon back" @icon="angle-down"/></button>
+    {{/if}}
+    {{#if @delete}}
+      <button class="" onclick={{@delete}}><FaIcon class="icon delete" @icon="trash-alt"/></button>
+    {{/if}}
+    {{#if @save}}
+      <button class="" onclick={{@save}}><FaIcon class="icon save" @icon="save"/></button>
+    {{/if}}
+  </div>
