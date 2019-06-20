@@ -1,12 +1,12 @@
 & {  
   & table {
     & th {
-      height: 50px;
+      height: 45px;
       width: calc(100vw / 7);
       border-bottom: 1px solid lightgray;    
     }
     & td {
-      height: calc(25vh  - 50px);
+      height: calc((100vh  - 130px) / 5);
       border: 1px solid lightgray;
       text-align: center;
     }
