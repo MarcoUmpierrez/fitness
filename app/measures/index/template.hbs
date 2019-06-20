@@ -5,8 +5,9 @@
   <section>
     {{#each model as |trainingDay|}}
       <div class="item">
+        <FaIcon class="measure-icon" @icon='balance-scale'/>
         {{format-date trainingDay.day}}
-        {{#link-to "measures.show" trainingDay.measureId}}<FaIcon @icon='external-link-alt'/>{{/link-to}}
+        {{#link-to "measures.show" trainingDay.measureId}}<FaIcon @icon='edit'/>{{/link-to}}
       </div>
     {{/each}}
   </section>
