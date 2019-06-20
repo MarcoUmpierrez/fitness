@@ -10,13 +10,13 @@ export default class MeasuresShowController extends Controller {
 
   @action
   async delete() {
-    const measuresId = this.model.id;
+    const measureId = this.model.id;
     await this.model.destroyRecord()
 
     const trainingDays = await this.store.findAll('training-day');
     let trainingDay = null;
     trainingDays.forEach(day => {
-      if (day.measuresId === measuresId) {
+      if (day.measureId === measureId) {
         trainingDay = day
       }
     })
