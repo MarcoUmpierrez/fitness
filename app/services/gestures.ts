@@ -6,7 +6,7 @@ export default class GesturesService extends Service {
   @service router
   init() {
     const gestures = new Hammer(document.body);
-    gestures.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+    gestures.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     this.set('gestures', gestures);
   }
 
