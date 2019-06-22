@@ -1,11 +1,45 @@
 import Component from '@ember/component';
+import {
+  increaseMonth,
+  decreaseMonth,
+  calendarMonth
+} from '../../utils/calendar-helper';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class CalendarGridComponent extends Component {
-  month = [
-    [1, 2, 3, 4, 5, 6, 7],
-    [8, 9, 10, 11, 12, 13, 14],
-    [15, 16, 17, 18, 19, 20, 21],
-    [22, 23, 24, 25, 26, 27, 28],
-    [29, 30, 31, 32, 33, 34, 35],
-  ]
+  @service gestures;
+  date?: Date;
+
+  init() {
+    super.init();
+
+    this.date = new Date();
+
+    this.gestures.addSwipeUpAction(() => {
+      if (this.date) {
+        this.set('date', increaseMonth(this.date));
+      }
+    });
+
+    this.gestures.addSwipeDownAction(() => {
+      if (this.date) {
+        this.set('date', decreaseMonth(this.date));
+      }
+    });
+  }
+
+  willDestroy() {
+    this.gestures.removeSwipeUpAction();
+    this.gestures.removeSwipeDownAction();
+  }
+
+  @computed('date')
+  get month() {
+    if (this.date) {
+      return calendarMonth(this.date);
+    }
+
+    return [];
+  }
 }

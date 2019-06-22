@@ -1,35 +1,60 @@
 import Service from '@ember/service';
 import Hammer from 'hammerjs';
 import { inject as service } from '@ember/service';
-import { assert } from '@ember/debug';
 
 export default class GesturesService extends Service {
   @service router
   init() {
     const gestures = new Hammer(document.body);
+    gestures.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
     this.set('gestures', gestures);
   }
 
-  addHorizontalTransitions(leftRoute:string, rightRoute:string) {
+  addSwipeUpAction(callback:CallableFunction) {
     const gestures = this.get('gestures');
-    gestures.on('swipeleft', (event) => {
-      assert('there is not left route defined', leftRoute !== undefined);
-      if (leftRoute) {
-        this.router.transitionTo(leftRoute);
-      }
-    });
-
-    gestures.on('swiperight', (event) => {
-      assert('there is not right route defined', rightRoute !== undefined);
-      if (rightRoute) {
-        this.router.transitionTo(rightRoute);
-      }
+    gestures.on('swipeup', () => {
+      callback();
     });
   }
 
-  removeHorizontalTransitions() {
+  removeSwipeUpAction() {    
+    const gestures = this.get('gestures');
+    gestures.off('swipeup');
+  }
+
+  addSwipeDownAction(callback:CallableFunction) {
+    const gestures = this.get('gestures');
+    gestures.on('swipedown', () => {
+      callback();
+    });
+  }
+
+  removeSwipeDownAction() {    
+    const gestures = this.get('gestures');
+    gestures.off('swipedown');
+  }
+
+  addSwipeLeftAction(callback:CallableFunction) {
+    const gestures = this.get('gestures');
+    gestures.on('swipeleft', () => {
+      callback();
+    });
+  }
+
+  removeSwipeLeftAction() {    
     const gestures = this.get('gestures');
     gestures.off('swipeleft');
+  }
+
+  addSwipeRightAction(callback:CallableFunction) {
+    const gestures = this.get('gestures');
+    gestures.on('swiperight', () => {
+      callback();
+    });
+  }
+
+  removeSwipeRightAction() {    
+    const gestures = this.get('gestures');
     gestures.off('swiperight');
   }
 }
