@@ -9,12 +9,11 @@ import { inject as service } from '@ember/service';
 
 export default class CalendarGridComponent extends Component {
   @service gestures;
-  date?: Date;
+
+  date?:Date;
 
   init() {
     super.init();
-
-    this.date = new Date();
 
     this.gestures.addSwipeUpAction(() => {
       if (this.date) {
