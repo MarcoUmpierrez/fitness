@@ -2,3 +2,5 @@
 ☐ Allow calendar to switch months by swiping up / down
 ☐ Add monthly grid view and daily list view to calendar
 ☐ Add more information to calendar days. Gray color for previous month and another color for today
+☐ Add settings route to download / upload activities to persist them outside of the app
+☐ use only ember-animated for animating components and routes?

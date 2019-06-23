@@ -6,6 +6,7 @@ import {
 } from '../../utils/calendar-helper';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { toUp, toDown } from 'ember-animated/transitions/move-over';
 
 export default class CalendarGridComponent extends Component {
   @service gestures;
@@ -31,6 +32,14 @@ export default class CalendarGridComponent extends Component {
   willDestroy() {
     this.gestures.removeSwipeUpAction();
     this.gestures.removeSwipeDownAction();
+  }
+
+  rules({ oldItems, newItems }) {
+    if (oldItems[0] > newItems[0]) {
+      return toDown;
+    } else {
+      return toUp;
+    }
   }
 
   @computed('date')

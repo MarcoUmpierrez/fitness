@@ -1,19 +1,23 @@
-
- <table>
-  <tr>
-    <th>MON</th>
-    <th>TUE</th>
-    <th>WED</th>
-    <th>THU</th>
-    <th>FRI</th>
-    <th>SAT</th>
-    <th>SUN</th>
-  </tr>
-  {{#each this.month as |week|}}
-    <tr>
-      {{#each week as |day|}}
-        <td>{{day}}</td>
+<AnimatedContainer>
+  {{#animated-value @date rules=this.rules duration=500}}
+    <table>
+      <tr>
+        <th>MON</th>
+        <th>TUE</th>
+        <th>WED</th>
+        <th>THU</th>
+        <th>FRI</th>
+        <th>SAT</th>
+        <th>SUN</th>
+      </tr>
+      {{#each this.month as |week|}}
+        <tr>
+          {{#each week as |day|}}
+            <td>{{day}}</td>
+          {{/each}}
+        </tr>
       {{/each}}
-    </tr>
-  {{/each}}
-</table>
+    </table>
+  {{/animated-value}}
+</AnimatedContainer>
+ 
