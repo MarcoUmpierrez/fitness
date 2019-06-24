@@ -2,18 +2,20 @@
   {{#animated-value @date rules=this.rules duration=500}}
     <table>
       <tr>
-        <th>MON</th>
-        <th>TUE</th>
-        <th>WED</th>
-        <th>THU</th>
-        <th>FRI</th>
-        <th>SAT</th>
-        <th>SUN</th>
+        <th>M</th>
+        <th>T</th>
+        <th>W</th>
+        <th>T</th>
+        <th>F</th>
+        <th>S</th>
+        <th>S</th>
       </tr>
       {{#each this.month as |week|}}
         <tr>
-          {{#each week as |day|}}
-            <td>{{day}}</td>
+          {{#each week as |node|}}
+            <td>
+              <span class="day-number {{if node.isCurrentMonth "current-month"}} {{if node.isToday "today"}} ">{{node.day}}</span>
+            </td>
           {{/each}}
         </tr>
       {{/each}}
