@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { computed, action } from '@ember/object';
 import { months } from '../../utils/calendar-helper';
-import Event from '../../models/event';
+import Event from 'fitness/models/event';
 
 interface Activity {
   url: string,
@@ -36,48 +36,50 @@ export default class CalendarController extends Controller {
     this.toggleProperty('showBottomSheet');
   }
 
+  createMeasure(url: string, eventId: string, label: string, measureId?: string): Activity {
+    return {
+      url: `calendar.activity.${url}`,
+      eventId: eventId,
+      measureOrRoutineId: measureId,
+      icon: 'weight',
+      iconTitle: 'weight',
+      label: `${label} measures`
+    };
+  }
+
+  createRoutine(url: string, eventId: string, label: string, routineId?: string): Activity {
+    return {
+      url: `calendar.activity.${url}`,
+      eventId: eventId,
+      measureOrRoutineId: routineId,
+      icon: 'running',
+      iconTitle: 'running',
+      label: `${label} training`
+    };
+  }
+
   @action
   selectDay(eventId: string) {
-    let selectedActivities: Activity[];
+    let selectedActivities: Activity[] = [];
     if (eventId) {
-      this.store.findRecord('event', eventId).then((record: Event) => {
-        selectedActivities = [
-          { 
-            url: 'calendar.activity.measure-show', 
-            eventId: record.id, 
-            measureOrRoutineId: record.measureId,
-            icon: 'weight', 
-            iconTitle: 'weight', 
-            label: 'Show measures' 
-          },
-          { 
-            url: 'calendar.activity.routine-new', 
-            eventId: record.id, 
-            measureOrRoutineId: record.routineId,
-            icon: 'running', 
-            iconTitle: 'running', 
-            label: 'Show training' 
-          }
-        ];
+      this.store.findRecord('event', eventId).then((event: Event) => {
+        if (event.measureId) {
+          selectedActivities.push(this.createMeasure('measure-show', event.id, 'Show', event.measureId));
+        } else {
+          selectedActivities.push(this.createMeasure('measure-new', event.id, 'Add'));
+        }
+
+        if (event.routineId) {
+          selectedActivities.push(this.createRoutine('routine-show', event.id, 'Show', event.routineId));
+        } else {
+          selectedActivities.push(this.createRoutine('routine-new', event.id, 'Add'));
+        }
       });
     } else {
-      const event = this.store.createRecord('event');
-      selectedActivities = [
-        { 
-          url: 'calendar.activity.measure-new', 
-          eventId: event.id, 
-          icon: 'weight', 
-          iconTitle: 'weight', 
-          label: 'Add measures' 
-        },
-        { 
-          url: 'calendar.activity.routine-new', 
-          eventId: event.id,  
-          icon: 'running', 
-          iconTitle: 'running', 
-          label: 'Add training' 
-        }
-      ];
+      const event: Event = this.store.createRecord('event');
+      event.save();
+      selectedActivities.push(this.createMeasure('measure-new', event.id, 'Add'));
+      selectedActivities.push(this.createRoutine('routine-new', event.id, 'Add'));
     }
 
     if (selectedActivities) {

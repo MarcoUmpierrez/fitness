@@ -61,12 +61,12 @@
   </form>
   <div class="measure-buttons">
     {{#if @transitionBack}}
-      <button class="" onclick={{@transitionBack}}><FaIcon class="icon back" @icon="angle-up"/></button>
+      <button class="" {{on 'click' @transitionBack}}><FaIcon class="icon back" @icon="angle-up"/></button>
     {{/if}}
     {{#if @delete}}
-      <button class="" onclick={{@delete}}><FaIcon class="icon delete" @icon="trash-alt"/></button>
+      <button class="" {{on 'click' @delete}}><FaIcon class="icon delete" @icon="trash-alt"/></button>
     {{/if}}
     {{#if @save}}
-      <button class="" onclick={{@save}}><FaIcon class="icon save" @icon="save"/></button>
+      <button class="" {{on 'click' @save}}><FaIcon class="icon save" @icon="save"/></button>
     {{/if}}
   </div>
