@@ -4,14 +4,14 @@ import { action } from '@ember/object';
 export default class MeasuresNewController extends Controller {
   @action
   save() {
-    let trainingDay = this.store.createRecord('training-day', {
+    let event = this.store.createRecord('event', {
       day: new Date(),
       completed: true,
       measureId: this.model.id
     });
-    trainingDay.set('measure', this.model);
+    event.set('measure', this.model);
     this.model.save();
-    trainingDay.save();
+    event.save();
     this.transitionToRoute('measures.index');
   }
 

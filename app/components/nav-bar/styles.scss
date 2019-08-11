@@ -1,0 +1,17 @@
+& {
+  width: 100vw;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-top: 1px solid #ccc;
+  box-shadow: 0px -2px 2px #ddd;
+  padding: 10px;
+  font-size: 1.6rem;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}

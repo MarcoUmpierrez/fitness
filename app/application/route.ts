@@ -1,6 +1,4 @@
-import BaseRoute from '../common/base';
+import Route from "@ember/routing/route";
 
-export default class ApplicationRoute extends BaseRoute {
-  leftRoute = 'measures';
-  rightRoute = 'calendar';
+export default class ApplicationRoute extends Route {
 }

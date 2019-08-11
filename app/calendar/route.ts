@@ -1,6 +1,7 @@
-import BaseRoute from '../common/base';
+import Route from "@ember/routing/route";
 
-export default class CalendarRoute extends BaseRoute {
-  leftRoute = 'index';
-  rightRoute = null;
+export default class CalendarRoute extends Route {
+  model() {
+    return this.store.findAll('event');
+  }
 }

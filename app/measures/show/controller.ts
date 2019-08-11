@@ -13,16 +13,16 @@ export default class MeasuresShowController extends Controller {
     const measureId = this.model.id;
     await this.model.destroyRecord()
 
-    const trainingDays = await this.store.findAll('training-day');
-    let trainingDay = null;
-    trainingDays.forEach(day => {
+    const events = await this.store.findAll('event');
+    let event = null;
+    events.forEach(day => {
       if (day.measureId === measureId) {
-        trainingDay = day
+        event = day
       }
     })
 
-    if (trainingDay) {
-      await trainingDay.destroyRecord();
+    if (event) {
+      await event.destroyRecord();
     }
 
     this.transitionToRoute('measures.index');

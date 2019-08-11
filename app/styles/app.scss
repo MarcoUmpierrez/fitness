@@ -1,5 +1,6 @@
 // required for ember-component-css
 @import "pod-styles";
+@import "variables";
 
 body {
   margin: 0;
@@ -20,6 +21,51 @@ input {
 input:focus {
   padding: 8px;
   border: 2px solid orangered;
+}
+
+.application-container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: $app-body-fraction $app-body-fraction $app-body-fraction $navbar-height;
+  grid-template-columns: 100vw;
+  grid-template-areas: 
+    "body"
+    "body"
+    "body"
+    "footer";
+
+  & section {
+    grid-area: body;
+  }
+  
+  & footer {  
+    grid-area: footer;
+  }
+}
+
+.page-container {
+  height: calc(100vh -  #{$navbar-height});
+  width: 100vw;
+  display: grid;
+  grid-template-rows: $header-height calc(100vh - #{$header-height});
+  grid-template-columns: 100vw;
+  grid-template-areas: 
+    "header"
+    "body";
+
+  & header {
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+    grid-area: header;
+    line-height: $header-height;
+    padding-left: 5px;
+  }
+  
+  & section {
+    grid-area: body;
+  }
 }
 
 @import "application";

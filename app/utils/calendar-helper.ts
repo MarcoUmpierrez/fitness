@@ -23,6 +23,17 @@ export const days: string[] = [
   'Sunday'
 ];
 
+
+export const isSameDay = (date1: Date, date2: Date): boolean => {
+  if (!date1 || !date2) {
+    return false;
+  }
+
+  return date1.getFullYear() === date2.getFullYear() &&
+  date1.getMonth() === date2.getMonth() &&
+  date1.getDate() === date2.getDate();
+}
+
 export const increaseMonth = (date: Date): Date => {
   const month = date.getMonth() + 1;
 
@@ -60,12 +71,6 @@ export const daysInPreviousMonth = (date: Date): number => {
 export const firstDayOfMonthInWeek = (date: Date): number => {
   return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 };
-
-export interface CalendarNode {
-  day: number;
-  isToday: boolean;
-  isCurrentMonth: boolean;
-}
 
 export const calendarMonth = (date: Date): CalendarNode[][] => {
   const monthDays = daysInMonth(date);
@@ -122,7 +127,8 @@ const _generateDays = (
     result.push({
       day: day,
       isCurrentMonth: isCurrentMonth,
-      isToday: day === todayDay && month === todayMonth && year === todayYear
+      isToday: day === todayDay && month === todayMonth && year === todayYear,
+      date: new Date(year, month, day)
     });
 
     day++;

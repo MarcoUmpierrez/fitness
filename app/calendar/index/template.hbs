@@ -1,8 +1,34 @@
-<div class="calendar-container">
-  <header>
+<div class="page-container">
+  <header class="calendar-header">
     Calendar {{this.month}}
   </header>
   <section>
-    <CalendarGrid @date={{this.date}}/>
+    {{#if this.showBottomSheet}}
+      <BottomSheet @close={{this.toggleBottomSheet}}>
+        <h1>Actions</h1>
+        <ul>         
+          {{#each this.selectedActivities as |activity|}}
+            <li>
+              {{#if activity.measureOrRoutineId}}
+                {{#link-to activity.url activity.eventId activity.measureOrRoutineId}}
+                  <FaIcon @icon={{activity.icon}} title={{activity.iconTitle}}/>
+                  <span>{{activity.label}}</span>
+                {{/link-to}}
+              {{else}}
+                {{#link-to activity.url activity.eventId}}
+                  <FaIcon @icon={{activity.icon}} title={{activity.iconTitle}}/>
+                  <span>{{activity.label}}</span>
+                {{/link-to}}
+              {{/if}}
+              
+            </li>
+          {{/each}}
+        </ul>
+      </BottomSheet>
+    {{/if}}
+    <CalendarGrid 
+      @date={{this.date}} 
+      @events={{this.model}}
+      @selectDay={{this.selectDay}}/>
   </section>
 </div>

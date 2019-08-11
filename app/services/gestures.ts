@@ -1,60 +1,24 @@
 import Service from '@ember/service';
 import Hammer from 'hammerjs';
-import { inject as service } from '@ember/service';
+import { Swipe } from '../utils/constants';
 
 export default class GesturesService extends Service {
-  @service router
   init() {
+    super.init();
     const gestures = new Hammer(document.body);
     gestures.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     this.set('gestures', gestures);
   }
 
-  addSwipeUpAction(callback:CallableFunction) {
+  addSwipeAction(callback:CallableFunction, direction: Swipe) {
     const gestures = this.get('gestures');
-    gestures.on('swipeup', () => {
+    gestures.on(direction, () => {
       callback();
     });
   }
 
-  removeSwipeUpAction() {    
+  removeSwipeAction(direction: Swipe) {    
     const gestures = this.get('gestures');
-    gestures.off('swipeup');
-  }
-
-  addSwipeDownAction(callback:CallableFunction) {
-    const gestures = this.get('gestures');
-    gestures.on('swipedown', () => {
-      callback();
-    });
-  }
-
-  removeSwipeDownAction() {    
-    const gestures = this.get('gestures');
-    gestures.off('swipedown');
-  }
-
-  addSwipeLeftAction(callback:CallableFunction) {
-    const gestures = this.get('gestures');
-    gestures.on('swipeleft', () => {
-      callback();
-    });
-  }
-
-  removeSwipeLeftAction() {    
-    const gestures = this.get('gestures');
-    gestures.off('swipeleft');
-  }
-
-  addSwipeRightAction(callback:CallableFunction) {
-    const gestures = this.get('gestures');
-    gestures.on('swiperight', () => {
-      callback();
-    });
-  }
-
-  removeSwipeRightAction() {    
-    const gestures = this.get('gestures');
-    gestures.off('swiperight');
+    gestures.off(direction);
   }
 }

@@ -1,6 +1,4 @@
-import BaseRoute from '../common/base';
+import Route from '@ember/routing/route';
 
-export default class StatisticsRoute extends BaseRoute {
-  leftRoute = null;
-  rightRoute = 'measures';
+export default class StatisticsRoute extends Route {
 }

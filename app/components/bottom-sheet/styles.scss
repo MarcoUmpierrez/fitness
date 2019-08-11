@@ -1,0 +1,19 @@
+& {
+  display: grid;
+  height: 100vh;  
+  left: 0;  
+  position: absolute;  
+  top: 0;
+  width: 100vw;  
+}
+
+.overlay {
+  background-color: #00000060;
+}
+
+.bottom-sheet {
+  background-color: white;
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
+}

@@ -11,8 +11,8 @@ export default class ApplicationAdapter extends DS.Adapter {
   models: Array<string> = [
     'measure',
     'exercise',
-    'training-day',
-    'training-routine'
+    'event',
+    'routine'
   ];
 
   // Database version number. Newer versions upgrade the schema if it's available

@@ -1,4 +1,5 @@
 & {  
+  height: 100%;
   & table {
     border-collapse: collapse; 
 
@@ -39,4 +40,8 @@
 
 .current-month {
   color: #333;
+}
+
+.animated-container {
+  position: inherit;
 }

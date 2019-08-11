@@ -1,20 +1,5 @@
-.container {
-  width: 100vw;
-  height: 90vh;
-  display: grid;
-  grid-template-areas: 
-    "body"
-    "body"
-    "body"
-    "footer";
-}
-
 .band {
-  grid-area: body;
+  height: 100%;
   background-image: linear-gradient(50deg, #4f3982, #a53c5a, #ed3a33);
   border-radius: 10% 10% 100% 100% / 0% 0% 50% 50% ;
-}
-
-.footer {  
-  grid-area: footer;
 }

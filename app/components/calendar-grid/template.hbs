@@ -13,7 +13,7 @@
       {{#each this.month as |week|}}
         <tr>
           {{#each week as |node|}}
-            <td>
+            <td {{on "click" (fn @selectDay node.eventId)}}>
               <span class="day-number {{if node.isCurrentMonth "current-month"}} {{if node.isToday "today"}} ">{{node.day}}</span>
             </td>
           {{/each}}
