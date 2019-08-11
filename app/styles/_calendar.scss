@@ -17,9 +17,13 @@ ul {
   padding: 0;
   & li {
     padding: 10px 0px 10px 20px;
-    border-bottom: 1px solid #ccc;
     & svg {
       width: 20px;
+    }
+
+    & a {
+      text-decoration: none;
+      color: #333;
     }
   }
 }
