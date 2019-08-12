@@ -1,5 +1,7 @@
+$navbar-height: 53px;
 & {  
-  height: 100%;
+  height: calc(100% - #{$navbar-height});
+  overflow: hidden;
   & table {
     border-collapse: collapse; 
 
@@ -40,8 +42,4 @@
 
 .current-month {
   color: #333;
-}
-
-.animated-container {
-  position: inherit;
 }
