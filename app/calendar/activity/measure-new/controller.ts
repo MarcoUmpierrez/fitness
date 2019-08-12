@@ -4,25 +4,23 @@ import Event from 'fitness/models/event';
 
 export default class MeasuresNewController extends Controller {
   @action
-  save() {
-    const urlParts: string[] = window.location.href.split('/');
-    const eventId = urlParts[urlParts.indexOf('calendar') + 1];
-    
-    let event: Event = this.store.peekRecord('event', eventId);
+  save() {    
+    let event: Event = this.store.createRecord('event');
     event.set('day', new Date());
     event.set('completed', true);
     event.set('measureId', this.model.id);
     event.set('measure', this.model);
-
-    this.model.save();
     event.save();
+
+    this.model.set('eventId', event.id);
+    this.model.set('event', event);
+    this.model.save();
 
     this.transitionToRoute('calendar');
   }
 
   @action
-  async transitionBack() {
-    await this.model.destroyRecord();
+  transitionBack() {
     this.transitionToRoute('calendar');
   }
 }

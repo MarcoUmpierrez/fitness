@@ -76,10 +76,8 @@ export default class CalendarController extends Controller {
         }
       });
     } else {
-      const event: Event = this.store.createRecord('event');
-      event.save();
-      selectedActivities.push(this.createMeasure('measure-new', event.id, 'Add'));
-      selectedActivities.push(this.createRoutine('routine-new', event.id, 'Add'));
+      selectedActivities.push(this.createMeasure('measure-new', 'activity', 'Add'));
+      selectedActivities.push(this.createRoutine('routine-new', 'activity', 'Add'));
     }
 
     if (selectedActivities) {

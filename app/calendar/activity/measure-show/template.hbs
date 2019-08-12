@@ -1,6 +1,13 @@
-<MeasuresForm 
-  @model={{this.model}}
-  @transitionBack={{this.transitionBack}}
-  @delete={{this.delete}}
-  @save={{this.save}}
-/>
+<div class="page-container">
+  <header class="to-right-header">
+    Measures
+  </header>
+  <section>
+    <MeasuresForm 
+      @model={{this.model}}
+      @transitionBack={{this.transitionBack}}
+      @delete={{this.delete}}
+      @save={{this.save}}
+    />
+  </section>
+</div>
