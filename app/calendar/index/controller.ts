@@ -5,7 +5,6 @@ import Event from 'fitness/models/event';
 
 interface Activity {
   url: string,
-  eventId: string,
   measureOrRoutineId?: string,
   icon: string,
   iconTitle: string,
@@ -36,10 +35,9 @@ export default class CalendarController extends Controller {
     this.toggleProperty('showBottomSheet');
   }
 
-  createMeasure(url: string, eventId: string, label: string, measureId?: string): Activity {
+  createMeasure(url: string, label: string, measureId?: string): Activity {
     return {
-      url: `calendar.activity.${url}`,
-      eventId: eventId,
+      url: `calendar.${url}`,
       measureOrRoutineId: measureId,
       icon: 'weight',
       iconTitle: 'weight',
@@ -47,10 +45,9 @@ export default class CalendarController extends Controller {
     };
   }
 
-  createRoutine(url: string, eventId: string, label: string, routineId?: string): Activity {
+  createRoutine(url: string, label: string, routineId?: string): Activity {
     return {
-      url: `calendar.activity.${url}`,
-      eventId: eventId,
+      url: `calendar.${url}`,
       measureOrRoutineId: routineId,
       icon: 'running',
       iconTitle: 'running',
@@ -64,20 +61,20 @@ export default class CalendarController extends Controller {
     if (eventId) {
       this.store.findRecord('event', eventId).then((event: Event) => {
         if (event.measureId) {
-          selectedActivities.push(this.createMeasure('measure-show', event.id, 'Show', event.measureId));
+          selectedActivities.push(this.createMeasure('measure-show', 'Show', event.measureId));
         } else {
-          selectedActivities.push(this.createMeasure('measure-new', event.id, 'Add'));
+          selectedActivities.push(this.createMeasure('measure-new', 'Add'));
         }
 
         if (event.routineId) {
-          selectedActivities.push(this.createRoutine('routine-show', event.id, 'Show', event.routineId));
+          selectedActivities.push(this.createRoutine('routine-show', 'Show', event.routineId));
         } else {
-          selectedActivities.push(this.createRoutine('routine-new', event.id, 'Add'));
+          selectedActivities.push(this.createRoutine('routine-new', 'Add'));
         }
       });
     } else {
-      selectedActivities.push(this.createMeasure('measure-new', 'activity', 'Add'));
-      selectedActivities.push(this.createRoutine('routine-new', 'activity', 'Add'));
+      selectedActivities.push(this.createMeasure('measure-new', 'Add'));
+      selectedActivities.push(this.createRoutine('routine-new', 'Add'));
     }
 
     if (selectedActivities) {

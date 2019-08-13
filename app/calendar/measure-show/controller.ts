@@ -5,7 +5,7 @@ export default class MeasuresShowController extends Controller {
   @action
   save() {
     this.model.save();
-    this.transitionToRoute('measures.index');
+    this.transitionToRoute('calendar');
   }
 
   @action

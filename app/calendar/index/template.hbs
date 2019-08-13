@@ -3,6 +3,7 @@
     {{this.month}}
   </header>
   <section>
+    
     {{#if this.showBottomSheet}}
       <BottomSheet @close={{this.toggleBottomSheet}}>
         <h1>Actions</h1>
@@ -10,12 +11,12 @@
           {{#each this.selectedActivities as |activity|}}
             <li>
               {{#if activity.measureOrRoutineId}}
-                {{#link-to activity.url activity.eventId activity.measureOrRoutineId}}
+                {{#link-to concat activity.url activity.measureOrRoutineId}}
                   <FaIcon @icon={{activity.icon}} title={{activity.iconTitle}}/>
                   <span>{{activity.label}}</span>
                 {{/link-to}}
               {{else}}
-                {{#link-to activity.url activity.eventId}}
+                {{#link-to activity.url}}
                   <FaIcon @icon={{activity.icon}} title={{activity.iconTitle}}/>
                   <span>{{activity.label}}</span>
                 {{/link-to}}
