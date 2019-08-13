@@ -2,6 +2,8 @@ import Controller from '@ember/controller';
 import { computed, action } from '@ember/object';
 import { months } from '../../utils/calendar-helper';
 import Event from 'fitness/models/event';
+import { inject as service } from '@ember/service';
+import SelectedDateService from 'fitness/services/selected-date';
 
 interface Activity {
   url: string,
@@ -12,7 +14,11 @@ interface Activity {
 }
 
 export default class CalendarController extends Controller {
+  @service
+  selectedDate?:SelectedDateService;
+
   date?: Date;
+
   showBottomSheet?: boolean;
 
   init() {
@@ -56,7 +62,11 @@ export default class CalendarController extends Controller {
   }
 
   @action
-  selectDay(eventId: string) {
+  selectDay(eventId: string, date: Date) {
+    if (this.selectedDate) {
+      this.selectedDate.set('date', date);
+    }
+
     let selectedActivities: Activity[] = [];
     if (eventId) {
       this.store.findRecord('event', eventId).then((event: Event) => {

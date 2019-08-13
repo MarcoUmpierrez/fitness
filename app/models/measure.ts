@@ -1,10 +1,8 @@
 import DS from 'ember-data';
-import Event from './event';
-const { Model, belongsTo, attr } = DS;
+const { Model, attr } = DS;
 
-export default class Measure extends Model {
-  @belongsTo('event', { async: false }) event!: Event;
-  @attr() eventId!: string;
+export default class Measure extends Model {  
+  @attr() date!: Date;
   @attr() weight!: number;
   @attr() water!: number;
   @attr() fat!: number;

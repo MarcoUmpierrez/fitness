@@ -12,6 +12,18 @@
   </div>
 
   <div class="measures-input">
+    <FaIcon @icon="pizza-slice"  title="fat"/>
+    <input 
+      id="fat"
+      type="number" 
+      step="0.1" 
+      value={{@model.fat}} 
+      placeholder="0.0" 
+      oninput={{action (mut @model.fat) value="target.value"}}
+    >
+  </div>
+
+  <div class="measures-input">
     <FaIcon @icon="tint" title="water"/>
     <input 
       id="water"
@@ -21,18 +33,6 @@
       placeholder="0.0" 
       oninput={{action (mut @model.water) value="target.value"}}
     >      
-  </div>
-
-  <div class="measures-input">
-    <FaIcon @icon="bacon"  title="fat"/>
-    <input 
-      id="fat"
-      type="number" 
-      step="0.1" 
-      value={{@model.fat}} 
-      placeholder="0.0" 
-      oninput={{action (mut @model.fat) value="target.value"}}
-    >
   </div>
 
   <div class="measures-input">

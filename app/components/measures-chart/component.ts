@@ -1,33 +1,56 @@
 import Component from '@ember/component';
 import Chartist from 'chartist';
+import Measure from 'fitness/models/measure';
 
 export default class MeasuresChart extends Component {
+  measures?: Measure[];
+
   didRender() {
+    if (!this.measures) {
+      return;
+    }
+
+    const sortedMeasures = this.measures.sortBy('date');
+
+    const weight = sortedMeasures.map((measure: Measure) => {
+      return measure.weight;
+    });
+
+    const water = sortedMeasures.map((measure: Measure) => {
+      return measure.water;
+    });
+
+    const bone = sortedMeasures.map((measure: Measure) => {
+      return measure.boneDensity;
+    });
+
+    const fat = sortedMeasures.map((measure: Measure) => {
+      return measure.fat;
+    });
+
     var chart = new Chartist.Line('.ct-chart', {
       // labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
-      labels: ['W1', 'W2', 'W3', 'W4'],
+      // labels: ['W1', 'W2', 'W3', 'W4'],
       // labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG','SEP','OCT','NOV','DIC'],
-      series: [
-        [12, 9, 7, 8],
-      ]
+      series: [ weight]
     }, {
-      fullWidth: true,
-      chartPadding: {
-        right: 40
-      }
-    });
+        fullWidth: true,
+        chartPadding: {
+          right: 40
+        }
+      });
 
     // Let's put a sequence number aside so we can use it in the event callbacks
     var seq = 0;
 
     // Once the chart is fully created we reset the sequence
-    chart.on('created', function() {
+    chart.on('created', function () {
       seq = 0;
     });
 
     // On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-    chart.on('draw', function(data) {
-      if(data.type === 'line' || data.type === 'point') {
+    chart.on('draw', function (data) {
+      if (data.type === 'line' || data.type === 'point') {
         // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
         data.element.animate({
           opacity: {
