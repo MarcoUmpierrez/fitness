@@ -19,9 +19,15 @@
   align-items: center;    
   flex-direction: column;
   padding-top: 40px;
-  padding-right: 20px;
+  padding-right: 20px;    
+  text-align: center;
 }
 
+.measure-date {  
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
 
 .measures-input {
   padding-top: 10px;     
@@ -32,7 +38,7 @@
     margin-right: 10px;
   }
   input {
-    width: 250px;
+    width: 75%;//250px;
   }
 }
 

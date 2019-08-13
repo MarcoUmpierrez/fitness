@@ -1,3 +1,4 @@
+☐ check date when clicking on a gray number in the calendar. It shows the current month instead of the next/previous one
 ☐ show a toast when no data has been added in the measure form
 ☐ Add more information to calendar days. Gray color for previous month and another color for today
 ☐ Add settings route to download / upload activities to persist them outside of the app

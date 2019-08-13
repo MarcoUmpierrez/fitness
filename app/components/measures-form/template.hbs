@@ -1,4 +1,6 @@
-<form class="measures-form">
+<form class="measures-form">  
+  <span class="measure-date">{{format-date @model.date}}</span>
+
   <div class="measures-input">
     <FaIcon @icon="weight" title="weight"/>
     <input 
