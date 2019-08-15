@@ -24,11 +24,11 @@ input:focus {
 }
 
 .to-left-header {
-  background-image: linear-gradient(270deg, #4f3982, #a53c5a, #ed3a33);
+  background-image: linear-gradient(270deg, $Purple900, $Pink700, $Red600);
 }
 
 .to-right-header {
-  background-image: linear-gradient(90deg, #4f3982, #a53c5a, #ed3a33);
+  background-image: linear-gradient(90deg, $Purple900, $Pink700, $Red600);
 }
 
 .application-container {
@@ -45,6 +45,7 @@ input:focus {
 
   & section {
     grid-area: body;
+    overflow: scroll;
   }
   
   & footer {  

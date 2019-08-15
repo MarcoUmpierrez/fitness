@@ -1,25 +1,19 @@
+@import 'fitness/styles/variables';
+
 & {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-areas: 
-    "body"
-    "body"
-    "body"
-    "footer";
 }
 
 .measures-form {
-  grid-area: body;
-  background-image: linear-gradient(50deg, #4f3982, #a53c5a, #ed3a33);
-  border-radius: 10% 10% 100% 100% / 0% 0% 50% 50% ;
-    
+  background-image: linear-gradient(50deg, $Purple900, $Pink700, $Red600);
+  border-radius: 10% 10% 100% 100% / 0% 0% 50% 50% ;    
   display: flex;
   align-items: center;    
   flex-direction: column;
   padding-top: 40px;
-  padding-right: 20px;    
+  padding-right: 20px;   
+  padding-bottom: 60px; 
   text-align: center;
 }
 
@@ -43,7 +37,6 @@
 }
 
 .measure-buttons {  
-  grid-area: footer;
   display: flex;
   justify-content: space-around;
   margin-top: 30px;
