@@ -1,12 +1,13 @@
 h1 {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $Gray300;
   padding: 10px 0px 10px 20px;
   margin: 0px;
-  color: white;
-  background-color: #333;
+  color: $Gray800;
+  border-radius: 10px;
+  font-size: $fontsize05;
 }
 
-ul {
+.activity-options {
   text-decoration: none;
   list-style-type: none;
   margin: 0;
@@ -15,11 +16,17 @@ ul {
     padding: 10px 0px 10px 20px;
     & svg {
       width: 20px;
+      padding-right: 10px;
+      color:$Red600;
     }
 
     & a {
       text-decoration: none;
-      color: #333;
+      color: $Gray900;
     }
   }
+}
+
+.icon-border {
+  background-ccolor: $Red600;
 }

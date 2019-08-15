@@ -1,3 +1,36 @@
 $navbar-height: 53px;
 $header-height: 45px;
 $app-body-fraction: calc((100vh - #{$navbar-height}) / 3);
+
+// colors
+$Black: #000000;
+$White: #FFFFFF;
+$Gray100:#F7FAFC;
+$Gray200:#EDF2F7;
+$Gray300:#E2E8F0;
+$Gray400:#CBD5E0;
+$Gray500:#A0AEC0;
+$Gray600:#718096;
+$Gray700:#4A5568;
+$Gray800:#2D3748;
+$Gray900:#1A202C;
+
+$Red100:#FFF5F5;
+$Red200:#FED7D7;
+$Red300:#FEB2B2;
+$Red400:#FC8181;
+$Red500:#F56565;
+$Red600:#E53E3E;
+$Red700:#C53030;
+$Red800:#9B2C2C;
+$Red900:#742A2A;
+
+// font size
+$fontsize01:0.6rem;
+$fontsize02:0.7rem;
+$fontsize03:0.8rem;
+$fontsize04:0.9rem;
+$fontsize05:1.0rem;
+$fontsize06:1.1rem;
+$fontsize07:1.2rem;
+$fontsize08:1.3rem;

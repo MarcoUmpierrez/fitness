@@ -1,3 +1,5 @@
+@import 'fitness/styles/variables';
+
 & {
   position: fixed;
   display: block;
@@ -7,14 +9,15 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba($Gray900, 0.5);
   cursor: pointer;
   z-index: 1;
 }
 
 .bottom-sheet {
-  background-color: white;
+  background-color: $White;
   bottom: 0;
   position: absolute;
   width: 100vw;
+  border-radius: 10px;
 }
