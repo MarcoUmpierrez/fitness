@@ -16,10 +16,16 @@ export default class MeasuresFormComponent extends Component {
   }
 
   hideNavBar() {
-    document.getElementsByClassName('footer')[0].style = 'display:none';
+    let footers = document.getElementsByClassName('footer') as HTMLCollectionOf<HTMLElement>;
+    if (footers && footers.length > 0) {
+      footers[0].style.display = 'none';
+    }
   }
 
   showNavBar() {
-    document.getElementsByClassName('footer')[0].style = 'display:inherit';
+    let footers = document.getElementsByClassName('footer')as HTMLCollectionOf<HTMLElement>;
+    if (footers && footers.length > 0) {
+      footers[0].style.display = 'inherit';
+    }
   }
 }
