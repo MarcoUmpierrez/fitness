@@ -1,11 +1,25 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import Measure from 'fitness/models/measure';
+
+enum Period {
+  week = 'week',
+  month = 'month',
+  year = 'year'
+}
 
 export default class StatisticsController extends Controller {
   model!: Measure[];
+  period!: Period;
+  periodEnum!: Period;
 
-  @computed('model')
+  init() {
+    super.init();
+    this.set('periodEnum', Period);
+    this.set('period', Period.month);
+  }
+
+  @computed('model', 'period')
   get sortedModel(): Measure[] {
     return this.model.sortBy('date');
   }
@@ -52,8 +66,18 @@ export default class StatisticsController extends Controller {
 
   @computed('period')
   get axisX() {
-    // return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-    return ['W1', 'W2', 'W3', 'W4', 'W5'];
+    if (this.period === Period.week) {
+      return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+    } else if (this.period === Period.month) {
+      return ['W1', 'W2', 'W3', 'W4', 'W5'];
+    } else {
+      return ['2019']
+    }
+  }
+
+  @action
+  selectPeriod(period: Period):void {
+    this.set('period', period);
   }
 
 }

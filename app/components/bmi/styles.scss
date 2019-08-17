@@ -1,5 +1,10 @@
 @import "fitness/styles/variables";
 
+& {
+  display: flex;
+  justify-content: center;
+}
+
 .bmi {
   text-align: center;
   border: 15px solid $Red600;
@@ -7,7 +12,6 @@
   border-radius: 50%;
   width: 200px;
   height: 200px;
-  margin-left: 21%;
 }
 
 .underweight {  

@@ -2,10 +2,25 @@
   Statistics
 </header>
 <section class="page-body">
-  <div>
-    <button>Week</button>
-    <button>Month</button>
-    <button>Year</button>
+  <div class="tab">
+    <button 
+      class="tab-button {{if (eq this.period this.periodEnum.week) "tab-active"}}" 
+      {{on "click" (fn this.selectPeriod this.periodEnum.week)}}
+    >
+      Week
+    </button>
+    <button 
+      class="tab-button {{if (eq this.period this.periodEnum.month) "tab-active"}}" 
+      {{on "click" (fn this.selectPeriod this.periodEnum.month)}}
+    >
+      Month
+    </button>
+    <button 
+      class="tab-button {{if (eq this.period this.periodEnum.year) "tab-active"}}" 
+      {{on "click" (fn this.selectPeriod this.periodEnum.year)}}
+    >
+      Year
+    </button>
   </div>
   <Bmi @measures={{this.userMeasures}} />
   <MeasuresChart 
