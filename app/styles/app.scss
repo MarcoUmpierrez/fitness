@@ -31,52 +31,44 @@ input:focus {
   background-image: linear-gradient(90deg, $Purple900, $Pink700, $Red600);
 }
 
-.application-container {
+.app-container {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: $app-body-fraction $app-body-fraction $app-body-fraction $navbar-height;
+  grid-template-rows: auto $navbar-height;
   grid-template-columns: 100vw;
   grid-template-areas: 
     "body"
-    "body"
-    "body"
     "footer";
 
-  & section {
+  & .app-body {
     grid-area: body;
-    overflow: scroll;
   }
   
-  & footer {  
+  & .app-footer {  
     grid-area: footer;
   }
 }
 
-.page-container {
-  height: calc(100vh -  #{$navbar-height});
-  width: 100vw;
-  display: grid;
-  grid-template-rows: $header-height calc(100vh - #{$header-height});
-  grid-template-columns: 100vw;
-  grid-template-areas: 
-    "header"
-    "body";
-
-  & header {
-    color: white;
-    font-size: 1.4em;
-    font-weight: bold;
-    grid-area: header;
-    line-height: $header-height;
-    padding-left: 5px;
-    z-index: 1;
-  }
-  
-  & section {
-    grid-area: body;
-  }
+.page-header {
+  color: white;
+  font-size: 1.4em;
+  font-weight: bold;
+  height: $header-height;
+  line-height: $header-height;
+  padding-left: 5px;
 }
+
+.page-body {
+  overflow-y: auto;
+  min-height: 520px;
+}
+
+// @media only screen and (max-height: 600px) {
+//   .application-container {
+//     grid-template-rows: auto 0;
+//   }
+// }
 
 @import "application";
 @import "calendar";

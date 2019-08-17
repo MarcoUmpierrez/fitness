@@ -1,6 +1,6 @@
 $navbar-height: 53px;
 $header-height: 45px;
-$app-body-fraction: calc((100vh - #{$navbar-height}) / 3);
+$app-body-fraction: calc(100vh - #{$navbar-height});
 
 // colors palette from TailwindCSS
 $Black: #000000;

@@ -1,13 +1,11 @@
-<div class="page-container">
-  <header class="to-right-header">
-    Measures
-  </header>
-  <section>
-    <MeasuresForm 
-      @model={{this.model}}
-      @transitionBack={{this.transitionBack}}
-      @delete={{null}}
-      @save={{this.save}}
-    />
-  </section>
-</div>
+<header class="page-header to-right-header">
+  Measures
+</header>
+<section class="page-body">
+  <MeasuresForm 
+    @model={{this.model}}
+    @transitionBack={{this.transitionBack}}
+    @delete={{null}}
+    @save={{this.save}}
+  />
+</section>
