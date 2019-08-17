@@ -35,7 +35,7 @@ input:focus {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: auto $navbar-height;
+  grid-template-rows: calc(100vh - #{$navbar-height}) $navbar-height;
   grid-template-columns: 100vw;
   grid-template-areas: 
     "body"
@@ -46,6 +46,7 @@ input:focus {
   }
   
   & .app-footer {  
+    z-index: 10;
     grid-area: footer;
   }
 }
@@ -57,6 +58,7 @@ input:focus {
   height: $header-height;
   line-height: $header-height;
   padding-left: 5px;
+  z-index: 10;
 }
 
 .page-body {
@@ -64,11 +66,12 @@ input:focus {
   min-height: 520px;
 }
 
-// @media only screen and (max-height: 600px) {
-//   .application-container {
-//     grid-template-rows: auto 0;
-//   }
-// }
+  
+@supports (-webkit-appearance:none) {
+  .app-container {
+    height: calc(100vh - 56px);   
+  }
+}
 
 @import "application";
 @import "calendar";
