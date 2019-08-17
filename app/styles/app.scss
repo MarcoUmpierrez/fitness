@@ -65,11 +65,10 @@ input:focus {
   overflow-y: auto;
   min-height: 520px;
 }
-
   
-@supports (-webkit-appearance:none) {
-  .app-container {
-    height: calc(100vh - 56px);   
+@media(max-height:400px) {
+  .app-footer {
+      display:none;
   }
 }
 
