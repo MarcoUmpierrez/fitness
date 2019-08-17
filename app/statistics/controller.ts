@@ -6,40 +6,45 @@ export default class StatisticsController extends Controller {
   model!: Measure[];
 
   @computed('model')
-  get sortedModel() {
+  get sortedModel(): Measure[] {
     return this.model.sortBy('date');
   }
-  
+
   @computed('sortedModel')
-  get weight():number[] {
+  get weight(): number[] {
     return this.sortedModel.map((measure: Measure) => {
       return measure.weight;
     });
   }
 
   @computed('sortedModel')
-  get fat():number[] {
+  get userMeasures(): UserMeasures {
+    return { height: 1.70, weight: 71 };
+  }
+
+  @computed('sortedModel')
+  get fat(): number[] {
     return this.sortedModel.map((measure: Measure) => {
       return measure.fat;
     });
   }
-  
+
   @computed('sortedModel')
-  get water():number[] {
+  get water(): number[] {
     return this.sortedModel.map((measure: Measure) => {
       return measure.water;
     });
   }
-  
+
   @computed('sortedModel')
-  get muscle():number[] {
+  get muscle(): number[] {
     return this.sortedModel.map((measure: Measure) => {
       return measure.muscle;
     });
   }
-  
+
   @computed('sortedModel')
-  get boneDensity():number[] {
+  get boneDensity(): number[] {
     return this.sortedModel.map((measure: Measure) => {
       return measure.boneDensity;
     });
@@ -50,5 +55,5 @@ export default class StatisticsController extends Controller {
     // return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     return ['W1', 'W2', 'W3', 'W4', 'W5'];
   }
-  
+
 }

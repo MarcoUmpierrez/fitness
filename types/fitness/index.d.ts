@@ -10,6 +10,11 @@ declare global {
     date: Date;
     eventId?: string;
   }
+
+  interface UserMeasures {
+    height: number;
+    weight: number;
+  }
 }
 
 export {};

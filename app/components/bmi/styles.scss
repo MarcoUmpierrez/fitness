@@ -1,0 +1,30 @@
+@import "fitness/styles/variables";
+
+.bmi {
+  text-align: center;
+  border: 15px solid $Red600;
+  color: $Red600;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin-left: 21%;
+}
+
+.underweight {  
+  border: 15px solid $Yellow500;
+  color: $Yellow500;
+}
+
+.normal {  
+  border: 15px solid $Green600;
+  color: $Green600;
+}
+
+.overweight {  
+  border: 15px solid $Red600;
+  color: $Red600;
+}
+
+.bmi-value {
+  font-size: 4.5rem;
+}
