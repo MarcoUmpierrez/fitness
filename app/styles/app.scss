@@ -42,6 +42,7 @@ input:focus {
     "footer";
 
   & .app-body {
+    overflow-y: auto;
     grid-area: body;
   }
   

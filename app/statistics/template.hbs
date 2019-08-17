@@ -2,5 +2,39 @@
   Statistics
 </header>
 <section class="page-body">
-  <MeasuresChart @measures={{this.model}} />
+  <div>
+    <button>Week</button>
+    <button>Month</button>
+    <button>Year</button>
+  </div>
+  <MeasuresChart 
+    @title="Weight"
+    @chartId="weight-chart"
+    @data={{this.weight}} 
+    @axisX={{this.axisX}} 
+  />
+  <MeasuresChart 
+    @title="Fat"
+    @chartId="fat-chart"
+    @data={{this.fat}} 
+    @axisX={{this.axisX}} 
+  />
+  <MeasuresChart 
+    @title="Water"
+    @chartId="water-chart"
+    @data={{this.water}} 
+    @axisX={{this.axisX}} 
+  />
+  <MeasuresChart 
+    @title="Muscle"
+    @chartId="muscle-chart"
+    @data={{this.muscle}} 
+    @axisX={{this.axisX}} 
+  />
+  <MeasuresChart 
+    @title="Bone Density"
+    @chartId="bone-chart"
+    @data={{this.boneDensity}} 
+    @axisX={{this.axisX}} 
+  />
 </section>

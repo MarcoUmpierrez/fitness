@@ -1,38 +1,19 @@
 import Component from '@ember/component';
 import Chartist from 'chartist';
-import Measure from 'fitness/models/measure';
 
 export default class MeasuresChart extends Component {
-  measures?: Measure[];
+  chartId!: string;
+  title!: string;
+  data!: number[];
+  axisX!: string[];
 
   didRender() {
-    if (!this.measures) {
-      return;
-    }
-
-    const sortedMeasures = this.measures.sortBy('date');
-
-    const weight = sortedMeasures.map((measure: Measure) => {
-      return measure.weight;
-    });
-
-    const water = sortedMeasures.map((measure: Measure) => {
-      return measure.water;
-    });
-
-    const bone = sortedMeasures.map((measure: Measure) => {
-      return measure.boneDensity;
-    });
-
-    const fat = sortedMeasures.map((measure: Measure) => {
-      return measure.fat;
-    });
-
-    var chart = new Chartist.Line('.ct-chart', {
+    var chart = new Chartist.Line(`#${this.chartId}`, {
       // labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
       // labels: ['W1', 'W2', 'W3', 'W4'],
       // labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG','SEP','OCT','NOV','DIC'],
-      series: [ weight]
+      series: [this.data],
+      labels: this.axisX
     }, {
         fullWidth: true,
         chartPadding: {
