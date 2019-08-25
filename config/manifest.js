@@ -14,8 +14,7 @@ module.exports = function (/* environment, appConfig */) {
     orientation: "any",
     //background_color: "#44337A",
     background_color: "transparent",
-    related_applications: "",
-    prefer_related_applications: "false",
+    prefer_related_applications: false,
     theme_color: "#E53E3E",
     icons: [
       {
