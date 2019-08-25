@@ -9,9 +9,13 @@
 
     {{content-for "head"}}
 
+    <link rel="manifest" src="{{rootURL}}manifest.webmanifest" />
+    <meta name="msapplication-config" content="{{rootURL}}browserconfig.xml" />
+
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/fitness.css">
+    
 
     {{content-for "head-footer"}}
   </head>
