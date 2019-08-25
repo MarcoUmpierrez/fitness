@@ -19,93 +19,25 @@ module.exports = function (/* environment, appConfig */) {
     theme_color: "#E53E3E",
     icons: [
       {
-        src: "/assets/logos/logo-44x44.png",
-        sizes: "44x44"
-      },
-      {
-        src: "/assets/logos/logo-48x48.png",
-        sizes: "48x48"
-      },
-      {
-        src: "/assets/logos/logo-1240x600.png",
-        sizes: "1240x600"
-      },
-      {
-        src: "/assets/logos/logo-300x300.png",
-        sizes: "300x300"
-      },
-      {
-        src: "/assets/logos/logo-150x150.png",
-        sizes: "150x150"
-      },
-      {
-        src: "/assets/logos/logo-88x88.png",
-        sizes: "88x88"
-      },
-      {
-        src: "/assets/logos/logo-24x24.png",
-        sizes: "24x24"
-      },
-      {
-        src: "/assets/logos/logo-50x50.png",
-        sizes: "50x50"
-      },
-      {
-        src: "/assets/logos/logo-620x300.png",
-        sizes: "620x300"
-      },
-      {
-        src: "/assets/logos/logo-192x192.png",
-        sizes: "192x192"
-      },
-      {
-        src: "/assets/logos/logo-144x144.png",
-        sizes: "144x144"
-      },
-      {
-        src: "/assets/logos/logo-96x96.png",
-        sizes: "96x96"
-      },
-      {
-        src: "/assets/logos/logo-72x72.png",
-        sizes: "72x72"
-      },
-      {
-        src: "/assets/logos/logo-36x36.png",
-        sizes: "36x36"
-      },
-      {
-        src: "/assets/logos/logo-1024x1024.png",
-        sizes: "1024x1024"
-      },
-      {
-        src: "/assets/logos/logo-180x180.png",
+        src: "/assets/logo/logo-180x180.png",
         sizes: "180x180"
       },
       {
-        src: "/assets/logos/logo-152x152.png",
-        sizes: "152x152"
+        src: "/assets/logo/logo-512x512.png",
+        sizes: "512x512"
       },
       {
-        src: "/assets/logos/logo-120x120.png",
-        sizes: "120x120"
-      },
-      {
-        src: "/assets/logos/logo-76x76.png",
-        sizes: "76x76"
-      },
-      {
-        src: '/assets/logos/logo-280x280.png',
+        src: '/assets/logo/logo-280x280.png',
         sizes: '280x280',
         targets: ['apple'],
       },
       {
-        src: '/assets/logos/logo-32x32.png',
+        src: '/assets/logo/logo-32x32.png',
         sizes: '32x32',
         targets: ['favicon'],
       },
       {
-        src: '/assets/logos/logo-150x150.png',
+        src: '/assets/logo/logo-150x150.png',
         element: 'square150x150logo',
         targets: ['ms'],
       }
