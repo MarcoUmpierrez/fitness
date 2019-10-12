@@ -9,7 +9,7 @@ export default class CalendarGridComponent extends Component {
   // @service gestures;
   currentDate;
   events;
-  @tracked showBottomSheet;
+  //@tracked showBottomSheet;
 
   constructor(...args) {
     super(...args);

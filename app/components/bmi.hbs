@@ -1,17 +1,15 @@
 <div class="w-full flex items-center justify-center mt-5">
-  <div class="{{this.bmiResult}} border-2 h-32 w-32 rounded-full text-center flex flex-col justify-center">
-    <h3>BMI</h3>
-    <span class="text-4xl">{{this.bmi}}</span>
-  </div>
+  <svg height="180" width="160">
+    <circle cx="80" cy="90" r="80" fill="#E0E0E0"/>
+    <circle cx="80" cy="90" r="72" fill="#FFFFFF"/>
+    <circle cx="80" cy="90" r="76" fill="none" 
+            stroke-width="4" 
+            stroke-miterlimit="20" 
+            stroke="{{this.bmiResult}}" 
+            transform="rotate(-180 80 90)"/>
+    <text text-anchor="middle" x="80" y="90">
+      <tspan>{{this.bmi}}</tspan>
+      <tspan x="77" dy="1.2em" fill="#A5A6A9">BMI</tspan>
+    </text>
+  </svg>
 </div>
-
-{{!-- this is the svg used in liferando for expected waiting time --}}
-<svg height="90" width="80" class="css-13azwyo">
-  <circle cx="40" cy="45" r="40" fill="#E0E0E0" class="css-nil"></circle>
-  <circle cx="40" cy="45" r="36" fill="#FFFFFF" class="css-nil"></circle>
-  <circle cx="40" cy="45" r="38" fill="none" stroke-width="4" stroke-miterlimit="20" stroke="#f78004"
-    transform="rotate(-90 40 45)" class="css-17vkaur"></circle><text text-anchor="middle" x="40" y="44" class="css-nil">
-    <tspan class="css-7wolj">51</tspan>
-    <tspan x="40" dy="1.2em" fill="#A5A6A9" class="css-13erlvf">min</tspan>
-  </text>
-</svg>

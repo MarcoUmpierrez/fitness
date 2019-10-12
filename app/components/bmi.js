@@ -9,13 +9,13 @@ export default class BMIComponent extends Component {
 
   get bmiResult() {
     if (this.bmi <= 18.5) {
-      return 'text-yellow-500 border-yellow-500';
+      return '#ECC94B';
     }
 
     if (this.bmi >= 25) {
-      return 'text-red-600 border-red-600';
+      return '#E53E3E';
     }
 
-    return 'text-green-600 border-green-600';
+    return '#38A169';
   }
 }
