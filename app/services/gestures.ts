@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import Hammer from 'hammerjs';
-import { Swipe } from '../utils/constants';
+import { Swipe } from 'efitness/utils/constants';
 
 export default class GesturesService extends Service {
   init() {
@@ -10,15 +10,22 @@ export default class GesturesService extends Service {
     this.set('gestures', gestures);
   }
 
-  addSwipeAction(callback:CallableFunction, direction: Swipe) {
+  addSwipeAction(callback: CallableFunction, direction: Swipe) {
     const gestures = this.get('gestures');
     gestures.on(direction, () => {
       callback();
     });
   }
 
-  removeSwipeAction(direction: Swipe) {    
+  removeSwipeAction(direction: Swipe) {
     const gestures = this.get('gestures');
     gestures.off(direction);
+  }
+}
+
+// DO NOT DELETE: this is how TypeScript knows how to look up your services.
+declare module '@ember/service' {
+  interface Registry {
+    'gestures': GesturesService;
   }
 }

@@ -1,0 +1,36 @@
+<AnimatedContainer>
+  {{#animated-value @date rules=this.rules duration=500}}
+    <table class="table-auto w-full text-center">
+      <thead>
+        <tr class="h-12 border-b border-1 border-gray-400">
+          <th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>
+        </tr>        
+      </thead>
+      <tbody>
+        {{#each this.month as |week|}}
+          <tr class="text-xs border-b border-1 border-gray-200">
+            {{#each week as |node|}}
+              <td 
+                class="row-height align-top
+                       {{if node.isCurrentMonth "text-gray-800" "text-gray-400"}}                        
+                       {{if node.isToday "bg-yellow-400 rounded" ""}}"
+                {{on "click" (action this.selectDay node.eventId node.date)}}
+              >
+                {{node.day}}
+              </td>
+            {{/each}}
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/animated-value}}
+</AnimatedContainer>
+
+{{#if this.showBottomSheet}}
+  {{yield 
+    (hash 
+      toggleBottomSheet=this.toggleBottomSheet
+      event=this.selectedDay
+    )
+  }}
+{{/if}}

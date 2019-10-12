@@ -1,0 +1,54 @@
+<nav>
+  <ul class="flex justify-around">
+    <li>
+      <LinkTo
+        id="nav-index"
+        class="nav-btn"
+        @route="index" 
+        @current-when="index"
+      >
+        <span>{{svg-jar "home-24px" class="fill-current" width="24px"}}</span>
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo
+        id="nav-trainings"
+        class="nav-btn"
+        @route="trainings"
+        @current-when="trainings"
+      >
+        <span>{{svg-jar "directions_run-24px" class="fill-current" width="24px"}}</span>
+      </LinkTo>
+    </li>    
+    <li>
+      <LinkTo
+        id="nav-calendar"
+        class="nav-btn"
+        @route="calendar" 
+        @current-when="calendar"
+      >
+        <span>{{svg-jar "calendar_today-24px" class="fill-current" width="24px"}}</span>
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo
+        id="nav-statistics"
+        class="nav-btn"
+        @route="statistics"
+        @current-when="statistics"
+      >
+        <span>{{svg-jar "bar_chart-24px" class="fill-current" width="24px"}}</span>
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo
+        id="nav-settings"
+        class="nav-btn"
+        @route="settings"
+        @current-when="settings"
+      >
+        <span>{{svg-jar "tune-24px" class="fill-current" width="24px"}}</span>
+      </LinkTo>
+    </li>
+  </ul>
+</nav>

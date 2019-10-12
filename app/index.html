@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Fitness</title>
+    <title>Efitness</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{content-for "head"}}
 
-    <link rel="manifest" src="{{rootURL}}manifest.webmanifest" />
-    <meta name="msapplication-config" content="{{rootURL}}browserconfig.xml" />
-
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
-    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/fitness.css">
-    
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/efitness.css">
 
     {{content-for "head-footer"}}
   </head>
-  <body>
+  <body class="flex flex-col h-full">
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>
-    <script src="{{rootURL}}assets/fitness.js"></script>
+    <script src="{{rootURL}}assets/efitness.js"></script>
 
     {{content-for "body-footer"}}
   </body>

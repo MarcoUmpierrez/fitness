@@ -1,0 +1,58 @@
+.nav-btn span {
+  @apply p-4;
+  @apply border-t-4;
+  @apply border-transparent;
+  @apply inline-block;
+}
+
+#nav-index.active span {
+  @apply text-red-600;
+  @apply border-red-600;
+}
+#nav-calendar.active span {
+  @apply text-yellow-500;
+  @apply border-yellow-500;
+}
+#nav-trainings.active span {
+  @apply text-green-400;
+  @apply border-green-400;
+}
+#nav-statistics.active span {
+  @apply text-blue-400;
+  @apply border-blue-400;
+}
+#nav-settings.active span {
+  @apply text-pink-400;
+  @apply border-pink-400;
+}
+
+.row-height {
+  height: calc((100vh - 165px)/5);
+}
+
+.bottom-sheet-height {
+  @apply inset-0;
+  height: calc(100vh - 65px);
+}
+
+/* 
+#index-page {
+  background-image: linear-gradient(to bottom, #FEB2B2, #FEB2B2);  
+}
+
+#calendar-page {
+  background-image: linear-gradient(to bottom, #ECC94B, #FAF089);
+}
+
+#trainings-page {
+  background-image: linear-gradient(to bottom, #48BB78, #9AE6B4);  
+}
+
+#statistics-page {
+  background-image: linear-gradient(to bottom, #4299E1, #90CDF4);  
+}
+
+#settings-page {
+  background-image: linear-gradient(to bottom, #ED64A6, #FBB6CE);  
+} 
+*/

@@ -1,5 +1,5 @@
-import EmberRouter from "@ember/routing/router";
-import config from "./config/environment";
+import EmberRouter from '@ember/routing/router';
+import config from './config/environment';
 
 const Router = EmberRouter.extend({
   location: config.locationType,
@@ -8,12 +8,11 @@ const Router = EmberRouter.extend({
 
 Router.map(function () {
   this.route('calendar', function () {
-    this.route('measure-new', { path: 'measure' });
-    this.route('measure-show', { path: 'measure/:measures_id' });
-    this.route('routine-new', { path: 'routine' });
-    this.route('routine-show', { path: 'routine/:routine_id' });
+    this.route('measures');
   });
+  this.route('trainings');
   this.route('statistics');
+  this.route('settings');
 });
 
 export default Router;

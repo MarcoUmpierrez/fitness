@@ -1,8 +1,9 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'fitness',
+    modulePrefix: 'efitness',
+    podModulePrefix: 'efitness/pages',
     environment,
     rootURL: '/',
     locationType: 'auto',

@@ -1,9 +1,0 @@
-☐ check date when clicking on a gray number in the calendar. It shows the current month instead of the next/previous one
-☐ show a toast when no data has been added in the measure form
-☐ Add more information to calendar days. Gray color for previous month and another color for today
-☐ Add settings route to download / upload activities to persist them outside of the app
-✘ Make dots appear only during transition. Hide them the rest of the time @cancelled(19-08-13 20:37)
-✔ Allow calendar to switch months by swiping up / down @done(19-08-13 20:37)
-✔ Add monthly grid view and daily list view to calendar @done(19-08-13 20:37)
-✔ use ember-animated for animating components @done(19-08-13 20:37)
-✔ check why it's so broken in chrome for mobile phones @done(19-08-13 20:38)

@@ -1,0 +1,20 @@
+<div class="bottom-sheet" {{on "click" @close}}>
+   <h1>Actions</h1>
+      {{!-- <ul class="activity-options">         
+        {{#each this.selectedActivities as |activity|}}
+          <li>
+            {{#if activity.measureOrRoutineId}}
+              {{#link-to concat activity.url activity.measureOrRoutineId}}
+                <span class="icon-border"><FaIcon @icon={{activity.icon}} title={{activity.iconTitle}}/></span>
+                <span>{{activity.label}}</span>
+              {{/link-to}}
+            {{else}}
+              {{#link-to activity.url}}
+                <span class="icon-border"><FaIcon @icon={{activity.icon}} title={{activity.iconTitle}}/></span>
+                <span>{{activity.label}}</span>
+              {{/link-to}}
+            {{/if}}            
+          </li>
+        {{/each}}
+      </ul> --}}
+</div>

@@ -1,0 +1,17 @@
+<div class="h-full">
+  <header class="border-b-2 border-yellow-400 py-2 text-center">
+    <span class="font-sans font-semibold text-lg text-gray-800">Calendar</span>
+  </header>
+  <section>
+    <CalendarGrid 
+      @date={{this.date}} 
+      @events={{this.model}}
+    as |showBottomSheet toggleBottomSheet event|>
+      {{#if this.showBottomSheet}}
+      <div class="z-10 absolute bg-gray-800 opacity-75 w-full bottom-sheet-height">
+        <BottomSheet @close={{this.toggleBottomSheet}} />
+      </div>
+      {{/if}}
+    </CalendarGrid>
+  </section>
+</div>
