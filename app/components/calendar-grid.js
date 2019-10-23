@@ -3,32 +3,26 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { toUp, toDown } from 'ember-animated/transitions/move-over';
 import { Swipe } from 'efitness/utils/constants';
-import { increaseMonth, decreaseMonth, calendarMonth, isSameDay } from 'efitness/utils/calendar-helper';
+import { calendarMonth, isSameDay } from 'efitness/utils/calendar-helper';
 
 export default class CalendarGridComponent extends Component {
-  // @service gestures;
-  currentDate;
+  @service gestures;
   events;
-  //@tracked showBottomSheet;
 
   constructor(...args) {
     super(...args);
 
-    this.showBottomSheet = false;
-
     const { date } = this.args;
-    this.currentDate = date;
-
     if (this.gestures) {
       this.gestures.addSwipeAction(() => {
-        if (this.currentDate) {
-          this.set('currentDate', increaseMonth(this.currentDate));
+        if (date) {
+          this.args.increaseMonth();
         }
       }, Swipe.Up);
 
       this.gestures.addSwipeAction(() => {
-        if (this.currentDate) {
-          this.set('currentDate', decreaseMonth(this.currentDate));
+        if (date) {
+          this.args.decreaseMonth();
         }
       }, Swipe.Down);
     }
@@ -50,8 +44,9 @@ export default class CalendarGridComponent extends Component {
   }
 
   get month() {
-    if (this.currentDate) {
-      const month = calendarMonth(this.currentDate);
+    const { date } = this.args;
+    if (date) {
+      const month = calendarMonth(date);
       for (const week of month) {
         for (const day of week) {
           if (this.events && this.events.length > 0) {
@@ -68,43 +63,5 @@ export default class CalendarGridComponent extends Component {
     }
 
     return [];
-  }
-
-  toggleBottomSheet() {
-    this.showBottomSheet = !this.showBottomSheet;
-  }
-
-  selectDay(eventId, date) {
-    console.log(eventId, date);
-    //   if (this.selectedDate) {
-    //     this.set('selectedDate', date);
-    //   }
-
-    //   let selectedActivities: Activity[] = [];
-    //   if (eventId) {
-    //     this.store.findRecord('event', eventId).then((event: Event) => {
-    //       if (event.measureId) {
-    //         selectedActivities.push(this.createMeasure('measure-show', 'Show', event.measureId));
-    //       } else {
-    //         selectedActivities.push(this.createMeasure('measure-new', 'Add'));
-    //       }
-
-    //       if (event.routineId) {
-    //         selectedActivities.push(this.createRoutine('routine-show', 'Show', event.routineId));
-    //       } else {
-    //         selectedActivities.push(this.createRoutine('routine-new', 'Add'));
-    //       }
-    //     });
-    //   } else {
-    //     selectedActivities.push(this.createMeasure('measure-new', 'Add'));
-    //     selectedActivities.push(this.createRoutine('routine-new', 'Add'));
-    //   }
-
-    //   if (selectedActivities) {
-    //     this.set('selectedActivities', selectedActivities);
-    //   }    
-    this.selectedDay = { eventId, date };
-    this.toggleBottomSheet();
-    //this.transitionToRoute('calendar.measures');
   }
 }

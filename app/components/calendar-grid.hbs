@@ -14,7 +14,7 @@
                 class="row-height align-top
                        {{if node.isCurrentMonth "text-gray-800" "text-gray-400"}}                        
                        {{if node.isToday "bg-yellow-400 rounded" ""}}"
-                {{on "click" (action this.selectDay node.eventId node.date)}}
+                {{on "click" (fn @selectDay node.eventId node.date)}}
               >
                 {{node.day}}
               </td>
@@ -25,12 +25,3 @@
     </table>
   {{/animated-value}}
 </AnimatedContainer>
-
-{{#if this.showBottomSheet}}
-  {{yield 
-    (hash 
-      toggleBottomSheet=this.toggleBottomSheet
-      event=this.selectedDay
-    )
-  }}
-{{/if}}

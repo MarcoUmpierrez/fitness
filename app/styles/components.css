@@ -31,8 +31,11 @@
 }
 
 .bottom-sheet-height {
-  @apply inset-0;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 110px);
+}
+
+.bottom-sheet-content {
+  bottom: 45px;
 }
 
 /* 

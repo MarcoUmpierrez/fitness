@@ -1,17 +1,19 @@
 <div class="h-full">
-  <header class="border-b-2 border-yellow-400 py-2 text-center">
-    <span class="font-sans font-semibold text-lg text-gray-800">Calendar</span>
+  <header class="relative w-full py-2 z-10 border-b-2 border-yellow-400 text-center bg-white">
+    <span class="font-sans font-semibold text-lg text-gray-800">{{this.month}}</span>
   </header>
-  <section>
+  <section class="relative">
     <CalendarGrid 
       @date={{this.date}} 
+      @increaseMonth={{this.incMonth}}
+      @decreaseMonth={{this.decMonth}}
       @events={{this.model}}
-    as |showBottomSheet toggleBottomSheet event|>
-      {{#if this.showBottomSheet}}
-      <div class="z-10 absolute bg-gray-800 opacity-75 w-full bottom-sheet-height">
-        <BottomSheet @close={{this.toggleBottomSheet}} />
+      @selectDay={{this.selectDay}}
+    />
+    {{#if this.showBottomSheet}}
+      <div class="flex flex-col absolute z-10 inset-0 bottom-sheet-height" >
+        <BottomSheet @onClose={{this.toggleBottomSheet}} @selectedDay={{this.selectedDay}} />
       </div>
-      {{/if}}
-    </CalendarGrid>
+    {{/if}}
   </section>
 </div>
