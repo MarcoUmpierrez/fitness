@@ -27,7 +27,7 @@
 }
 
 .row-height {
-  height: calc((100vh - 165px)/5);
+  height: calc((100vh - 165px)/6);
 }
 
 .bottom-sheet-height {
@@ -38,9 +38,9 @@
   bottom: 45px;
 }
 
-/* 
+/*
 #index-page {
-  background-image: linear-gradient(to bottom, #FEB2B2, #FEB2B2);  
+  background-image: linear-gradient(to bottom, #FEB2B2, #FEB2B2);
 }
 
 #calendar-page {
@@ -48,14 +48,14 @@
 }
 
 #trainings-page {
-  background-image: linear-gradient(to bottom, #48BB78, #9AE6B4);  
+  background-image: linear-gradient(to bottom, #48BB78, #9AE6B4);
 }
 
 #statistics-page {
-  background-image: linear-gradient(to bottom, #4299E1, #90CDF4);  
+  background-image: linear-gradient(to bottom, #4299E1, #90CDF4);
 }
 
 #settings-page {
-  background-image: linear-gradient(to bottom, #ED64A6, #FBB6CE);  
-} 
+  background-image: linear-gradient(to bottom, #ED64A6, #FBB6CE);
+}
 */

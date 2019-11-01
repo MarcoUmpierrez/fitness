@@ -12,7 +12,11 @@
     />
     {{#if this.showBottomSheet}}
       <div class="flex flex-col absolute z-10 inset-0 bottom-sheet-height" >
-        <BottomSheet @onClose={{this.toggleBottomSheet}} @selectedDay={{this.selectedDay}} />
+        <BottomSheet 
+          @onClose={{this.toggleBottomSheet}} 
+          @event={{this.event}}
+          @onSave={{this.saveEvent}} 
+        />
       </div>
     {{/if}}
   </section>

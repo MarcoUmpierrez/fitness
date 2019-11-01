@@ -31,7 +31,7 @@ export default class ApplicationAdapter extends DS.Adapter {
       .objectStore(modelName)
       .add(data);
     db.close();
-    return new Promise((resolve, reject) => resolve(data));
+    return data;
   }
 
   async findRecord(store: StoreService, type: typeof DS.Model, id: string | number): Promise<any> {
@@ -42,7 +42,7 @@ export default class ApplicationAdapter extends DS.Adapter {
       .objectStore(modelName)
       .get(id);
     db.close();
-    return new Promise((resolve, reject) => resolve(record));
+    return record;
   }
 
   async findAll(store: StoreService, type: typeof DS.Model) {
@@ -57,7 +57,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     }
 
     db.close();
-    return new Promise((resolve, reject) => resolve(data));
+    return data;
   }
 
   async updateRecord(store: StoreService, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
@@ -74,7 +74,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     }
 
     db.close();
-    return new Promise((resolve, reject) => resolve(data));
+    return data;
   }
 
   async deleteRecord(store: StoreService, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
@@ -86,7 +86,7 @@ export default class ApplicationAdapter extends DS.Adapter {
       .objectStore(modelName)
       .delete(snapshot.id);
     db.close();
-    return new Promise((resolve, reject) => resolve(data));
+    return data;
   }
 
   async queryRecord(store: StoreService, type: typeof DS.Model, query: any): Promise<any> {
@@ -110,14 +110,14 @@ export default class ApplicationAdapter extends DS.Adapter {
 
         if (queryKeyMatchCount === queryKeys.length) {
           db.close();
-          return new Promise((resolve, reject) => resolve(cursor.value));
+          return cursor.value;
         } else {
           cursor = await cursor.continue();
         }
       }
     } else {
       db.close();
-      return new Promise((resolve, reject) => resolve(null));
+      return null;
     }
   }
 
@@ -151,7 +151,7 @@ export default class ApplicationAdapter extends DS.Adapter {
       db.close();
     }
 
-    return new Promise((resolve, reject) => resolve(data));
+    return data;
   }
 
   openDatabase(): Promise<any> {

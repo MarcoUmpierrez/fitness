@@ -2,6 +2,8 @@ import Controller from '@ember/controller';
 import { computed, action, set } from '@ember/object';
 import { months } from 'efitness/utils/calendar-helper';
 import Event from 'efitness/models/event';
+import Measure from 'efitness/models/measure';
+import Training from 'efitness/models/training';
 import { increaseMonth, decreaseMonth } from 'efitness/utils/calendar-helper';
 
 interface Activity {
@@ -12,16 +14,11 @@ interface Activity {
   label: string
 }
 
-interface SelectedDay {
-  eventId: string,
-  date: Date
-}
-
 export default class CalendarController extends Controller {
   date?: Date;
   selectedDate?:Date;
   showBottomSheet?: Boolean;
-  selectedDay?: SelectedDay;
+  event?: Event;
 
   init() {
     super.init();
@@ -80,36 +77,29 @@ export default class CalendarController extends Controller {
 
   @action
   selectDay(eventId: string, date: Date): void {
-    console.log(eventId, date);
-    //   if (this.selectedDate) {
-    //     this.set('selectedDate', date);
-    //   }
+    let event;
+    if (eventId) {
+      event = this.store.peekRecord('event', eventId);
+    } else {
+      event = this.store.createRecord('event', {
+        day: date
+      })
+    }
 
-    //   let selectedActivities: Activity[] = [];
-    //   if (eventId) {
-    //     this.store.findRecord('event', eventId).then((event: Event) => {
-    //       if (event.measureId) {
-    //         selectedActivities.push(this.createMeasure('measure-show', 'Show', event.measureId));
-    //       } else {
-    //         selectedActivities.push(this.createMeasure('measure-new', 'Add'));
-    //       }
-
-    //       if (event.routineId) {
-    //         selectedActivities.push(this.createRoutine('routine-show', 'Show', event.routineId));
-    //       } else {
-    //         selectedActivities.push(this.createRoutine('routine-new', 'Add'));
-    //       }
-    //     });
-    //   } else {
-    //     selectedActivities.push(this.createMeasure('measure-new', 'Add'));
-    //     selectedActivities.push(this.createRoutine('routine-new', 'Add'));
-    //   }
-
-    //   if (selectedActivities) {
-    //     this.set('selectedActivities', selectedActivities);
-    //   }    
-    set(this, 'selectedDay', { eventId, date });
+    set(this, 'event', event);
     this.toggleBottomSheet();
-    //this.transitionToRoute('calendar.measures');
+  }
+
+  @action
+  saveEvent(event: Event, measure?: Measure, training?: Training) {
+    console.log('saving');
+
+    if (measure) {
+      set(event, 'measure', measure);
+      event.measureId = measure.id;
+      set(measure, 'event', event);
+      measure.save();
+      event.save();
+    }
   }
 }

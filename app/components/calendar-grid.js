@@ -44,13 +44,13 @@ export default class CalendarGridComponent extends Component {
   }
 
   get month() {
-    const { date } = this.args;
+    const { date, events } = this.args;
     if (date) {
       const month = calendarMonth(date);
       for (const week of month) {
         for (const day of week) {
-          if (this.events && this.events.length > 0) {
-            this.events.forEach(event => {
+          if (events && events.length > 0) {
+            events.forEach(event => {
               if (isSameDay(day.date, event.day)) {
                 day.eventId = event.id;
               }
