@@ -1,18 +1,18 @@
-<form class="w-full p-2">
-  <div class="my-2 text-sm text-gray-800">Select training</div>
-  <div class="inline-block relative w-full">
+<form class="w-full px-2">
+  <div class="mt-4 text-sm text-gray-800">Select training</div>
+  <div class="relative w-full">
     <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
       <option>Really long</option>
       <option>Option 2</option>
       <option>Option 3</option>
     </select>
-    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+    {{!-- <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
       <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-    </div>
+    </div> --}}
   </div>
 
-  <div class="my-2 text-sm text-gray-800">Repeat</div>
-  <div class="mt-2 text-sm text-gray-800">
+  <div class="mt-4 text-sm text-gray-800">Repeat</div>
+  <div class="my-2 text-sm text-gray-800">
     <div>
       <label class="inline-flex items-center">
         <input type="radio" class="form-radio" name="radio" value="1" checked>
@@ -27,8 +27,8 @@
     </div>
   </div>
 
-  <div class="my-2 text-sm text-gray-800">Week</div>
-  <div class="flex justify-around">
+  <div class="mt-4 text-sm text-gray-800">Week</div>
+  <div class="my-2 flex justify-around">
     <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">M</div>
     <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">T</div>
     <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">W</div>
@@ -38,18 +38,19 @@
     <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">S</div>
   </div>
 
-  <div class="my-2 text-sm text-gray-800">Month</div>
-  <div class="flex justify-around">
+  <div class="mt-4 text-sm text-gray-800">Month</div>
+  <div class="my-2 flex justify-around">
     <div class="rounded-full py-1 px-4 bg-gray-300">Week 1</div>
     <div class="rounded-full py-1 px-4 bg-gray-300">Week 2</div>
     <div class="rounded-full py-1 px-4 bg-yellow-500">Week 3</div>
     <div class="rounded-full py-1 px-4 bg-gray-300">Week 4</div>
   </div>
 
-  <div class="flex mt-6">
+  <div class="mt-6 mb-2 flex">
     <button class="w-full shadow py-2 px-4 bg-yellow-800 font-semibold text-white mr-2
                   hover:bg-yellow-700 focus:shadow-outline focus:outline-none"
-            type="button">
+            type="button"
+            {{on "click" @onClose}}>
     Cancel
     </button>
     <button class="w-full shadow py-2 px-4 bg-yellow-500 font-semibold text-white

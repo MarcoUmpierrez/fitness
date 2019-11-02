@@ -2,27 +2,10 @@
 
 <div class="p-2 bg-white rounded-lg relative">
   {{#if this.isMenuState}}
-    <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Actions</h1>
-    <ul>
-      <li>
-        <button class="w-full flex shadow py-2 px-4 mt-2 bg-yellow-500 font-semibold text-white
-                      hover:bg-yellow-400 focus:shadow-outline focus:outline-none"
-                type="button"
-                {{on "click" this.setMeasuresState}}>
-          <span>{{svg-jar "square_foot-24px" class="fill-current" width="24px"}}</span>
-          Measures
-        </button>
-      </li>
-      <li>
-        <button class="w-full flex shadow py-2 px-4 mt-2 bg-yellow-500 font-semibold text-white
-                      hover:bg-yellow-400 focus:shadow-outline focus:outline-none"
-                type="button"
-                {{on "click" this.setTrainingState}}>
-          <span>{{svg-jar "directions_run-24px" class="fill-current" width="24px"}}</span>
-          Training
-        </button>
-      </li>
-    </ul>
+    <BottomSheet::Menu
+      @setMeasuresState={{this.setMeasuresState}}
+      @setTrainingState={{this.setTrainingState}}
+    />
 
   {{else if this.isMeasureState}}
     <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Measures</h1>
@@ -33,6 +16,8 @@
     />
   {{else if this.isTrainingState}}
     <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Training</h1>
-    <BottomSheet::TrainingForm />
+    <BottomSheet::TrainingForm
+      @onClose={{@onClose}}
+    />
   {{/if}}
 </div>
