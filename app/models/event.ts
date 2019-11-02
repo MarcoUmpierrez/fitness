@@ -1,15 +1,14 @@
 import DS from 'ember-data';
-import Routine from './routine';
+import Training from './training';
 import Measure from './measure';
 const { Model, belongsTo, attr } = DS;
 
 export default class Event extends Model {
-  @belongsTo('routine', { async: false }) routine?: Routine;
+  @belongsTo('training', { async: false }) training?: Training;
   @belongsTo('measure', { async: false }) measure?: Measure;
   @attr() day!: Date;
-  @attr() routineId?: string;
+  @attr() trainingId?: string;
   @attr() measureId?: string;
-  @attr({ defaultValue: false }) completed!: boolean;
 }
 
 declare module 'ember-data/types/registries/model' {

@@ -34,10 +34,6 @@
   height: calc(100vh - 110px);
 }
 
-.bottom-sheet-content {
-  bottom: 45px;
-}
-
 /*
 #index-page {
   background-image: linear-gradient(to bottom, #FEB2B2, #FEB2B2);

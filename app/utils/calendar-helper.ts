@@ -109,7 +109,7 @@ const _generateDays = (currentDate: Date): CalendarNode[] => {
       day: day,
       isCurrentMonth: isCurrentMonth,
       isToday: isSameDay(today, date),
-      date: date
+      date: new Date(date.getTime())
     });
 
     day++;

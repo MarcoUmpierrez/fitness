@@ -1,10 +1,11 @@
 import Controller from '@ember/controller';
-import { computed, action, set } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { action, set } from '@ember/object';
 import { months } from 'efitness/utils/calendar-helper';
 import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
-import Training from 'efitness/models/training';
 import { increaseMonth, decreaseMonth } from 'efitness/utils/calendar-helper';
+import Training from 'efitness/models/training';
 
 interface Activity {
   url: string,
@@ -15,10 +16,10 @@ interface Activity {
 }
 
 export default class CalendarController extends Controller {
-  date?: Date;
-  selectedDate?:Date;
-  showBottomSheet?: Boolean;
   event?: Event;
+  selectedDate?:Date;
+  @tracked date?: Date;
+  @tracked showBottomSheet?: Boolean;
 
   init() {
     super.init();
@@ -26,7 +27,6 @@ export default class CalendarController extends Controller {
     this.showBottomSheet = false;
   }
 
-  @computed('date')
   get month() {
     if (this.date) {
       return `${months[this.date.getMonth()]} ${this.date.getFullYear()}`;
@@ -35,21 +35,21 @@ export default class CalendarController extends Controller {
     return null;
   }
 
-  @action 
+  @action
   incMonth() {
     if (this.date) {
-      set(this, 'date', increaseMonth(this.date));
+      this.date = increaseMonth(this.date);
     }
   }
 
-  @action 
+  @action
   decMonth() {
     if (this.date) {
-      set(this, 'date', decreaseMonth(this.date));
+      this.date = decreaseMonth(this.date);
     }
   }
 
-  @action 
+  @action
   createMeasure(url: string, label: string, measureId?: string): Activity {
     return {
       url: `calendar.${url}`,
@@ -68,20 +68,20 @@ export default class CalendarController extends Controller {
       iconTitle: 'running',
       label: `${label} training`
     };
-  }  
-
-  @action
-  toggleBottomSheet() {
-    set(this, 'showBottomSheet', !this.showBottomSheet);
   }
 
   @action
-  selectDay(eventId: string, date: Date): void {
+  toggleBottomSheet() {
+    this.showBottomSheet = !this.showBottomSheet;
+  }
+
+  @action
+  async selectDay(eventId: string, date: Date): Promise<void> {
     let event;
     if (eventId) {
-      event = this.store.peekRecord('event', eventId);
+      event = await this.store.findRecord('event', eventId);
     } else {
-      event = this.store.createRecord('event', {
+      event = await this.store.createRecord('event', {
         day: date
       })
     }
@@ -97,9 +97,20 @@ export default class CalendarController extends Controller {
     if (measure) {
       set(event, 'measure', measure);
       event.measureId = measure.id;
+      measure.eventId = event.id;
       set(measure, 'event', event);
       measure.save();
-      event.save();
     }
+
+    if (training) {
+      set(event, 'training', training);
+      event.trainingId = training.id;
+      training.eventId = event.id;
+      set(training, 'event', event);
+      training.save();
+    }
+
+
+    event.save();
   }
 }
