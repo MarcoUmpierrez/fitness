@@ -9,14 +9,19 @@ export default class MeasureFormComponent extends Component {
   @service store! : StoreService;
   measure!: Measure;
 
+  async getMeasure(measureId?:string) {
+    if (measureId) {
+      return await this.store.findRecord('measure', measureId);
+    } else {
+      return await this.store.createRecord('measure');
+    }
+  }
+
   constructor(...args) {
     super(...args);
     const { event } : { event: Event } = this.args;
-    if (event.measureId) {
-      this.measure = this.store.findRecord('measure', event.measureId);
-    } else {
-      this.measure = this.store.createRecord('measure');
-    }
+    // TODO: get the measure from the store (Promises! ugh!)
+    this.getMeasure(event.measureId).then(record => this.measure = record);
   }
 
   @action
