@@ -29,21 +29,21 @@
 
   <div class="mt-4 text-sm text-gray-800">Week</div>
   <div class="my-2 flex justify-around">
-    <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">M</div>
-    <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">T</div>
-    <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">W</div>
-    <div class="rounded-full h-8 w-8 bg-yellow-500 flex items-center justify-center">T</div>
-    <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">F</div>
-    <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">S</div>
-    <div class="rounded-full h-8 w-8 bg-gray-300 flex items-center justify-center">S</div>
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="M" @flags={{this.repeatOnDay}} @index={{this.days.Monday}} @onChange={{this.setRepeatOnDay}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="T" @flags={{this.repeatOnDay}} @index={{this.days.Tuesday}} @onChange={{this.setRepeatOnDay}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="W" @flags={{this.repeatOnDay}} @index={{this.days.Wednesday}} @onChange={{this.setRepeatOnDay}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="T" @flags={{this.repeatOnDay}} @index={{this.days.Thursday}} @onChange={{this.setRepeatOnDay}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="F" @flags={{this.repeatOnDay}} @index={{this.days.Friday}} @onChange={{this.setRepeatOnDay}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="S" @flags={{this.repeatOnDay}} @index={{this.days.Saturday}} @onChange={{this.setRepeatOnDay}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{false}} @label="S" @flags={{this.repeatOnDay}} @index={{this.days.Sunday}} @onChange={{this.setRepeatOnDay}} />
   </div>
 
   <div class="mt-4 text-sm text-gray-800">Month</div>
   <div class="my-2 flex justify-around">
-    <div class="rounded-full py-1 px-4 bg-gray-300">Week 1</div>
-    <div class="rounded-full py-1 px-4 bg-gray-300">Week 2</div>
-    <div class="rounded-full py-1 px-4 bg-yellow-500">Week 3</div>
-    <div class="rounded-full py-1 px-4 bg-gray-300">Week 4</div>
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{true}} @label="Week 1" @flags={{this.repeatOnMonth}} @index={{this.weeks.Week1}} @onChange={{this.setRepeatOnMonth}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{true}} @label="Week 2" @flags={{this.repeatOnMonth}} @index={{this.weeks.Week2}} @onChange={{this.setRepeatOnMonth}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{true}} @label="Week 3" @flags={{this.repeatOnMonth}} @index={{this.weeks.Week3}} @onChange={{this.setRepeatOnMonth}} />
+    <BottomSheet::TrainingForm::PeriodSelector @isPill={{true}} @label="Week 4" @flags={{this.repeatOnMonth}} @index={{this.weeks.Week4}} @onChange={{this.setRepeatOnMonth}} />
   </div>
 
   <div class="mt-6 mb-2 flex">
