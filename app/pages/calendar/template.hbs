@@ -3,19 +3,21 @@
     <span class="font-sans font-semibold text-lg text-gray-800">{{this.month}}</span>
   </header>
   <section class="relative">
-    <CalendarGrid 
-      @date={{this.date}} 
+    <CalendarGrid
+      @date={{this.date}}
+      @events={{this.model}}
       @increaseMonth={{this.incMonth}}
       @decreaseMonth={{this.decMonth}}
-      @events={{this.model}}
       @selectDay={{this.selectDay}}
     />
     {{#if this.showBottomSheet}}
       <div class="flex flex-col absolute z-10 inset-0 bottom-sheet-height" >
-        <BottomSheet 
-          @onClose={{this.toggleBottomSheet}} 
-          @event={{this.event}}
-          @onSave={{this.saveEvent}} 
+        <BottomSheet
+          @events={{this.model}}
+          @date={{this.selectedDate}}
+          @onClose={{this.toggleBottomSheet}}
+          @onSaveMeasure={{this.saveMeasure}}
+          @onSaveTraining={{this.saveTraining}}
         />
       </div>
     {{/if}}

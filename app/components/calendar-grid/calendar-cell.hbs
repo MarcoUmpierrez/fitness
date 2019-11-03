@@ -1,0 +1,8 @@
+ <td
+  class="row-height align-top
+          {{if this.isCurrentMonth "text-gray-800" "text-gray-400"}}
+          {{if this.isToday "bg-yellow-400 rounded" ""}}"
+  {{on "click" (fn @selectDay @date)}}
+>
+  {{this.day}}
+</td>

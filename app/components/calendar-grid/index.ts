@@ -1,16 +1,23 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { toUp, toDown } from 'ember-animated/transitions/move-over';
 import { Swipe } from 'efitness/utils/constants';
-import { calendarMonth, isSameDay } from 'efitness/utils/calendar-helper';
+import { calendarMonth } from 'efitness/utils/calendar-helper';
+import GesturesService from 'efitness/services/gestures';
 
-export default class CalendarGridComponent extends Component {
-  @service gestures;
-  events;
+interface Args {
+  date:Date,
+  increaseMonth: () => void,
+  decreaseMonth: () => void,
+  events: Event[],
+  selectDay:(date: Date) => void
+}
 
-  constructor(...args) {
-    super(...args);
+export default class CalendarGridComponent extends Component<Args> {
+  @service gestures!: GesturesService;
+
+  constructor(owner:unknown, args:Args) {
+    super(owner, args);
 
     const { date } = this.args;
     if (this.gestures) {
@@ -35,7 +42,7 @@ export default class CalendarGridComponent extends Component {
     }
   }
 
-  rules({ oldItems, newItems }) {
+  rules({ oldItems, newItems }: { oldItems: Date[], newItems : Date[]}) {
     if (oldItems[0] > newItems[0]) {
       return toDown;
     } else {
@@ -44,21 +51,9 @@ export default class CalendarGridComponent extends Component {
   }
 
   get month() {
-    const { date, events } = this.args;
+    const { date } = this.args;
     if (date) {
       const month = calendarMonth(date);
-      for (const week of month) {
-        for (const day of week) {
-          if (events && events.length > 0) {
-            events.forEach(event => {
-              if (isSameDay(day.date, event.day)) {
-                day.eventId = event.id;
-              }
-            });
-          }
-        }
-      }
-
       return month;
     }
 

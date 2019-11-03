@@ -10,14 +10,18 @@
   {{else if this.isMeasureState}}
     <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Measures</h1>
     <BottomSheet::MeasureForm
-      @event={{@event}}
+      @date={{@date}}
+      @measure={{this.measure}}
       @onClose={{@onClose}}
-      @onSave={{this.saveMeasures}}
+      @onSave={{@onSaveMeasure}}
     />
   {{else if this.isTrainingState}}
     <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Training</h1>
     <BottomSheet::TrainingForm
+      @date={{@date}}
+      @training={{this.training}}
       @onClose={{@onClose}}
+      @onSave={{@onSaveTraining}}
     />
   {{/if}}
 </div>

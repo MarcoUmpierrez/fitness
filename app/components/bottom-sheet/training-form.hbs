@@ -2,9 +2,9 @@
   <div class="mt-4 text-sm text-gray-800">Select training</div>
   <div class="relative w-full">
     <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-      <option>Really long</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
+      {{#each routines as |routine|}}
+        <option>{{routine.name}}</option>
+      {{/each}}
     </select>
     {{!-- <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
       <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -16,7 +16,7 @@
     <div>
       <label class="inline-flex items-center">
         <input type="radio" class="form-radio" name="radio" value="1" checked>
-        <span class="ml-2">Only on: <span class="font-semibold">30 November 2019</span></span>
+        <span class="ml-2">Only on: <span class="font-semibold">{{format-date @date}}</span></span>
       </label>
     </div>
     <div>

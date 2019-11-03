@@ -56,12 +56,12 @@ export const firstDayOfMonthInWeek = (date: Date): number => {
   return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
 };
 
-export const calendarMonth = (date: Date): CalendarNode[][] => {
-  let calendarDays: CalendarNode[] = _generateDays(date);
+export const calendarMonth = (date: Date): Date[][] => {
+  let calendarDays: Date[] = _generateDays(date);
   return _divideIntoWeeks(calendarDays, 7);
 };
 
-const _divideIntoWeeks = (array: CalendarNode[], weekSize:number): CalendarNode[][] => {
+const _divideIntoWeeks = (array: Date[], weekSize:number): Date[][] => {
   var result = [];
 
   while (array.length) {
@@ -71,8 +71,7 @@ const _divideIntoWeeks = (array: CalendarNode[], weekSize:number): CalendarNode[
   return result;
 }
 
-const _generateDays = (currentDate: Date): CalendarNode[] => {
-  const today = new Date();
+const _generateDays = (currentDate: Date): Date[] => {
   const daysInPreviousMonth: number = daysInMonth(decreaseMonth(currentDate));
   const daysInCurrentMonth: number = daysInMonth(currentDate);
 
@@ -102,15 +101,10 @@ const _generateDays = (currentDate: Date): CalendarNode[] => {
   }
 
 
-  let result: CalendarNode[] = [];
+  let result: Date[] = [];
   for (let i = 0; i < 42; i++) {
     date.setDate(day);
-    result.push({
-      day: day,
-      isCurrentMonth: isCurrentMonth,
-      isToday: isSameDay(today, date),
-      date: new Date(date.getTime())
-    });
+    result.push(new Date(date.getTime()));
 
     day++;
     if (isPreviousMonth && day > daysInPreviousMonth) {
