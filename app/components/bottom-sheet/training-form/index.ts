@@ -35,6 +35,7 @@ export default class TrainingFormComponent extends Component<Args> {
   repeatOnDay!: number;
   weeks!: Weeks;
   repeatOnMonth!: number;
+  isRepeatable!: boolean;
 
   constructor(owner: unknown, args: Args) {
     super(owner, args);
@@ -57,6 +58,8 @@ export default class TrainingFormComponent extends Component<Args> {
       Week4: 0b1000,
     }
     this.repeatOnMonth = 0b0000;
+
+    this.isRepeatable = false;
   }
 
   didInsertElement() {
@@ -86,6 +89,10 @@ export default class TrainingFormComponent extends Component<Args> {
 
   setInputValue(id:string, value: number) {
     (document.getElementById(id) as HTMLInputElement).value = value.toString();
+  }
+
+  @action setIsRepeatable(value: boolean) {
+    set(this, 'isRepeatable', value);
   }
 
   @action setRepeatOnDay(flags: number) {
