@@ -2,9 +2,10 @@
   <ul class="flex justify-around">
     <li>
       <LinkTo
+        aria-label="Home page"
         id="nav-index"
         class="nav-btn"
-        @route="index" 
+        @route="index"
         @current-when="index"
       >
         <span>{{svg-jar "home-24px" class="fill-current" width="24px"}}</span>
@@ -12,19 +13,21 @@
     </li>
     <li>
       <LinkTo
-        id="nav-trainings"
+        aria-label="Routines page"
+        id="nav-routines"
         class="nav-btn"
-        @route="trainings"
-        @current-when="trainings"
+        @route="routines"
+        @current-when="routines"
       >
         <span>{{svg-jar "directions_run-24px" class="fill-current" width="24px"}}</span>
       </LinkTo>
-    </li>    
+    </li>
     <li>
       <LinkTo
+        aria-label="Calendar page"
         id="nav-calendar"
         class="nav-btn"
-        @route="calendar" 
+        @route="calendar"
         @current-when="calendar"
       >
         <span>{{svg-jar "calendar_today-24px" class="fill-current" width="24px"}}</span>
@@ -32,6 +35,7 @@
     </li>
     <li>
       <LinkTo
+        aria-label="Statistics page"
         id="nav-statistics"
         class="nav-btn"
         @route="statistics"
@@ -42,6 +46,7 @@
     </li>
     <li>
       <LinkTo
+        aria-label="Settings page"
         id="nav-settings"
         class="nav-btn"
         @route="settings"
