@@ -26,4 +26,24 @@ export default class CalendarCellComponent extends Component<Args> {
     const { date } = this.args;
     return date.getDate();
   }
+
+  get hasMeasure() : string | undefined {
+    const { events, date } = this.args;
+    let event : Event | undefined = events.find((record: Event) => isSameDay(record.day, date))
+    if (event) {
+      return event.measureId;
+    }
+
+    return undefined;
+  }
+
+  get hasTraining() : string | undefined {
+    const { events, date } = this.args;
+    let event : Event | undefined = events.find((record: Event) => isSameDay(record.day, date))
+    if (event) {
+      return event.trainingId;
+    }
+
+    return undefined;
+  }
 }

@@ -4,16 +4,9 @@ import { action, set } from '@ember/object';
 import { months } from 'efitness/utils/calendar-helper';
 import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
-import { increaseMonth, decreaseMonth, isSameDay } from 'efitness/utils/calendar-helper';
 import Training from 'efitness/models/training';
-
-interface Activity {
-  url: string,
-  measureOrRoutineId?: string,
-  icon: string,
-  iconTitle: string,
-  label: string
-}
+import { TrainingBox, MeasuresBox } from 'efitness/components/bottom-sheet/utils';
+import { increaseMonth, decreaseMonth, isSameDay } from 'efitness/utils/calendar-helper';
 
 export default class CalendarController extends Controller {
   event?: Event;
@@ -48,26 +41,6 @@ export default class CalendarController extends Controller {
     }
   }
 
-  @action createMeasure(url: string, label: string, measureId?: string): Activity {
-    return {
-      url: `calendar.${url}`,
-      measureOrRoutineId: measureId,
-      icon: 'weight',
-      iconTitle: 'weight',
-      label: `${label} measures`
-    };
-  }
-
-  createRoutine(url: string, label: string, routineId?: string): Activity {
-    return {
-      url: `calendar.${url}`,
-      measureOrRoutineId: routineId,
-      icon: 'running',
-      iconTitle: 'running',
-      label: `${label} training`
-    };
-  }
-
   @action toggleBottomSheet() {
     this.showBottomSheet = !this.showBottomSheet;
   }
@@ -77,27 +50,34 @@ export default class CalendarController extends Controller {
     this.toggleBottomSheet();
   }
 
-  @action async saveMeasure(weight: number, fat: number, water: number, muscle: number, boneDensity: number) {
+  getRecord<T>(type: string, id?: string): T  {
+    if (id) {
+      return this.store.peekRecord(type, id);
+    } else {
+      return this.store.createRecord(type);
+    }
+  }
+
+  getEvent(): Event {
     let event = this.model.find((record: Event) => isSameDay(record.day, this.selectedDate))
 
     if (!event) {
-      event = await this.store.createRecord('event', {
+      event = this.store.createRecord('event', {
         day: new Date(this.selectedDate.getTime())
       })
     }
 
-    let measure;
-    if (event.measureId) {
-      measure = this.store.peekRecord('measure', event.measureId);
-    } else {
-      measure = this.store.createRecord('measure');
-    }
+    return event;
+  }
 
-    measure.weight = weight;
-    measure.fat = fat;
-    measure.water = water;
-    measure.muscle = muscle;
-    measure.boneDensity = boneDensity;
+  @action async saveMeasure(measuresBox: MeasuresBox) {
+    let event = this.getEvent();
+    let measure : Measure = this.getRecord<Measure>('measure', event.measureId);
+    measure.weight = measuresBox.weight || 0;
+    measure.fat = measuresBox.fat || 0;
+    measure.water = measuresBox.water || 0;
+    measure.muscle = measuresBox.muscle || 0;
+    measure.boneDensity = measuresBox.boneDensity || 0;
     measure.eventId = event.id;
     measure.event = event;
     measure.save();
@@ -105,25 +85,23 @@ export default class CalendarController extends Controller {
     event.measure = measure;
     event.measureId = measure.id;
     event.save();
+    this.toggleBottomSheet();
   }
 
-  @action async saveTraining(training?: Training) {
-    let selectedEvent = this.model.find((event: Event) => isSameDay(event.day, this.selectedDate))
+  @action async saveTraining(trainingBox: TrainingBox) {
+    let event = this.getEvent();
+    let training : Training = this.getRecord<Training>('training', event.trainingId);
+    training.isRepeatable = trainingBox.isRepeatable;
+    training.repeatOnDays = trainingBox.repeatOnDays;
+    training.repeatOnWeeks = trainingBox.repeatOnWeeks;
+    training.lastUntil = trainingBox.lastUntil;
+    training.eventId = event.id;
+    training.event = event;
+    training.save();
 
-    if (!selectedEvent) {
-      selectedEvent = await this.store.createRecord('event', {
-        day: this.selectedDate
-      })
-    }
-
-    if (training) {
-      selectedEvent.training = training;
-      selectedEvent.trainingId = training.id;
-      training.eventId = selectedEvent.id;
-      training.event = selectedEvent;
-      training.save();
-    }
-
-    selectedEvent.save();
+    event.training = training;
+    event.trainingId = training.id;
+    event.save();
+    this.toggleBottomSheet();
   }
 }

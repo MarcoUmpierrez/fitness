@@ -1,8 +1,16 @@
  <td
-  class="row-height align-top
+  class="row-height cell-width align-top
           {{if this.isCurrentMonth "text-gray-800" "text-gray-400"}}
           {{if this.isToday "bg-yellow-400 rounded" ""}}"
   {{on "click" (fn @selectDay @date)}}
 >
-  {{this.day}}
+<span class="block">{{this.day}}</span>
+<div class="flex flex-col items-center justify-center">
+    {{#if this.hasMeasure}}
+      <span class="block rounded-full w-6 h-6 bg-white text-yellow-600 flex items-center justify-center font-semibold mt-2">M</span>
+    {{/if}}
+    {{#if this.hasTraining}}
+      <span class="block rounded-full w-6 h-6 bg-white text-yellow-600 flex items-center justify-center font-semibold mt-2">T</span>
+    {{/if}}
+</div>
 </td>

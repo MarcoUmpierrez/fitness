@@ -1,9 +1,10 @@
 import DS from 'ember-data';
+import Routine from './routine';
 const { Model, attr, belongsTo } = DS;
 
 export default class Training extends Model {
   @belongsTo('event', { async: false }) event?: Event;
-  @belongsTo('routine', { async: false }) routine?: Event;
+  @belongsTo('routine', { async: false }) routine?: Routine;
 
   @attr() eventId?: string;
   @attr() routineId?: string;
@@ -24,7 +25,7 @@ export default class Training extends Model {
      Saturday:  0100000
      Sunday:    1000000
   */
-  @attr({ defaultValue: 0b0000000 }) repeatOnDay!: number;
+  @attr({ defaultValue: 0b0000000 }) repeatOnDays!: number;
 
   /* Binary value to represent each week of the month
      Week 1: 0001
@@ -32,7 +33,7 @@ export default class Training extends Model {
      Week 3: 0100
      Week 4: 1000
   */
-  @attr({ defaultValue: 0b0000 }) repeatOnWeek!: number;
+  @attr({ defaultValue: 0b0000 }) repeatOnWeeks!: number;
 
   // In case of a repeatable training session, indicates
   // until when should be relevant

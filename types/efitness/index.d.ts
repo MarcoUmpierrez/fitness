@@ -8,6 +8,21 @@ declare global {
     height: number;
     weight: number;
   }
+
+  interface MeasuresObj {
+    weight?: number;
+    fat?: number;
+    water?: number;
+    muscle?: number;
+    boneDensity?: number;
+  }
+
+  interface TrainingObj {
+    isRepeatable: boolean;
+    repeatOnDays: number;
+    repeatOnWeeks: number;
+    lastUntil?: Date;
+  }
 }
 
 export {};

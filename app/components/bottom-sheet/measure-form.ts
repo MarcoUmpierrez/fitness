@@ -1,49 +1,57 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import StoreService from 'ember-data/store';
-import { inject as service } from '@ember/service';
 import Measure from 'efitness/models/measure';
+import { MeasuresBox } from 'efitness/components/bottom-sheet/utils';
 
 interface Args {
   date: Date,
-  measure: Measure | null,
+  model: Measure | null,
   onClose: () => void,
-  onSave: (weight: number, fat: number, water: number, muscle: number, boneDensity: number) => void,
+  onSave: (measures: MeasuresObj) => void,
 }
 
 export default class MeasureFormComponent extends Component<Args> {
-  @service store! : StoreService;
+  measures!: MeasuresBox;
 
   constructor(owner: unknown, args: Args) {
     super(owner, args);
-  }
 
-  didInsertElement() {
-    const { measure } = this.args;
-    if (measure) {
-      this.setInputValue('inline-weight', measure.weight);
-      this.setInputValue('inline-fat', measure.fat);
-      this.setInputValue('inline-water', measure.water);
-      this.setInputValue('inline-muscle', measure.muscle);
-      this.setInputValue('inline-bone-density', measure.boneDensity);
+    this.measures = new MeasuresBox();
+    const { model } = this.args;
+    if (model) {
+      this.measures.weight = model.weight;
+      this.measures.fat = model.fat;
+      this.measures.water = model.water;
+      this.measures.muscle = model.muscle;
+      this.measures.boneDensity = model.boneDensity;
     }
   }
 
-  @action onSave() {
+  @action onInput({ target: { id, value } }:  { target: { id: string, value: string }}) {
+    switch (id) {
+      case 'inline-weight':
+        this.measures.weight = parseFloat(value);
+        break;
+      case 'inline-fat':
+        this.measures.fat = parseFloat(value);
+        break;
+      case 'inline-water':
+        this.measures.water = parseFloat(value);
+        break;
+      case 'inline-muscle':
+        this.measures.muscle = parseFloat(value);
+        break;
+      case 'inline-bone-density':
+        this.measures.boneDensity = parseFloat(value);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  @action save() {
     const { onSave } = this.args;
-    let weight = this.getInputValue('inline-weight');
-    let fat = this.getInputValue('inline-fat');
-    let water = this.getInputValue('inline-water');
-    let muscle = this.getInputValue('inline-muscle');
-    let boneDensity = this.getInputValue('inline-bone-density');
-    onSave(weight, fat, water, muscle, boneDensity);
-  }
-
-  getInputValue(id:string) : number {
-    return parseFloat((document.getElementById(id) as HTMLInputElement).value);
-  }
-
-  setInputValue(id:string, value: number) {
-    (document.getElementById(id) as HTMLInputElement).value = value.toString();
+    onSave(this.measures);
   }
 }

@@ -11,7 +11,7 @@
     <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Measures</h1>
     <BottomSheet::MeasureForm
       @date={{@date}}
-      @measure={{this.measure}}
+      @model={{this.measure}}
       @onClose={{@onClose}}
       @onSave={{@onSaveMeasure}}
     />
@@ -19,7 +19,7 @@
     <h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Training</h1>
     <BottomSheet::TrainingForm
       @date={{@date}}
-      @training={{this.training}}
+      @model={{this.training}}
       @onClose={{@onClose}}
       @onSave={{@onSaveTraining}}
     />
