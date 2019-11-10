@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 import Routine from 'efitness/models/routine';
 import Training from 'efitness/models/training';
 import { Days, days, Weeks, weeks } from 'efitness/utils/binary-helper';
-import { TrainingBox } from 'efitness/components/bottom-sheet/utils';
+import { TrainingBox } from 'efitness/utils/wrappers';
 
 interface Args {
   date: Date,

@@ -34,6 +34,10 @@
   width: calc(100vw/7);
 }
 
-.bottom-sheet-height {
-  height: calc(100vh - 110px);
+.page-height {
+  height: calc(100vh - 111px);
+}
+
+.ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
+  stroke: #2B6CB0 !important;
 }

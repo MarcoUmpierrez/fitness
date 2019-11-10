@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import Measure from 'efitness/models/measure';
-import { MeasuresBox } from 'efitness/components/bottom-sheet/utils';
+import { MeasuresBox } from 'efitness/utils/wrappers';
 
 interface Args {
   date: Date,

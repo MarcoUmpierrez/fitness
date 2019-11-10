@@ -1,0 +1,41 @@
+<MeasuresChart::Menu @period={{this.period}} @selectPeriod={{this.selectPeriod}}/>
+<MeasuresChart::Chart
+  @title="Weight"
+  @chartId="weight-chart"
+  @propertyToRender="weight"
+  @period={{this.period}}
+  @data={{@model}}
+  @axisX={{this.axisX}}
+/>
+<MeasuresChart::Chart
+  @title="Fat"
+  @chartId="fat-chart"
+  @propertyToRender="fat"
+  @period={{this.period}}
+  @data={{@model}}
+  @axisX={{this.axisX}}
+/>
+<MeasuresChart::Chart
+  @title="Water"
+  @chartId="water-chart"
+  @propertyToRender="water"
+  @period={{this.period}}
+  @data={{@model}}
+  @axisX={{this.axisX}}
+/>
+<MeasuresChart::Chart
+  @title="Muscle"
+  @chartId="muscle-chart"
+  @propertyToRender="muscle"
+  @period={{this.period}}
+  @data={{@model}}
+  @axisX={{this.axisX}}
+/>
+<MeasuresChart::Chart
+  @title="Bone Density"
+  @chartId="bone-chart"
+  @propertyToRender="boneDensity"
+  @period={{this.period}}
+  @data={{@model}}
+  @axisX={{this.axisX}}
+/>

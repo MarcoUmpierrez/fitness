@@ -23,6 +23,22 @@ export const days: string[] = [
   'Sunday'
 ];
 
+const millisecondsInADay = 86354663;
+export const isThisWeek = (today: Date, date: Date): boolean => {
+  let dayOfWeek = today.getDay();
+  let offset = today.getDate() - dayOfWeek + (dayOfWeek == 0 ? -6 : 1);
+  let firstDayOfWeek: Date = new Date(today.getTime());
+  firstDayOfWeek.setDate(offset);
+  let lastDayOfWeek: Date = new Date(firstDayOfWeek.getTime() + (7 * millisecondsInADay));
+
+  return date.getFullYear() >= firstDayOfWeek.getFullYear() &&
+         date.getFullYear() <= lastDayOfWeek.getFullYear() &&
+         date.getMonth() >= firstDayOfWeek.getMonth() &&
+         date.getMonth() <= lastDayOfWeek.getMonth() &&
+         date.getDate() >= firstDayOfWeek.getDate() &&
+         date.getDate() <= lastDayOfWeek.getDate();
+}
+
 
 export const isSameDay = (date1: Date, date2: Date): boolean => {
   if (!date1 || !date2) {

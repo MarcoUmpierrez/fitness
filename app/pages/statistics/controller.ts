@@ -1,83 +1,37 @@
 import Controller from '@ember/controller';
-import { computed, action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 import Measure from 'efitness/models/measure';
+import { StatisticsBox } from 'efitness/utils/wrappers';
+import Event from 'efitness/models/event';
 
-enum Period {
-  week = 'week',
-  month = 'month',
-  year = 'year'
-}
+
 
 export default class StatisticsController extends Controller {
-  model!: Measure[];
-  period!: Period;
-  periodEnum!: Period;
+  @tracked model!: Event[];
 
-  init() {
-    super.init();
-    this.set('periodEnum', Period);
-    this.set('period', Period.month);
-  }
-
-  @computed('model', 'period')
-  get sortedModel(): Measure[] {
-    return this.model.sortBy('date');
-  }
-
-  @computed('sortedModel')
-  get weight(): number[] {
-    return this.sortedModel.map((measure: Measure) => {
-      return measure.weight;
-    });
-  }
-
-  @computed('sortedModel')
   get userMeasures(): UserMeasures {
     return { height: 1.70, weight: 71 };
   }
 
-  @computed('sortedModel')
-  get fat(): number[] {
-    return this.sortedModel.map((measure: Measure) => {
-      return measure.fat;
+  get statistics(): StatisticsBox[] {
+    let statistics: StatisticsBox[] = [];
+    this.model.forEach((event: Event) => {
+      if (event.measureId) {
+        let statistic: StatisticsBox = new StatisticsBox();
+        let measure: Measure = this.store.peekRecord('measure', event.measureId);
+        if (measure) {
+          statistic.date = event.day;
+          statistic.weight = measure.weight;
+          statistic.fat = measure.fat;
+          statistic.water = measure.water;
+          statistic.muscle = measure.muscle;
+          statistic.boneDensity = measure.boneDensity;
+          statistics.push(statistic);
+        }
+      }
     });
-  }
 
-  @computed('sortedModel')
-  get water(): number[] {
-    return this.sortedModel.map((measure: Measure) => {
-      return measure.water;
-    });
-  }
-
-  @computed('sortedModel')
-  get muscle(): number[] {
-    return this.sortedModel.map((measure: Measure) => {
-      return measure.muscle;
-    });
-  }
-
-  @computed('sortedModel')
-  get boneDensity(): number[] {
-    return this.sortedModel.map((measure: Measure) => {
-      return measure.boneDensity;
-    });
-  }
-
-  @computed('period')
-  get axisX() {
-    if (this.period === Period.week) {
-      return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-    } else if (this.period === Period.month) {
-      return ['W1', 'W2', 'W3', 'W4', 'W5'];
-    } else {
-      return ['2019']
-    }
-  }
-
-  @action
-  selectPeriod(period: Period):void {
-    this.set('period', period);
+    return statistics.sortBy('date');
   }
 
 }

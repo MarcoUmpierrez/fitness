@@ -2,7 +2,11 @@
   <header class="border-b-2 border-blue-400 py-2 text-center">
     <span class="font-sans font-semibold text-lg text-gray-800">Statistics</span>
   </header>
-  <section>
+  <section class="page-height overflow-y-auto">
+
+
     <Bmi @measures={{this.userMeasures}} />
+    <MeasuresChart @model={{this.statistics}} @measures={{this.userMeasures}} />
+
   </section>
 </div>
