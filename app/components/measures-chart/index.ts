@@ -2,36 +2,42 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { StatisticsBox } from 'efitness/utils/wrappers';
+import { getWeekDays, Period } from 'efitness/utils/calendar-helper';
 
 interface Args {
   model: StatisticsBox[],
 }
 
-enum Period {
-  week = 'week',
-  month = 'month',
-  year = 'year'
-}
-
 export default class MeasuresChartComponent extends Component<Args> {
   @tracked period!: Period;
+  @tracked date!: Date;
 
   constructor(owner: unknown, args: Args) {
     super(owner, args);
-    this.period = Period.month;
+    this.date = new Date();
+    this.period = Period.week;
   }
 
-  get axisX(): string[] {
+  get week(): string | null {
     if (this.period === Period.week) {
-      return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-    } else if (this.period === Period.month) {
-      return ['W1', 'W2', 'W3', 'W4', 'W5'];
-    } else {
-      return ['2019']
+      let { first, last } = getWeekDays(this.date);
+      return `${first.getDate()}.${first.getMonth()}.${first.getFullYear()} - ${last.getDate()}.${last.getMonth()}.${last.getFullYear()}`;
     }
+
+    return null;
   }
 
   @action selectPeriod(period: Period): void {
     this.period = period;
+  }
+
+  @action previousWeek(): void {
+    this.date.setDate(this.date.getDate() - 7);
+    this.date = this.date;
+  }
+
+  @action nextWeek(): void {
+    this.date.setDate(this.date.getDate() + 7);
+    this.date = this.date;
   }
 }

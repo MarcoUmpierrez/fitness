@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import Chartist from 'chartist';
 import { StatisticsBox } from 'efitness/utils/wrappers';
-import { isThisWeek } from 'efitness/utils/calendar-helper';
+import { getWeekDays, Period, isGreaterOrEq, isLessOrEq } from 'efitness/utils/calendar-helper';
 
 interface Args {
   title: string,
@@ -18,23 +18,37 @@ export default class ChartComponent extends Component<Args> {
     super(owner, args);
   }
 
-  initChart(element: HTMLElement, [chartId, propertyToRender, data, period, axisX]: [string, string, StatisticsBox[], string, string[]]) {
+  get axisX(): string[] {
+    const { period } = this.args;
+    if (period === Period.week) {
+      return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+    } else if (period === Period.month) {
+      return ['W1', 'W2', 'W3', 'W4', 'W5'];
+    } else {
+      return ['2019']
+    }
+  }
+
+  initChart(element: HTMLElement, [chartId, propertyToRender, data, period, date, axisX]: [string, string, StatisticsBox[], string, Date, string[]]) {
     let points;
-    let today = new Date();
     switch (period) {
-      case 'week':
-        points = data.map((model: StatisticsBox) => {
-          if (isThisWeek(today, model.date)) {
-            return model[propertyToRender];
+      case Period.week:
+        points = [null, null, null, null, null, null, null];
+        data.forEach((model: StatisticsBox) => {
+          const { first, last } = getWeekDays(date);
+          if (isGreaterOrEq(model.date, first) && isLessOrEq(model.date, last)) {
+            let day = model.date.getDay();
+            day = day === 0? 6 : day - 1;
+            points[day] = model[propertyToRender];
           }
         });
         break;
-      case 'month':
+      case Period.month:
         points = data.map((model: StatisticsBox) => {
           return model[propertyToRender];
         });
         break;
-      case 'year':
+      case Period.year:
         points = data.map((model: StatisticsBox) => {
           return model[propertyToRender];
         });

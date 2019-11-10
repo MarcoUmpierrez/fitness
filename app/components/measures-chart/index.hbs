@@ -1,41 +1,52 @@
 <MeasuresChart::Menu @period={{this.period}} @selectPeriod={{this.selectPeriod}}/>
+{{#if (eq this.period "week")}}
+  <div class="flex flex-row justify-around text-lg text-blue-700 py-2 mt-2">
+    <span {{on "click" this.previousWeek}} role="button">{{svg-jar "navigate_before-24px" class="fill-current" width="36px" height="36px"}}</span>
+    <span class="font-semibold leading-loose">{{this.week}}</span>
+    <span {{on "click" this.nextWeek}} role="button">{{svg-jar "navigate_next-24px" class="fill-current" width="36px" height="36px"}}</span>
+  </div>
+{{else if (eq this.period "month")}}
+  month
+{{else}}
+  year
+{{/if}}
 <MeasuresChart::Chart
   @title="Weight"
   @chartId="weight-chart"
   @propertyToRender="weight"
   @period={{this.period}}
+  @date={{this.date}}
   @data={{@model}}
-  @axisX={{this.axisX}}
 />
 <MeasuresChart::Chart
   @title="Fat"
   @chartId="fat-chart"
   @propertyToRender="fat"
   @period={{this.period}}
+  @date={{this.date}}
   @data={{@model}}
-  @axisX={{this.axisX}}
 />
 <MeasuresChart::Chart
   @title="Water"
   @chartId="water-chart"
   @propertyToRender="water"
   @period={{this.period}}
+  @date={{this.date}}
   @data={{@model}}
-  @axisX={{this.axisX}}
 />
 <MeasuresChart::Chart
   @title="Muscle"
   @chartId="muscle-chart"
   @propertyToRender="muscle"
   @period={{this.period}}
+  @date={{this.date}}
   @data={{@model}}
-  @axisX={{this.axisX}}
 />
 <MeasuresChart::Chart
   @title="Bone Density"
   @chartId="bone-chart"
   @propertyToRender="boneDensity"
   @period={{this.period}}
+  @date={{this.date}}
   @data={{@model}}
-  @axisX={{this.axisX}}
 />

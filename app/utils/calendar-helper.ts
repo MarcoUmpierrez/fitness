@@ -1,3 +1,9 @@
+export enum Period {
+  week = 'week',
+  month = 'month',
+  year = 'year'
+}
+
 export const months: string[] = [
   'January',
   'February',
@@ -24,21 +30,14 @@ export const days: string[] = [
 ];
 
 const millisecondsInADay = 86354663;
-export const isThisWeek = (today: Date, date: Date): boolean => {
-  let dayOfWeek = today.getDay();
-  let offset = today.getDate() - dayOfWeek + (dayOfWeek == 0 ? -6 : 1);
-  let firstDayOfWeek: Date = new Date(today.getTime());
-  firstDayOfWeek.setDate(offset);
-  let lastDayOfWeek: Date = new Date(firstDayOfWeek.getTime() + (7 * millisecondsInADay));
-
-  return date.getFullYear() >= firstDayOfWeek.getFullYear() &&
-         date.getFullYear() <= lastDayOfWeek.getFullYear() &&
-         date.getMonth() >= firstDayOfWeek.getMonth() &&
-         date.getMonth() <= lastDayOfWeek.getMonth() &&
-         date.getDate() >= firstDayOfWeek.getDate() &&
-         date.getDate() <= lastDayOfWeek.getDate();
+export const getWeekDays = (date: Date): { first: Date, last: Date } => {
+  let dayOfWeek = date.getDay();
+  let offset = date.getDate() - dayOfWeek + (dayOfWeek == 0 ? -6 : 1);
+  let first: Date = new Date(date.getTime());
+  first.setDate(offset);
+  let last: Date = new Date(first.getTime() + (6 * millisecondsInADay));
+  return { first, last };
 }
-
 
 export const isSameDay = (date1: Date, date2: Date): boolean => {
   if (!date1 || !date2) {
@@ -48,6 +47,22 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
   return date1.getFullYear() === date2.getFullYear() &&
   date1.getMonth() === date2.getMonth() &&
   date1.getDate() === date2.getDate();
+}
+
+export const isGreaterOrEq = (date1: Date, date2: Date): boolean => {
+  let a = new Date(date1.getTime());
+  a.setHours(0,0,0,0);
+  let b = new Date(date2.getTime());
+  b.setHours(0,0,0,0);
+  return a >= b;
+}
+
+export const isLessOrEq = (date1: Date, date2: Date): boolean => {
+  let a = new Date(date1.getTime());
+  a.setHours(0,0,0,0);
+  let b = new Date(date2.getTime());
+  b.setHours(0,0,0,0);
+  return a <= b;
 }
 
 export const increaseMonth = (date: Date): Date => {
