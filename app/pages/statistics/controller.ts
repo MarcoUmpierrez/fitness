@@ -34,4 +34,8 @@ export default class StatisticsController extends Controller {
     return statistics.sortBy('date');
   }
 
+  get lastMeasures(): StatisticsBox {
+    return this.statistics[this.statistics.length - 1];
+  }
+
 }
