@@ -2,14 +2,14 @@
   <svg height="180" width="160">
     <circle cx="80" cy="90" r="80" fill="#E0E0E0"/>
     <circle cx="80" cy="90" r="72" fill="#FFFFFF"/>
-    <circle cx="80" cy="90" r="76" fill="none" 
-            stroke-width="4" 
-            stroke-miterlimit="20" 
-            stroke="{{this.bmiResult}}" 
+    <circle cx="80" cy="90" r="76" fill="none"
+            stroke-width="4"
+            stroke-miterlimit="20"
+            stroke="{{this.bmiResult}}"
             transform="rotate(-180 80 90)"/>
     <text text-anchor="middle" x="80" y="90">
-      <tspan>{{this.bmi}}</tspan>
-      <tspan x="77" dy="1.2em" fill="#A5A6A9">BMI</tspan>
+      <tspan class="text-4xl" fill={{this.bmiResult}}>{{this.bmi}}</tspan>
+      <tspan class="text-2xl" x="77" dy="1.2em" fill={{this.bmiResult}}>BMI</tspan>
     </text>
   </svg>
 </div>

@@ -10,7 +10,7 @@ export default class StatisticsController extends Controller {
   @tracked model!: Event[];
 
   get userMeasures(): UserMeasures {
-    return { height: 1.70, weight: 71 };
+    return { height: 1.70, weight: this.lastMeasures.weight };
   }
 
   get statistics(): StatisticsBox[] {

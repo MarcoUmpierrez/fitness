@@ -1,6 +1,10 @@
 import Component from '@glimmer/component';
 
-export default class BMIComponent extends Component {
+interface Args {
+  measures: { height: number, weight: number },
+}
+
+export default class BMIComponent extends Component<Args> {
   get bmi() {
     const { measures } = this.args;
     const result = measures.weight / (measures.height * measures.height);
@@ -16,6 +20,6 @@ export default class BMIComponent extends Component {
       return '#E53E3E';
     }
 
-    return '#38A169';
+    return '#2B6CB0';
   }
 }
