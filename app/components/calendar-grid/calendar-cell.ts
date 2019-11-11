@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
-import { isSameDay } from 'efitness/utils/calendar-helper';
 import Event from 'efitness/models/event';
+import { comparator } from 'efitness/utils/calendar-helper';
 
 interface Args {
   date:Date,
@@ -19,7 +19,7 @@ export default class CalendarCellComponent extends Component<Args> {
   get isToday() {
     const { date } = this.args;
     const today = new Date();
-    return isSameDay(date, today);
+    return comparator.eq(date, today);
   }
 
   get day() {
@@ -29,7 +29,7 @@ export default class CalendarCellComponent extends Component<Args> {
 
   get hasMeasure() : string | undefined {
     const { events, date } = this.args;
-    let event : Event | undefined = events.find((record: Event) => isSameDay(record.day, date))
+    let event : Event | undefined = events.find((record: Event) => comparator.eq(record.day, date))
     if (event) {
       return event.measureId;
     }
@@ -39,7 +39,7 @@ export default class CalendarCellComponent extends Component<Args> {
 
   get hasTraining() : string | undefined {
     const { events, date } = this.args;
-    let event : Event | undefined = events.find((record: Event) => isSameDay(record.day, date))
+    let event : Event | undefined = events.find((record: Event) => comparator.eq(record.day, date))
     if (event) {
       return event.trainingId;
     }

@@ -6,7 +6,7 @@ import StoreService from 'ember-data/store';
 import Measure from 'efitness/models/measure';
 import Training from 'efitness/models/training';
 import Event from 'efitness/models/event';
-import { isSameDay } from 'efitness/utils/calendar-helper';
+import { comparator } from 'efitness/utils/calendar-helper';
 
 interface Args {
   date: Date,
@@ -39,7 +39,7 @@ export default class BottomSheetComponent extends Component<Args> {
 
   get measure(): Measure | null {
     const { events, date } = this.args;
-    let event: Event | undefined = events.find((event: Event) => isSameDay(event.day, date));
+    let event: Event | undefined = events.find((event: Event) => comparator.eq(event.day, date));
     if (event && event.measureId) {
       return this.store.peekRecord('measure', event.measureId)
     }
@@ -49,7 +49,7 @@ export default class BottomSheetComponent extends Component<Args> {
 
   get training(): Training | null {
     const { events, date } = this.args;
-    let event: Event | undefined = events.find((event: Event) => isSameDay(event.day, date));
+    let event: Event | undefined = events.find((event: Event) => comparator.eq(event.day, date));
     if (event && event.trainingId) {
       return this.store.peekRecord('training', event.trainingId)
     }

@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { toUp, toDown } from 'ember-animated/transitions/move-over';
 import { Swipe } from 'efitness/utils/constants';
-import { calendarMonth } from 'efitness/utils/calendar-helper';
+import { monthGenerator } from 'efitness/utils/calendar-helper';
 import GesturesService from 'efitness/services/gestures';
 
 interface Args {
@@ -53,7 +53,7 @@ export default class CalendarGridComponent extends Component<Args> {
   get month() {
     const { date } = this.args;
     if (date) {
-      const month = calendarMonth(date);
+      const month = monthGenerator.generate(date);
       return month;
     }
 

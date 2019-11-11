@@ -1,12 +1,12 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
-import { months } from 'efitness/utils/calendar-helper';
 import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
 import Training from 'efitness/models/training';
-import { TrainingBox, MeasuresBox } from 'efitness/components/bottom-sheet/utils';
-import { increaseMonth, decreaseMonth, isSameDay } from 'efitness/utils/calendar-helper';
+import { months } from 'efitness/utils/constants';
+import { TrainingBox, MeasuresBox } from 'efitness/utils/wrappers';
+import { dateHelper, comparator } from 'efitness/utils/calendar-helper';
 
 export default class CalendarController extends Controller {
   event?: Event;
@@ -31,13 +31,13 @@ export default class CalendarController extends Controller {
 
   @action incMonth() {
     if (this.date) {
-      this.date = increaseMonth(this.date);
+      this.date = dateHelper.increaseMonth(this.date);
     }
   }
 
   @action decMonth() {
     if (this.date) {
-      this.date = decreaseMonth(this.date);
+      this.date = dateHelper.decreaseMonth(this.date);
     }
   }
 
@@ -59,7 +59,7 @@ export default class CalendarController extends Controller {
   }
 
   getEvent(): Event {
-    let event = this.model.find((record: Event) => isSameDay(record.day, this.selectedDate))
+    let event = this.model.find((record: Event) => comparator.eq(record.day, this.selectedDate))
 
     if (!event) {
       event = this.store.createRecord('event', {

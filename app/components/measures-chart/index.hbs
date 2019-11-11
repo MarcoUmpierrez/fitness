@@ -1,14 +1,10 @@
 <MeasuresChart::Menu @period={{this.period}} @selectPeriod={{this.selectPeriod}}/>
 {{#if (eq this.period "week")}}
-  <div class="flex flex-row justify-around text-lg text-blue-700 py-2 mt-2">
-    <span {{on "click" this.previousWeek}} role="button">{{svg-jar "navigate_before-24px" class="fill-current" width="36px" height="36px"}}</span>
-    <span class="font-semibold leading-loose">{{this.week}}</span>
-    <span {{on "click" this.nextWeek}} role="button">{{svg-jar "navigate_next-24px" class="fill-current" width="36px" height="36px"}}</span>
-  </div>
+  <MeasuresChart::Selection @label={{this.week}} @previous={{this.previousWeek}} @next={{this.nextWeek}} />
 {{else if (eq this.period "month")}}
-  month
+  <MeasuresChart::Selection @label={{this.month}} @previous={{this.previousMonth}} @next={{this.nextMonth}} />
 {{else}}
-  year
+  <MeasuresChart::Selection @label={{this.year}} @previous={{this.previousYear}} @next={{this.nextYear}} />
 {{/if}}
 <MeasuresChart::Chart
   @title="Weight"

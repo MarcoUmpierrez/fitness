@@ -1,9 +1,9 @@
 import { helper } from '@ember/component/helper';
-import { increaseMonth } from 'efitness/utils/calendar-helper';
+import { dateHelper } from 'efitness/utils/calendar-helper';
 
 export function formatDateInput([ date ] : [ Date ]) {
   if (date) {
-    let localDate = increaseMonth(date);
+    let localDate = dateHelper.increaseMonth(date);
     let day = localDate.getDate().toString();
     day = parseInt(day) > 9 ? day : `0${day}`;
     let month = localDate.getMonth().toString();
