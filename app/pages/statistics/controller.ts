@@ -1,20 +1,26 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
+import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
 import { StatisticsBox } from 'efitness/utils/wrappers';
-import Event from 'efitness/models/event';
-
-
+import { userId } from 'efitness/utils/constants';
+import { inject as service } from '@ember/service';
+import SettingsService from 'efitness/services/settings';
+import { task } from 'ember-concurrency';
+import Task from 'ember-concurrency/task';
 
 export default class StatisticsController extends Controller {
+  @service settings!: SettingsService;
+
   @tracked model!: Event[];
 
-  get userMeasures(): UserMeasures {
-    return { height: 1.70, weight: this.lastMeasures.weight };
-  }
+  @tracked userMeasures!: UserMeasures;
+  @tracked statistics!: StatisticsBox[];
+  @tracked lastMeasures!: StatisticsBox;
 
-  get statistics(): StatisticsBox[] {
-    let statistics: StatisticsBox[] = [];
+  @(task(function*(this: StatisticsController) {
+    let user: UserSettings = yield this.settings.load(userId);
+    this.statistics = [];
     this.model.forEach((event: Event) => {
       if (event.measureId) {
         let statistic: StatisticsBox = new StatisticsBox();
@@ -26,16 +32,14 @@ export default class StatisticsController extends Controller {
           statistic.water = measure.water;
           statistic.muscle = measure.muscle;
           statistic.boneDensity = measure.boneDensity;
-          statistics.push(statistic);
+          this.statistics.push(statistic);
         }
       }
     });
 
-    return statistics.sortBy('date');
-  }
-
-  get lastMeasures(): StatisticsBox {
-    return this.statistics[this.statistics.length - 1];
-  }
+    this.statistics = this.statistics.sortBy('date');
+    this.lastMeasures = this.statistics[this.statistics.length - 1];
+    this.userMeasures = { height: user.height, weight: this.lastMeasures.weight };
+  }).restartable()) measures!: Task;
 
 }

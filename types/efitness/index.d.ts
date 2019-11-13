@@ -9,6 +9,11 @@ declare global {
     weight: number;
   }
 
+  interface UserSettings {
+    id: string;
+    height: number;
+  }
+
   interface MeasuresObj {
     weight?: number;
     fat?: number;

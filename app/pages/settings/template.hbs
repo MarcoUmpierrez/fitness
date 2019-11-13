@@ -1,4 +1,4 @@
-<div class="h-full">
+<div class="h-full" {{did-insert (perform this.loadSettings)}}>
   <header class="border-b-2 border-pink-400 py-2 text-center">
     <span class="font-sans font-semibold text-lg text-gray-800">Settings</span>
   </header>
@@ -6,17 +6,20 @@
       <span class="block my-2">{{svg-jar "account_circle-24px" class="fill-current text-pink-600" width="64px" height="64px"}}</span>
       <p class="text-lg text-justify mt-2">Introduce your height to calculate your Body Max Index (BMI). This value works as rough estimation of your current condition, dividing it into three categories: Underweight, normal weight or overweight. The BMI value will be displayed <LinkTo
        class="text-pink-600" aria-label="Statistics page" @route="statistics">here</LinkTo>.</p>
-      <input class="w-full h-10 appearance-none mt-4 px-2 border border-gray-500
-                      text-gray-700 focus:border-pink-600"
-             id="height"
-             type="number"
-             step=0.1
-             placeholder=0.0
-             value=1.70>
-             {{!-- {{on "input" this.onInput}} --}}
+
+      {{#if (and (not this.loadSettings.isRunning) this.user)}}
+        <input class="w-full h-10 appearance-none mt-4 px-2 border border-gray-500 text-right pr-8
+                        text-gray-700 focus:border-pink-600"
+              id="height"
+              type="number"
+              step=0.1
+              placeholder=0.0
+              value={{this.user.height}}
+              {{on "input" (perform this.saveSettings)}}>
+      {{/if}}
 
         <span class="block mt-5">{{svg-jar "folder-24px" class="fill-current text-pink-600" width="64px" height="64px"}}</span>
-        <p class="text-lg text-justify mt-2">Optionally, you can download the data you have stored as a backup and restore it later in the same device or a different one</p>
+        <p class="text-lg text-justify mt-2">Optionally, you can download the data you have stored as a backup and restore it later in the same device or a different one.</p>
         <div class="flex flex-row w-full mt-6">
           <button class="flex justify-center w-full shadow py-2 px-4 bg-pink-400 font-semibold text-white mr-2
                         hover:bg-pink-400 focus:shadow-outline focus:outline-none"
@@ -26,8 +29,8 @@
           </button>
           <button class="flex justify-center w-full shadow py-2 px-4 bg-pink-600 font-semibold text-white
                         hover:bg-pink-600 focus:shadow-outline focus:outline-none"
-                  type="button">
-                  {{!-- {{on "click" this.save}}> --}}
+                  type="button"
+                  {{on "click" this.download}}>
             <span>{{svg-jar "cloud_download-24px" class="fill-current" width="24px" height="24px"}}</span>&nbsp;Download
           </button>
         </div>

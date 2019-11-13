@@ -35,3 +35,5 @@ export const days: string[] = [
   'Saturday',
   'Sunday'
 ];
+
+export const userId: string = '186731fc-2248-4626-9ceb-c5c724355d55';

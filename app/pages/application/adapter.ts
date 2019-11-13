@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import { v4 } from 'uuid';
 import StoreService from 'ember-data/store';
-import { openDB } from 'idb';
+import { openDB, IDBPDatabase } from 'idb';
 
 export default class ApplicationAdapter extends DS.Adapter {
   // Database name
@@ -14,7 +14,6 @@ export default class ApplicationAdapter extends DS.Adapter {
     'measure',
     'routine',
     'training',
-    'user',
   ];
 
   // Database version number. Newer versions upgrade the schema if it's available
@@ -156,7 +155,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     return data;
   }
 
-  openDatabase(): Promise<any> {
+  openDatabase(): Promise<IDBPDatabase> {
     const models = this.models;
     return openDB(this.dbName, this.version, {
       upgrade(db) {

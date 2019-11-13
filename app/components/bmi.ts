@@ -5,7 +5,7 @@ interface Args {
 }
 
 export default class BMIComponent extends Component<Args> {
-  get bmi() {
+  get bmi(): number {
     const { measures } = this.args;
     const result = measures.weight / (measures.height * measures.height);
     return parseFloat(result.toFixed(1));
