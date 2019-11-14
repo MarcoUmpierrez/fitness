@@ -7,9 +7,7 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function () {
-  this.route('calendar', function () {
-    this.route('measures');
-  });
+  this.route('calendar');
   this.route('routines');
   this.route('statistics');
   this.route('settings');

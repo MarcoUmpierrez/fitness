@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import Chartist from 'chartist';
 import { StatisticsBox } from 'efitness/utils/wrappers';
 import { dateHelper, comparator } from 'efitness/utils/calendar-helper';
-import { Period } from 'efitness/utils/constants';
+import { Period, days, months } from 'efitness/utils/constants';
 
 interface Args {
   title: string,
@@ -19,19 +19,9 @@ export default class ChartComponent extends Component<Args> {
     super(owner, args);
   }
 
-  get axisX(): string[] {
-    const { period } = this.args;
-    if (period === Period.week) {
-      return ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-    } else if (period === Period.month) {
-      return ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'];
-    } else {
-      return ['JAN', 'FEB', 'MAR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-    }
-  }
-
-  initChart(_: HTMLElement, [chartId, propertyToRender, data, period, date, axisX]: [string, string, StatisticsBox[], string, Date, string[]]) {
-    let points: (undefined | number)[] = [];
+  initChart(_: HTMLElement, [chartId, propertyToRender, data, period, date]: [string, string, StatisticsBox[], string, Date]) {
+    let axisY: number[] = [];
+    let axisX: string[] = [];
     switch (period) {
       case Period.week:
         data.forEach((model: StatisticsBox) => {
@@ -39,32 +29,43 @@ export default class ChartComponent extends Component<Args> {
           if (comparator.gte(model.date, first) && comparator.lte(model.date, last)) {
             let day = model.date.getDay();
             day = day === 0? 6 : day - 1;
-            points[day] = model[propertyToRender];
+            axisY.push(model[propertyToRender]);
+            axisX.push(days[day].substring(0, 3).toUpperCase());
           }
         });
         break;
+
       case Period.month:
         data.forEach((model: StatisticsBox) => {
           let month = date.getMonth();
           if (model.date.getFullYear() === date.getFullYear() && model.date.getMonth() === month) {
-            let index = dateHelper.belongsToWeek(model.date, month);
-            if (index >= 0) {
-              points[index] = model[propertyToRender];
+            if (model.date.getMonth() === date.getMonth()) {
+              axisY.push(model[propertyToRender]);
+              axisX.push(model.date.getDate().toString());
             }
           }
         });
         break;
+
       case Period.year:
+        let usedMonth = -1;
         data.forEach((model: StatisticsBox) => {
           if (model.date.getFullYear() === date.getFullYear()) {
-            points[model.date.getMonth()] = model[propertyToRender];
+            if (usedMonth === model.date.getMonth()) {
+              axisY[axisY.length - 1] = model[propertyToRender];
+            } else {
+              axisY.push(model[propertyToRender]);
+              axisX.push(months[model.date.getMonth()].substring(0, 3).toUpperCase())
+              usedMonth = model.date.getMonth();
+            }
           }
         });
         break;
+
     }
 
     var chart = new Chartist.Line(`#${chartId}`, {
-      series: [points],
+      series: [axisY],
       labels: axisX
     }, {
       fullWidth: true,

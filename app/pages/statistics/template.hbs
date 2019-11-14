@@ -1,39 +1,12 @@
-<div class="h-full" {{did-insert (perform this.measures)}}>
+<div class="h-full">
   <header class="border-b-2 border-blue-400 py-2 text-center">
     <span class="font-sans font-semibold text-lg text-gray-800">Statistics</span>
   </header>
   <section class="page-height overflow-y-auto">
-    {{#if (and (not this.measures.isRunning) this.userMeasures)}}
+    {{#if this.userMeasures}}
       <Bmi @measures={{this.userMeasures}} />
-
-      <div class="flex flex-row justify-around text-blue-700 py-2">
-        <div class="flex flex-col items-center">
-          <span class="block">{{svg-jar "weight-scale-24px" class="fill-current" width="36px" height="36px"}}</span>
-          <span class="block">{{this.lastMeasures.weight}}</span>
-        </div>
-        <div class="flex flex-col items-center">
-          <span class="block">{{svg-jar "fat-24px" class="fill-current" width="36px" height="36px"}}</span>
-          <span class="block">{{this.lastMeasures.fat}}</span>
-        </div>
-
-        <div class="flex flex-col items-center">
-          <span class="block">{{svg-jar "water-24px" class="fill-current" width="36px" height="36px"}}</span>
-          <span class="block">{{this.lastMeasures.water}}</span>
-        </div>
-
-        <div class="flex flex-col items-center">
-          <span class="block">{{svg-jar "muscle-24px" class="fill-current" width="36px" height="36px"}}</span>
-          <span class="block">{{this.lastMeasures.muscle}}</span>
-        </div>
-
-        <div class="flex flex-col items-center">
-          <span class="block">{{svg-jar "bone_density-24px" class="fill-current" width="36px" height="36px"}}</span>
-          <span class="block">{{this.lastMeasures.boneDensity}}</span>
-        </div>
-      </div>
-
+      <MeasuresInline @measures={{this.lastMeasures}} />
       <MeasuresChart @model={{this.statistics}} @measures={{this.userMeasures}} />
     {{/if}}
-
   </section>
 </div>

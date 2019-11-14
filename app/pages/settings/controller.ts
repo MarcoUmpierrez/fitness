@@ -7,6 +7,15 @@ import { task, timeout } from 'ember-concurrency';
 import Task from 'ember-concurrency/task';
 import { tracked } from '@glimmer/tracking';
 
+interface BackUp {
+  events: object[],
+  exercise: object[],
+  measures: object[],
+  routines: object[],
+  trainings: object[],
+  settings: (UserSettings|null)[]
+}
+
 export default class SettingsController extends Controller {
   @service settings!: SettingsService;
 
@@ -27,18 +36,29 @@ export default class SettingsController extends Controller {
     }
   }).restartable()) saveSettings!: Task;
 
-  @action download() {
-     // Set up the link
-     const element: HTMLElement = document.createElement('a');
-     const link: HTMLLinkElement = element as HTMLLinkElement;
-     link.style.display = 'none';
-     link.setAttribute("target","_blank");
-     var blob = new Blob(["hello moto"], {type: "text/plain"});
-     link.setAttribute("href", URL.createObjectURL(blob));
+  @action async download() {
+    const today = new Date();
+    const backup = await this.CreateBackUp();
 
-     link.setAttribute("download","file.txt");
-     document.body.appendChild(link);
-     link.click();
-     document.body.removeChild(link)
+    // Create a link to download the generated backup file
+    const element: HTMLElement = document.createElement('a');
+    const link: HTMLLinkElement = element as HTMLLinkElement;
+    const blob = new Blob([JSON.stringify(backup)], {type: 'text/plain'});
+    link.setAttribute('target','_blank');
+    link.setAttribute('href', URL.createObjectURL(blob));
+    link.setAttribute('download',`backup-${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
+    link.click();
+    link.remove();
+  }
+
+  async CreateBackUp(): Promise<BackUp> {
+    let data: BackUp = { events: [], exercise: [], measures: [], routines: [], trainings: [], settings: [] };
+    (await this.store.findAll('event')).forEach(model => data.events.push(model.serialize()));
+    (await this.store.findAll('exercise')).forEach(model => data.exercise.push(model.serialize()));
+    (await this.store.findAll('measure')).forEach(model => data.measures.push(model.serialize()));
+    (await this.store.findAll('routine')).forEach(model => data.routines.push(model.serialize()));
+    (await this.store.findAll('training')).forEach(model => data.trainings.push(model.serialize()));
+    data.settings.push(await this.settings.load(userId));
+    return data;
   }
 }

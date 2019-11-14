@@ -4,11 +4,13 @@ import { action, set } from '@ember/object';
 import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
 import Training from 'efitness/models/training';
+import Routine from 'efitness/models/routine';
 import { months } from 'efitness/utils/constants';
 import { TrainingBox, MeasuresBox } from 'efitness/utils/wrappers';
 import { dateHelper, comparator } from 'efitness/utils/calendar-helper';
 
 export default class CalendarController extends Controller {
+  @tracked model!: {events: Event[], measures: Measure[], trainings: Training[], routines: Routine[] };
   event?: Event;
   selectedDate!:Date;
   @tracked date?: Date;
@@ -59,12 +61,12 @@ export default class CalendarController extends Controller {
   }
 
   getEvent(): Event {
-    let event = this.model.find((record: Event) => comparator.eq(record.day, this.selectedDate))
+    let event = this.model.events.find((record: Event) => comparator.eq(record.day, this.selectedDate))
 
     if (!event) {
       event = this.store.createRecord('event', {
         day: new Date(this.selectedDate.getTime())
-      })
+      }) as Event;
     }
 
     return event;

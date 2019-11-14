@@ -22,7 +22,7 @@ export default class MeasuresChartComponent extends Component<Args> {
   get week(): string | null {
     if (this.period === Period.week) {
       let { first, last } = dateHelper.getWeekDays(this.date);
-      return `${first.getDate()}.${first.getMonth()}.${first.getFullYear()} - ${last.getDate()}.${last.getMonth()}.${last.getFullYear()}`;
+      return `${first.getDate()} ${months[first.getMonth()].substring(0, 3).toUpperCase()} - ${last.getDate()} ${months[last.getMonth()].substring(0, 3).toUpperCase()}`;
     }
 
     return null;

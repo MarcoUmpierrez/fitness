@@ -60,23 +60,6 @@ class DateHelper {
     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   }
 
-  public belongsToWeek(date: Date, month: number): number {
-    const tmp = new Date(date.getTime());
-    let i = 0;
-    tmp.setDate(1);
-    while (tmp.getMonth() === month) {
-      const { first, last } = this.getWeekDays(tmp);
-      if (comparator.gte(date, first) && comparator.lte(date, last)) {
-        return i;
-      }
-
-      tmp.setDate(tmp.getDate() + 7);
-      i++;
-    }
-
-    return -1;
-  }
-
   private resetTime(date: Date): Date {
     const tmp = new Date(date.getTime());
     tmp.setHours(0, 0, 0, 0);

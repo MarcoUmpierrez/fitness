@@ -3,25 +3,13 @@ import { tracked } from '@glimmer/tracking';
 import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
 import { StatisticsBox } from 'efitness/utils/wrappers';
-import { userId } from 'efitness/utils/constants';
-import { inject as service } from '@ember/service';
-import SettingsService from 'efitness/services/settings';
-import { task } from 'ember-concurrency';
-import Task from 'ember-concurrency/task';
 
 export default class StatisticsController extends Controller {
-  @service settings!: SettingsService;
+  @tracked model!: {events: Event[], measures: Measure[], userSettings?: UserSettings };
 
-  @tracked model!: Event[];
-
-  @tracked userMeasures!: UserMeasures;
-  @tracked statistics!: StatisticsBox[];
-  @tracked lastMeasures!: StatisticsBox;
-
-  @(task(function*(this: StatisticsController) {
-    let user: UserSettings = yield this.settings.load(userId);
-    this.statistics = [];
-    this.model.forEach((event: Event) => {
+  get statistics() : StatisticsBox[] {
+    let statistics: StatisticsBox[] = [];
+    this.model.events.forEach((event: Event) => {
       if (event.measureId) {
         let statistic: StatisticsBox = new StatisticsBox();
         let measure: Measure = this.store.peekRecord('measure', event.measureId);
@@ -32,14 +20,22 @@ export default class StatisticsController extends Controller {
           statistic.water = measure.water;
           statistic.muscle = measure.muscle;
           statistic.boneDensity = measure.boneDensity;
-          this.statistics.push(statistic);
+          statistics.push(statistic);
         }
       }
     });
 
-    this.statistics = this.statistics.sortBy('date');
-    this.lastMeasures = this.statistics[this.statistics.length - 1];
-    this.userMeasures = { height: user.height, weight: this.lastMeasures.weight };
-  }).restartable()) measures!: Task;
+    return statistics.sortBy('date');;
+  }
 
+  get userMeasures(): UserMeasures | null {
+    if (this.model.userSettings && this.lastMeasures) {
+      return { height: this.model.userSettings.height, weight: this.lastMeasures.weight}
+    }
+    return null;
+  }
+
+  get lastMeasures(): StatisticsBox {
+    return this.statistics[this.statistics.length - 1];
+  }
 }
