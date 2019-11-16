@@ -2,10 +2,10 @@
   "name": "efitness",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for efitness goes here",
-  "repository": "",
+  "description": "Progressive Web Application for tracking weight measures and training routines.",
+  "repository": "https://github.com/MarcoUmpierrez/fitness.git",
   "license": "MIT",
-  "author": "",
+  "author": "Marco Umpiérrez",
   "directories": {
     "doc": "doc",
     "test": "tests"

@@ -5,19 +5,21 @@
   <section class="flex flex-col items-center page-height overflow-y-auto px-4">
     <span class="block my-2">{{svg-jar "account_circle-24px" class="fill-current text-pink-600" width="64px" height="64px"}}</span>
     <p class="text-lg text-justify mt-2">
-      Introduce your height to calculate your Body Max Index (BMI). This value works as a rough estimation of your current condition, dividing it into three categories: underweight, normal weight and overweight. The BMI value will be displayed
-      <LinkTo class="text-pink-600" aria-label="Statistics page" @route="statistics">here</LinkTo>.
+      Introduce your height to calculate your Body Max Index (BMI). This value works as a rough estimation of your current condition, dividing it into three categories: underweight, normal weight and overweight. The BMI value will be displayed in
+      <LinkTo class="text-pink-600" aria-label="Statistics page" @route="statistics">statistics page</LinkTo>.
     </p>
 
     {{#if (and (not this.loadSettings.isRunning) this.user)}}
-      <input class="w-full h-10 appearance-none mt-4 px-2 border border-gray-500 text-right pr-8
-                      text-gray-700 focus:border-pink-600"
+    <div class="flex flex-col justify-center w-full mt-4">
+      <label class="text-sm text-gray-800 mb-1" for="height">Height</label>
+      <input class="w-full h-10 appearance-none px-2 border border-gray-500 text-right text-gray-700 focus:border-pink-600"
             id="height"
             type="number"
             step={{0.1}}
             placeholder={{0.0}}
             value={{this.user.height}}
             {{on "input" (perform this.saveSettings)}}>
+    </div>
     {{/if}}
 
     <span class="block mt-5">{{svg-jar "folder-24px" class="fill-current text-pink-600" width="64px" height="64px"}}</span>
