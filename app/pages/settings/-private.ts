@@ -1,3 +1,12 @@
+export interface BackUp {
+  events: object[],
+  exercises: object[],
+  measures: object[],
+  routines: object[],
+  trainings: object[],
+  settings: (UserSettings | null)[]
+}
+
 export class AsyncFileReader {
   input: HTMLInputElement;
   boundListener!: (this: AsyncFileReader) => void;
@@ -38,4 +47,17 @@ export class AsyncFileReader {
   dispose() {
     this.input.remove();
   }
+}
+
+export const downloadFile = (backup: BackUp) => {
+  const today = new Date();
+  // Create a link to download the generated backup file
+  const element: HTMLElement = document.createElement('a');
+  const link: HTMLLinkElement = element as HTMLLinkElement;
+  const blob = new Blob([JSON.stringify(backup)], { type: 'text/plain' });
+  link.setAttribute('target', '_blank');
+  link.setAttribute('href', URL.createObjectURL(blob));
+  link.setAttribute('download', `backup-${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
+  link.click();
+  link.remove();
 }

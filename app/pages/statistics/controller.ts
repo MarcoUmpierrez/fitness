@@ -30,7 +30,7 @@ export default class StatisticsController extends Controller {
 
   get userMeasures(): UserMeasures | null {
     if (this.model.userSettings && this.lastMeasures) {
-      return { height: this.model.userSettings.height, weight: this.lastMeasures.weight}
+      return { height: this.model.userSettings.height as number, weight: this.lastMeasures.weight}
     }
     return null;
   }

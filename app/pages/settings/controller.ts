@@ -6,34 +6,25 @@ import { userId } from 'efitness/utils/constants';
 import { task, timeout } from 'ember-concurrency';
 import Task from 'ember-concurrency/task';
 import { tracked } from '@glimmer/tracking';
-import { AsyncFileReader } from './-private';
-
-interface BackUp {
-  events: object[],
-  exercises: object[],
-  measures: object[],
-  routines: object[],
-  trainings: object[],
-  settings: (UserSettings|null)[]
-}
+import { AsyncFileReader, downloadFile, BackUp } from './-private';
 
 export default class SettingsController extends Controller {
   @service settings!: SettingsService;
 
   @tracked user!: UserSettings;
 
-  @(task(function*(this: SettingsController) {
+  @(task(function* (this: SettingsController) {
     this.user = yield this.settings.load(userId);
     if (!this.user) {
-      this.user = { id: userId, height: 0 };
+      this.user = { id: userId, height: null };
     }
   })).drop() loadSettings!: Task;
 
-  @(task(function*(this: SettingsController, { target: { value } }:  { target: { value: string }}) {
+  @(task(function* (this: SettingsController, { target: { value } }: { target: { value: string } }) {
     yield timeout(500);
     const height = parseFloat(value);
     if (!isNaN(height)) {
-      this.settings.save({ id: userId, height: height});
+      this.settings.save({ id: userId, height: height });
     }
   }).restartable()) saveSettings!: Task;
 
@@ -43,38 +34,35 @@ export default class SettingsController extends Controller {
     const models: BackUp = JSON.parse(result);
     this.uploadBackUp(models);
     input.dispose();
+    this.loadSettings.perform();
+  }
+
+  @action async download() {
+    const backup = await this.createBackUp();
+    downloadFile(backup);
   }
 
   private async uploadBackUp(models: BackUp) {
-    console.log(models);
+    // clear store
+    this.store.unloadAll();
+
     if (models) {
-      models.events.forEach(event => event.attributes.day = new Date(event.attributes.day));
-      this.store.push({data: models.events });
-      this.store.push({data: models.exercises });
-      this.store.push({data: models.measures });
-      this.store.push({data: models.routines });
-      this.store.push({data: models.trainings });
+      // convert string dates into Date types
+      models.events.forEach((event: { attributes: { day: string | Date } }) => event.attributes.day = new Date(event.attributes.day));
+      models.routines.forEach((routine: { attributes: { createdOn: string | Date } }) => routine.attributes.createdOn = new Date(routine.attributes.createdOn));
+
+      this.store.push({ data: models.events });
+      this.store.push({ data: models.exercises });
+      this.store.push({ data: models.measures });
+      this.store.push({ data: models.routines });
+      this.store.push({ data: models.trainings });
+
       models.settings.forEach(setting => {
         if (setting) {
           this.settings.save(setting);
         }
       });
     }
-  }
-
-  @action async download() {
-    const today = new Date();
-    const backup = await this.createBackUp();
-
-    // Create a link to download the generated backup file
-    const element: HTMLElement = document.createElement('a');
-    const link: HTMLLinkElement = element as HTMLLinkElement;
-    const blob = new Blob([JSON.stringify(backup)], {type: 'text/plain'});
-    link.setAttribute('target','_blank');
-    link.setAttribute('href', URL.createObjectURL(blob));
-    link.setAttribute('download',`backup-${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
-    link.click();
-    link.remove();
   }
 
   private async createBackUp(): Promise<BackUp> {

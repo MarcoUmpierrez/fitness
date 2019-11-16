@@ -11,7 +11,7 @@ declare global {
 
   interface UserSettings {
     id: string;
-    height: number;
+    height: number | null;
   }
 
   interface MeasuresObj {
