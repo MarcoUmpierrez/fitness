@@ -13,13 +13,21 @@ interface Args {
   axisX: string[]
 }
 
+enum MeasureProperties {
+  weight = 'weight',
+  fat = 'fat',
+  muscle = 'muscle',
+  water = 'water',
+  boneDensity = 'boneDensity'
+}
+
 export default class ChartComponent extends Component<Args> {
 
   constructor(owner: unknown, args: Args) {
     super(owner, args);
   }
 
-  initChart(_: HTMLElement, [chartId, propertyToRender, data, period, date]: [string, string, StatisticsBox[], string, Date]) {
+  initChart(_: HTMLElement, [chartId, propertyToRender, data, period, date]: [string, MeasureProperties, StatisticsBox[], string, Date]) {
     let axisY: number[] = [];
     let axisX: string[] = [];
     switch (period) {
