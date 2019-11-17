@@ -10,16 +10,16 @@
     </p>
 
     {{#if (and (not this.loadSettings.isRunning) this.user)}}
-    <div class="flex flex-col justify-center w-full mt-4">
-      <label class="text-sm text-gray-800 mb-1" for="height">Height</label>
-      <input class="w-full h-10 appearance-none px-2 border border-gray-500 text-right text-gray-700 focus:border-pink-600"
-            id="height"
-            type="number"
-            step={{0.1}}
-            placeholder={{0.0}}
-            value={{this.user.height}}
-            {{on "input" (perform this.saveSettings)}}>
-    </div>
+      <div class="flex flex-col justify-center w-full mt-4">
+        <label class="text-sm text-gray-800 mb-1" for="height">Height</label>
+        <input class="w-full h-10 appearance-none px-2 border border-gray-500 text-right text-gray-700 focus:border-pink-600"
+              id="height"
+              type="number"
+              step={{0.1}}
+              placeholder={{0.0}}
+              value={{this.user.height}}
+              {{on "input" (perform this.saveSettings)}}>
+      </div>
     {{/if}}
 
     <span class="block mt-5">{{svg-jar "folder-24px" class="fill-current text-pink-600" width="64px" height="64px"}}</span>
