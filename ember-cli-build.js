@@ -40,6 +40,17 @@ module.exports = function (defaults) {
     },
     'ember-service-worker-update-notify': {
       pollingInterval: 1200000 // Default is 20min
+    },
+    'ember-cli-image-transformer': {
+      images: [
+        {
+          inputFilename: 'lib/images/logo.svg',
+          outputFileName: 'logo-',
+          convertTo: 'png',
+          destination: 'assets/icons/',
+          sizes: [32, 72, 96, 128, 144, 150, 152, 192, 280, 384, 512],
+        },
+      ],
     }
   });
 
