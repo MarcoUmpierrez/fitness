@@ -69,5 +69,4 @@ module.exports = function (/* environment, appConfig */) {
       tileColor: '#E53E3E'
     }
   };
-};
 }
