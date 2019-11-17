@@ -6,10 +6,12 @@ import { userId } from 'efitness/utils/constants';
 import { task, timeout } from 'ember-concurrency';
 import Task from 'ember-concurrency/task';
 import { tracked } from '@glimmer/tracking';
-import { AsyncFileReader, downloadFile, BackUp } from './-private';
+import { AsyncFileReader, downloadFile } from './-private';
+import BatchOperationsService from 'efitness/services/batch-operations';
 
 export default class SettingsController extends Controller {
   @service settings!: SettingsService;
+  @service batchOperations!: BatchOperationsService;
 
   @tracked user!: UserSettings;
 
@@ -57,6 +59,8 @@ export default class SettingsController extends Controller {
       this.store.push({ data: models.routines });
       this.store.push({ data: models.trainings });
 
+      await this.batchOperations.saveAll(models);
+
       models.settings.forEach(setting => {
         if (setting) {
           this.settings.save(setting);
@@ -76,7 +80,7 @@ export default class SettingsController extends Controller {
     return data;
   }
 
-  private pullPayload(model: any, type: string): object {
+  private pullPayload(model: any, type: string): BackUpModel {
     return {
       id: model.id,
       type: type,

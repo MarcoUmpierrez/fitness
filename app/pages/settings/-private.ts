@@ -1,12 +1,3 @@
-export interface BackUp {
-  events: object[],
-  exercises: object[],
-  measures: object[],
-  routines: object[],
-  trainings: object[],
-  settings: (UserSettings | null)[]
-}
-
 export class AsyncFileReader {
   input: HTMLInputElement;
   boundListener!: (this: AsyncFileReader) => void;

@@ -1,3 +1,18 @@
+// Database name for indexedDB
+export const databaseName = 'FitnessAdapter';
+
+// Database version number. Newer versions upgrade the schema if it's available
+export const databaseVersion: number = 1;
+
+// List of models
+export const models: string[] = [
+  'event',
+  'exercise',
+  'measure',
+  'routine',
+  'training',
+];
+
 export enum Swipe {
   Up = 'swipeup',
   Down = 'swipedown',

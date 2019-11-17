@@ -1,0 +1,27 @@
+.nav-btn span {
+  @apply p-4;
+  @apply border-t-4;
+  @apply border-transparent;
+  @apply inline-block;
+}
+
+#nav-index.active span {
+  @apply text-red-600;
+  @apply border-red-600;
+}
+#nav-calendar.active span {
+  @apply text-yellow-500;
+  @apply border-yellow-500;
+}
+#nav-routines.active span {
+  @apply text-green-400;
+  @apply border-green-400;
+}
+#nav-statistics.active span {
+  @apply text-blue-400;
+  @apply border-blue-400;
+}
+#nav-settings.active span {
+  @apply text-pink-400;
+  @apply border-pink-400;
+}

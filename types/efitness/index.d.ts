@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 declare global {
-  interface Array<T> extends Ember.ArrayPrototypeExtensions<T> {}
+  interface Array<T> extends Ember.ArrayPrototypeExtensions<T> { }
   // interface Function extends Ember.FunctionPrototypeExtensions {}
 
   interface UserMeasures {
@@ -28,6 +28,22 @@ declare global {
     repeatOnWeeks: number;
     lastUntil?: Date;
   }
+
+  interface BackUp {
+    events: object[],
+    exercises: object[],
+    measures: object[],
+    routines: object[],
+    trainings: object[],
+    settings: (UserSettings | null)[],
+    [index: string]: (object | UserSettings | null)[],
+  }
+
+  interface BackUpModel {
+    id: string,
+    type: string,
+    attributes: object[]
+  }
 }
 
-export {};
+export { };

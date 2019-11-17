@@ -2,22 +2,9 @@ import DS from 'ember-data';
 import { v4 } from 'uuid';
 import StoreService from 'ember-data/store';
 import { openDB, IDBPDatabase } from 'idb';
+import { models, databaseName, databaseVersion } from 'efitness/utils/constants';
 
 export default class ApplicationAdapter extends DS.Adapter {
-  // Database name
-  dbName: string = 'FitnessAdapter';
-
-  // models
-  models: Array<string> = [
-    'event',
-    'exercise',
-    'measure',
-    'routine',
-    'training',
-  ];
-
-  // Database version number. Newer versions upgrade the schema if it's available
-  version: number = 1;
 
   generateIdForRecord(store: StoreService, type: typeof DS.Model, inputProperties: Object): string | number {
     return v4();
@@ -156,8 +143,7 @@ export default class ApplicationAdapter extends DS.Adapter {
   }
 
   openDatabase(): Promise<IDBPDatabase> {
-    const models = this.models;
-    return openDB(this.dbName, this.version, {
+    return openDB(databaseName, databaseVersion, {
       upgrade(db) {
         // store list of models or find their names somewhere else?
         models.forEach((modelName: string) => {

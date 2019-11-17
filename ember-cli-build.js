@@ -25,6 +25,21 @@ module.exports = function (defaults) {
           ...isProduction ? [purgeCSS] : []
         ]
       }
+    },
+    svgJar: {
+      sourceDirs: ['svgs', 'public/images/icons']
+    },
+    'ember-service-worker': {
+      versionStrategy: 'every-build',
+      enabled: isProduction
+    },
+    'asset-cache': {
+      manual: [
+        'https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'
+      ]
+    },
+    'ember-service-worker-update-notify': {
+      pollingInterval: 1200000 // Default is 20min
     }
   });
 

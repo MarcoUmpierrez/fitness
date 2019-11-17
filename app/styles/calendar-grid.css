@@ -1,0 +1,7 @@
+.row-height {
+  height: calc((100vh - 165px)/6);
+}
+
+.cell-width {
+  width: calc(100vw/7);
+}
