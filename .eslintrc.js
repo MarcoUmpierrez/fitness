@@ -16,6 +16,7 @@ module.exports = {
     browser: true
   },
   rules: {
+    'ember/no-jquery': 'error'
   },
   overrides: [
     // node files
@@ -31,8 +32,7 @@ module.exports = {
         'server/**/*.js'
       ],
       parserOptions: {
-        sourceType: 'script',
-        ecmaVersion: 2015
+        sourceType: 'script'
       },
       env: {
         browser: false,

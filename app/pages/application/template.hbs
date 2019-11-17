@@ -1,0 +1,13 @@
+<main class="flex-1">
+  {{outlet}}
+</main>
+<footer class="w-full bg-gray-200 pin-b z-10">
+  <NavBar/>
+</footer>
+{{#if this.isProduction}}
+  <ServiceWorkerUpdateNotify>
+    <a class="service-worker-update-notify" href={{this.router.currentURL}}>
+      A new version is available, click here to update.
+    </a>
+  </ServiceWorkerUpdateNotify>
+{{/if}}

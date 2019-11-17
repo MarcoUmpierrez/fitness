@@ -1,9 +1,12 @@
 import { helper } from '@ember/component/helper';
+import { months } from 'efitness/utils/constants';
 
-const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-
-export function formatDate([date]:[Date]):string {
-  return `${date.getDate()} ${ months[date.getMonth()]}  ${date.getFullYear()}`
+export function formatDate([ date ] : [ Date ]) {
+  if (date) {
+    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+  } else {
+    return '';
+  }
 }
 
 export default helper(formatDate);

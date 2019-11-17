@@ -1,0 +1,48 @@
+<MeasuresChart::Menu @period={{this.period}} @selectPeriod={{this.selectPeriod}}/>
+{{#if (eq this.period "week")}}
+  <MeasuresChart::Selection @label={{this.week}} @previous={{this.previousWeek}} @next={{this.nextWeek}} />
+{{else if (eq this.period "month")}}
+  <MeasuresChart::Selection @label={{this.month}} @previous={{this.previousMonth}} @next={{this.nextMonth}} />
+{{else}}
+  <MeasuresChart::Selection @label={{this.year}} @previous={{this.previousYear}} @next={{this.nextYear}} />
+{{/if}}
+<MeasuresChart::Chart
+  @title="Weight"
+  @chartId="weight-chart"
+  @propertyToRender="weight"
+  @period={{this.period}}
+  @date={{this.date}}
+  @data={{@model}}
+/>
+<MeasuresChart::Chart
+  @title="Fat"
+  @chartId="fat-chart"
+  @propertyToRender="fat"
+  @period={{this.period}}
+  @date={{this.date}}
+  @data={{@model}}
+/>
+<MeasuresChart::Chart
+  @title="Water"
+  @chartId="water-chart"
+  @propertyToRender="water"
+  @period={{this.period}}
+  @date={{this.date}}
+  @data={{@model}}
+/>
+<MeasuresChart::Chart
+  @title="Muscle"
+  @chartId="muscle-chart"
+  @propertyToRender="muscle"
+  @period={{this.period}}
+  @date={{this.date}}
+  @data={{@model}}
+/>
+<MeasuresChart::Chart
+  @title="Bone Density"
+  @chartId="bone-chart"
+  @propertyToRender="boneDensity"
+  @period={{this.period}}
+  @date={{this.date}}
+  @data={{@model}}
+/>

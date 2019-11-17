@@ -1,0 +1,22 @@
+<h1 class="w-full border-b-2 border-yellow-500 mb-4 text-yellow-500 font-semibold">Actions</h1>
+
+<ul>
+  <li>
+    <button class="w-full flex shadow py-2 px-4 mt-2 bg-yellow-500 font-semibold text-white
+                  hover:bg-yellow-400 focus:shadow-outline focus:outline-none"
+            type="button"
+            {{on "click" @setMeasuresState}}>
+      <span>{{svg-jar "square_foot-24px" class="fill-current" width="24px"}}</span>
+      Measures
+    </button>
+  </li>
+  <li>
+    <button class="w-full flex shadow py-2 px-4 mt-2 bg-yellow-500 font-semibold text-white
+                  hover:bg-yellow-400 focus:shadow-outline focus:outline-none"
+            type="button"
+            {{on "click" @setTrainingState}}>
+      <span>{{svg-jar "directions_run-24px" class="fill-current" width="24px"}}</span>
+      Training
+    </button>
+  </li>
+</ul>

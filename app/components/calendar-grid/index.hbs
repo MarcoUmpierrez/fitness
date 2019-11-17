@@ -1,0 +1,25 @@
+<AnimatedContainer>
+  {{#animated-value @date rules=this.rules duration=500}}
+    <table class="table-auto w-full text-center">
+      <thead>
+        <tr class="h-12 border-b border-1 border-gray-400">
+          <th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.month as |week|}}
+          <tr class="text-xs border-b border-1 border-gray-200">
+            {{#each week as |day|}}
+              <CalendarGrid::CalendarCell
+                @currentDate={{@date}}
+                @date={{day}}
+                @events={{@events}}
+                @selectDay={{@selectDay}}
+              />
+            {{/each}}
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/animated-value}}
+</AnimatedContainer>

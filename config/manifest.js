@@ -6,9 +6,9 @@ module.exports = function (/* environment, appConfig */) {
 
   return {
     lang: "English",
-    name: "E-Fitness",
+    name: "eFitness",
     short_name: "eFitness",
-    description: "Application to keep track of weight and training sessions",
+    description: "Progressive Web Application for tracking weight measures and training routines",
     start_url: "/",
     display: "standalone",
     orientation: "any",
@@ -69,4 +69,5 @@ module.exports = function (/* environment, appConfig */) {
       tileColor: '#E53E3E'
     }
   };
+};
 }

@@ -1,0 +1,25 @@
+<div class="h-full">
+  <header class="relative w-full py-2 z-10 border-b-2 border-yellow-400 text-center bg-white">
+    <span class="font-sans font-semibold text-lg text-gray-800">{{this.month}}</span>
+  </header>
+  <section class="relative">
+    <CalendarGrid
+      @date={{this.date}}
+      @events={{this.model.events}}
+      @increaseMonth={{this.incMonth}}
+      @decreaseMonth={{this.decMonth}}
+      @selectDay={{this.selectDay}}
+    />
+    {{#if this.showBottomSheet}}
+      <div class="flex flex-col absolute z-10 inset-0 page-height" >
+        <BottomSheet
+          @events={{this.model.events}}
+          @date={{this.selectedDate}}
+          @onClose={{this.toggleBottomSheet}}
+          @onSaveMeasure={{this.saveMeasure}}
+          @onSaveTraining={{this.saveTraining}}
+        />
+      </div>
+    {{/if}}
+  </section>
+</div>
