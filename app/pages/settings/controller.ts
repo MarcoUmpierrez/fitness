@@ -81,10 +81,8 @@ export default class SettingsController extends Controller {
   }
 
   private pullPayload(model: any, type: string): BackUpModel {
-    return {
-      id: model.id,
-      type: type,
-      attributes: model.serialize()
-    };
+    let payload = model.serialize({ includeId: true });
+    payload.type = type;
+    return payload;
   }
 }

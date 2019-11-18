@@ -9,6 +9,7 @@ const purgeCSS = {
     content: [
       // add extra paths here for components/controllers which include tailwind classes
       './app/index.html',
+      './app/components/*.hbs',
       './app/components/**/*.hbs',
       './app/pages/**/*.hbs',
     ],
@@ -18,18 +19,6 @@ const purgeCSS = {
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    // outputPaths: {
-    //   app: {
-    //     html: 'index.html',
-    //     css: {
-    //       'app': '/assets/app.css',
-    //       'calendar-grid': '/assets/calendar-grid.css',
-    //       'nav-bar': '/assets/nav-bar.css',
-    //       'overrides': '/assets/overrides.css',
-    //       'waves': '/assets/waves.css',
-    //     }
-    //   }
-    // },
     postcssOptions: {
       compile: {
         plugins: [

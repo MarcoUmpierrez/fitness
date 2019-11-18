@@ -10,6 +10,7 @@ module.exports = function (/* environment, appConfig */) {
     short_name: "eFitness",
     description: "Progressive Web Application for tracking weight measures and training routines",
     start_url: "/",
+    scope: "/",
     display: "standalone",
     orientation: "any",
     background_color: "#44337A",
