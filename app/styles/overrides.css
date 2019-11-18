@@ -1,4 +1,5 @@
 /* chartist chart line color */
+/* purgecss ignore */
 .ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
   @apply stroke-current text-blue-600 !important;
 }

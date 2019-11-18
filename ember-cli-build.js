@@ -9,10 +9,10 @@ const purgeCSS = {
     content: [
       // add extra paths here for components/controllers which include tailwind classes
       './app/index.html',
-      './app/components/*.hbs',
       './app/components/**/*.hbs',
       './app/pages/**/*.hbs',
     ],
+    //whitelistPatterns: [/red$/],
     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
   }
 }
