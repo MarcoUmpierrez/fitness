@@ -33,7 +33,7 @@ module.exports = function (defaults) {
     },
     'ember-service-worker': {
       versionStrategy: 'every-build',
-      enabled: isProduction
+      enabled: false //isProduction
     },
     'asset-cache': {
       manual: [
