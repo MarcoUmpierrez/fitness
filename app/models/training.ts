@@ -1,5 +1,7 @@
 import DS from 'ember-data';
 import Routine from './routine';
+import Event from './event';
+
 const { Model, attr, belongsTo } = DS;
 
 export default class Training extends Model {

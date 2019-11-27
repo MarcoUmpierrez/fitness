@@ -53,6 +53,7 @@ export default class SettingsController extends Controller {
       models.events.forEach((event: { attributes: { day: string | Date } }) => event.attributes.day = new Date(event.attributes.day));
       models.routines.forEach((routine: { attributes: { createdOn: string | Date } }) => routine.attributes.createdOn = new Date(routine.attributes.createdOn));
 
+
       this.store.push({ data: models.events });
       this.store.push({ data: models.exercises });
       this.store.push({ data: models.measures });
@@ -71,18 +72,20 @@ export default class SettingsController extends Controller {
 
   private async createBackUp(): Promise<BackUp> {
     let data: BackUp = { events: [], exercises: [], measures: [], routines: [], trainings: [], settings: [] };
-    (await this.store.findAll('event')).forEach(model => data.events.push(this.pullPayload(model, 'event')));
-    (await this.store.findAll('exercise')).forEach(model => data.exercises.push(this.pullPayload(model, 'exercise')));
-    (await this.store.findAll('measure')).forEach(model => data.measures.push(this.pullPayload(model, 'measure')));
-    (await this.store.findAll('routine')).forEach(model => data.routines.push(this.pullPayload(model, 'routine')));
-    (await this.store.findAll('training')).forEach(model => data.trainings.push(this.pullPayload(model, 'training')));
+    (await this.store.findAll('event')).forEach(model => data.events.push(this.pullPayload(model)));
+    (await this.store.findAll('exercise')).forEach(model => data.exercises.push(this.pullPayload(model)));
+    (await this.store.findAll('measure')).forEach(model => data.measures.push(this.pullPayload(model)));
+    (await this.store.findAll('routine')).forEach(model => data.routines.push(this.pullPayload(model)));
+    (await this.store.findAll('training')).forEach(model => data.trainings.push(this.pullPayload(model)));
     data.settings.push(await this.settings.load(userId));
     return data;
   }
 
-  private pullPayload(model: any, type: string): BackUpModel {
+  private pullPayload(model: any): BackUpModel {
     let payload = model.serialize({ includeId: true });
-    payload.type = type;
+    payload.data.type = payload.type;
+    payload = payload.data;
+
     return payload;
   }
 }

@@ -3,6 +3,8 @@ import Hammer from 'hammerjs';
 import { Swipe } from 'efitness/utils/constants';
 
 export default class GesturesService extends Service {
+  gestures?: HammerManager;
+
   init() {
     super.init();
     const gestures = new Hammer(document.body);
@@ -11,15 +13,17 @@ export default class GesturesService extends Service {
   }
 
   addSwipeAction(callback: CallableFunction, direction: Swipe) {
-    const gestures = this.get('gestures');
-    gestures.on(direction, () => {
-      callback();
-    });
+    if (this.gestures) {
+      this.gestures.on(direction, () => {
+        callback();
+      });
+    }
   }
 
   removeSwipeAction(direction: Swipe) {
-    const gestures = this.get('gestures');
-    gestures.off(direction);
+    if (this.gestures) {
+      this.gestures.off(direction);
+    }
   }
 }
 

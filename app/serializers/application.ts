@@ -1,9 +1,14 @@
 import JSONAPISerializer from '@ember-data/serializer/json-api';
-import { dasherize } from '@ember/string';
+import { camelize } from '@ember/string';
 import StoreService from 'ember-data/store';
+import DS from 'ember-data';
 
 
 export default class Application extends JSONAPISerializer {
+  keyForAttribute(key: string) {
+    return camelize(key);
+  }
+
   normalizeResponse(store: StoreService, primaryModelClass: any, payload:any, id:string, requestType:string) {
     if (Array.isArray(payload)) {
       payload = payload.map(obj => {
@@ -13,7 +18,7 @@ export default class Application extends JSONAPISerializer {
         let attributes = {};
         for (const key in obj) {
           if (obj.hasOwnProperty(key)) {
-            attributes[dasherize(key)] = obj[key];
+            attributes[key] = obj[key];
           }
         }
 
@@ -29,6 +34,9 @@ export default class Application extends JSONAPISerializer {
     return super.normalizeResponse(store, primaryModelClass, payload, id, requestType);
   }
 
+  serialize(snapshot: DS.Snapshot, options: Object) {
+    return Object.assign(snapshot.attributes(), { id: snapshot.id, type: snapshot.modelName });
+  }
 }
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your serializers.
