@@ -50,8 +50,8 @@ export default class SettingsController extends Controller {
 
     if (models) {
       // convert string dates into Date types
-      models.events.forEach((event: { attributes: { day: string | Date } }) => event.attributes.day = new Date(event.attributes.day));
-      models.routines.forEach((routine: { attributes: { createdOn: string | Date } }) => routine.attributes.createdOn = new Date(routine.attributes.createdOn));
+      models.events.forEach((event: { day: string | Date }) => event.day = new Date(event.day));
+      models.routines.forEach((routine: { createdOn: string | Date }) => routine.createdOn = new Date(routine.createdOn));
 
 
       this.store.push({ data: models.events });
@@ -82,10 +82,6 @@ export default class SettingsController extends Controller {
   }
 
   private pullPayload(model: any): BackUpModel {
-    let payload = model.serialize({ includeId: true });
-    payload.data.type = payload.type;
-    payload = payload.data;
-
-    return payload;
+    return model.serialize({ includeId: true });
   }
 }

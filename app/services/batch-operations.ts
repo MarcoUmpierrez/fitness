@@ -5,26 +5,25 @@ import { models, databaseName, databaseVersion } from 'efitness/utils/constants'
 
 
 export default class BatchOperationsService extends Service {
-  async saveAll(models: BackUp) {
+  async saveAll(backup: BackUp) {
     let db = await this.openDatabase();
-
-    for (let property in models) {
-      let array = models[property] as BackUpModel[];
-      if (property !== 'settings' && array && Array.isArray(array) && array.length > 0) {
+    debugger
+    for (let property in backup) {
+      let models = backup[property] as BackUpModel[];
+      if (property !== 'settings' && models && Array.isArray(models) && models.length > 0) {
         let model: BackUpModel;
         let objectStore;
-        for (model of (models[property] as BackUpModel[])) {
+        for (model of models) {
           if (!objectStore) {
             objectStore = await db.transaction(model.type, 'readwrite').objectStore(model.type);
           }
 
-          let obj = Object.assign(model.attributes, { id: model.id });
           let record = await objectStore.get(model.id);
 
           if (record) {
-            await objectStore.put(obj);
+            await objectStore.put(model);
           } else {
-            await objectStore.add(obj);
+            await objectStore.add(model);
           }
         }
       }
