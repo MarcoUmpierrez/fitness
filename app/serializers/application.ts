@@ -26,7 +26,7 @@ export default class Application extends JSONAPISerializer {
         return {
           id,
           attributes,
-          type: pluralize(primaryModelClass.name)
+          type: obj["type"] || pluralize(primaryModelClass.name)
         }
       });
     }
