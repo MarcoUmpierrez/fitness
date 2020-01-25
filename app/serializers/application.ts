@@ -1,5 +1,6 @@
 import JSONAPISerializer from '@ember-data/serializer/json-api';
 import { camelize } from '@ember/string';
+import { pluralize } from 'ember-inflector';
 import StoreService from 'ember-data/store';
 import DS from 'ember-data';
 
@@ -21,15 +22,15 @@ export default class Application extends JSONAPISerializer {
             attributes[key] = obj[key];
           }
         }
-
+        
         return {
           id,
           attributes,
-          type: primaryModelClass.name
+          type: pluralize(primaryModelClass.name)
         }
       });
     }
-
+    if (payload.length > 0) debugger;
     payload = { data: payload };
     return super.normalizeResponse(store, primaryModelClass, payload, id, requestType);
   }
