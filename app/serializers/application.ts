@@ -30,7 +30,10 @@ export default class Application extends JSONAPISerializer {
         }
       });
     }
-    if (payload.length > 0) debugger;
+    if (payload.length > 0) {
+      console.log(payload);
+    }
+
     payload = { data: payload };
     return super.normalizeResponse(store, primaryModelClass, payload, id, requestType);
   }
