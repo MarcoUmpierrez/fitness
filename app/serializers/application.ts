@@ -17,7 +17,7 @@ export default class Application extends JSONAPISerializer {
 
         let attributes = {};
         for (const key in obj) {
-          if (obj.hasOwnProperty(key)) {
+          if (obj.hasOwnProperty(key) && key !== "type") {
             attributes[key] = obj[key];
           }
         }
