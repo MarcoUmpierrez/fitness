@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import StoreService from 'ember-data/store';
+import Store from '@ember-data/store';
 import Measure from 'efitness/models/measure';
 import Training from 'efitness/models/training';
 import Event from 'efitness/models/event';
@@ -17,7 +17,7 @@ interface Args {
 }
 
 export default class BottomSheetComponent extends Component<Args> {
-  @service store! : StoreService;
+  @service store! : Store;
   @tracked state! : number;
 
   constructor(owner: unknown, args: Args) {

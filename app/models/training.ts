@@ -1,8 +1,6 @@
-import DS from 'ember-data';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import Routine from './routine';
 import Event from './event';
-
-const { Model, attr, belongsTo } = DS;
 
 export default class Training extends Model {
   @belongsTo('event', { async: false }) event?: Event;

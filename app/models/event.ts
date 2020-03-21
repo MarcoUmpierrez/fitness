@@ -1,7 +1,6 @@
-import DS from 'ember-data';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import Training from './training';
 import Measure from './measure';
-const { Model, belongsTo, attr } = DS;
 
 export default class Event extends Model {
   @belongsTo('training', { async: false }) training?: Training;

@@ -1,6 +1,5 @@
-import DS from 'ember-data';
+import Model, { attr, hasMany } from '@ember-data/model';
 import Exercise from './exercise';
-const { Model, hasMany, attr } = DS;
 
 export default class Routine extends Model {
   @hasMany('exercise', { async: false }) exercises!: Exercise[];

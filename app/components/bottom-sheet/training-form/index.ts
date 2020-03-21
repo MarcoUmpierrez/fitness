@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import StoreService from 'ember-data/store';
+import Store from '@ember-data/store';
 import { inject as service } from '@ember/service';
 import Routine from 'efitness/models/routine';
 import Training from 'efitness/models/training';
@@ -15,7 +15,7 @@ interface Args {
 }
 
 export default class TrainingFormComponent extends Component<Args> {
-  @service store! : StoreService;
+  @service store! : Store;
   training!: TrainingBox;
   weeks!: Weeks;
   days!: Days;
