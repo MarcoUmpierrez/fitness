@@ -90,5 +90,11 @@
     "hammerjs": "^2.0.8",
     "idb": "^5.0.1",
     "uuid": "^7.0.2"
+  }, 
+  "resolutions": {
+    "@babel/core": "7.8.7",
+    "@babel/helpers": "7.8.4",
+    "@babel/plugin-transform-classes": "7.8.6",
+    "@babel/runtime": "7.8.7"
   }
 }
