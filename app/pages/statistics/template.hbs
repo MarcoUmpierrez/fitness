@@ -1,8 +1,8 @@
 <div class="h-full">
-  <header class="border-b-2 border-blue-400 py-2 text-center">
-    <span class="font-sans font-semibold text-lg text-gray-800">Statistics</span>
+  <header class="py-2 text-center border-b-2 border-blue-400">
+    <span class="font-sans text-lg font-semibold text-gray-800">Statistics</span>
   </header>
-  <section class="page-height overflow-y-auto">
+  <section class="overflow-y-auto page-height">
     {{#if this.userMeasures}}
       <Bmi @measures={{this.userMeasures}} />
       <MeasuresInline @measures={{this.lastMeasures}} />
