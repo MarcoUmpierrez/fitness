@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -30,6 +28,8 @@ module.exports = {
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
+        "tailwind.config.js",
+        "postcss.config.js",
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
