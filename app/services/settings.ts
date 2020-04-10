@@ -6,8 +6,8 @@ export default class SettingsService extends Service {
   store!: string;
   dbName!: string;
 
-  init() {
-    super.init();
+  constructor() {
+    super(...arguments);
     this.version = 1;
     this.store = 'user';
     this.dbName = 'SettingsStorage';

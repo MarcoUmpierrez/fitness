@@ -16,8 +16,8 @@ export default class CalendarController extends Controller {
   @tracked date?: Date;
   @tracked showBottomSheet?: Boolean;
 
-  init() {
-    super.init();
+  constructor() {
+    super(...arguments);
     this.date = new Date();
     this.selectedDate = new Date();
     this.showBottomSheet = false;
