@@ -1,4 +1,5 @@
 export interface Days {
+  None: number,
   Monday: number,
   Tuesday: number,
   Wednesday: number,
@@ -9,6 +10,7 @@ export interface Days {
 }
 
 export interface Weeks {
+  None: number,
   Week1: number,
   Week2: number,
   Week3: number,
@@ -16,6 +18,7 @@ export interface Weeks {
 }
 
 export const days: Days = {
+  None:      0b0000000,
   Monday:    0b0000001,
   Tuesday:   0b0000010,
   Wednesday: 0b0000100,
@@ -26,6 +29,7 @@ export const days: Days = {
 }
 
 export const weeks: Weeks = {
+  None: 0b00000,
   Week1: 0b0001,
   Week2: 0b0010,
   Week3: 0b0100,

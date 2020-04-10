@@ -26,7 +26,7 @@ export default class TrainingFormComponent extends Component<Args> {
     this.days = days;
     this.weeks = weeks;
 
-    this.training = new TrainingBox(false, 0b0000000, 0b0000);
+    this.training = new TrainingBox(false, days.None, weeks.None);
     const { model }  = this.args;
     if (model) {
       this.training.isRepeatable = model.isRepeatable;
