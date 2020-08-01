@@ -78,11 +78,11 @@ export default class CalendarController extends Controller {
   @action async saveMeasure(measuresBox: MeasuresBox) {
     let event = this.getEvent();
     let measure : Measure = this.getRecord<Measure>('measure', event.measureId);
-    measure.weight = measuresBox.weight || 0;
-    measure.fat = measuresBox.fat || 0;
-    measure.water = measuresBox.water || 0;
-    measure.muscle = measuresBox.muscle || 0;
-    measure.boneDensity = measuresBox.boneDensity || 0;
+    measure.weight = parseFloat(measuresBox.weight) || 0;
+    measure.fat = parseFloat(measuresBox.fat) || 0;
+    measure.water = parseFloat(measuresBox.water) || 0;
+    measure.muscle = parseFloat(measuresBox.muscle) || 0;
+    measure.boneDensity = parseFloat(measuresBox.boneDensity) || 0;
     measure.eventId = event.id;
     measure.event = event;
     measure.save();
