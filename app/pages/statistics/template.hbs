@@ -5,7 +5,7 @@
   <section class="overflow-y-auto page-height">
     {{#if this.userMeasures}}
       <Bmi @measures={{this.userMeasures}} />
-      <MeasuresInline @measures={{this.lastMeasures}} />
+      <MeasuresInline @measures={{this.statistics}} />
       <MeasuresChart @model={{this.statistics}} @measures={{this.userMeasures}} />
     {{/if}}
   </section>
