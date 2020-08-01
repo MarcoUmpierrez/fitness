@@ -1,0 +1,162 @@
+<h1
+  class="w-full mb-4 font-semibold text-yellow-500 border-b-2 border-yellow-500"
+>
+  {{@title}}
+</h1>
+<form class="w-full px-2">
+  <div class="mt-4 text-sm text-gray-800">
+    Select training
+  </div>
+  <div class="relative w-full">
+    <select
+      class="w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none focus:outline-none focus:border-yellow-500 focus:shadow-outline"
+    >
+      {{#each routines as |routine|}}
+        <option>
+          {{routine.name}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mt-4 text-sm text-gray-800">
+    Repeat
+  </div>
+  <div class="my-2 text-sm text-gray-800">
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          class="form-radio"
+          name="radio"
+          value={{false}}
+          checked={{if (not this.training.isRepeatable) "checked" ""}}
+          {{on "change" (fn this.setIsRepeatable false)}}
+        />
+        <span class="ml-2">
+          Only on:
+        </span>
+        <span class="font-semibold">
+          {{format-date @date}}
+        </span>
+      </label>
+    </div>
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          class="form-radio"
+          name="radio"
+          value={{true}}
+          checked={{if this.training.isRepeatable "checked" ""}}
+          {{on "change" (fn this.setIsRepeatable true)}}
+        />
+        <span class="ml-2">
+          Each...
+        </span>
+      </label>
+    </div>
+  </div>
+  {{#if this.training.isRepeatable}}
+    <div class="mt-4 text-sm text-gray-800">
+      Days per week
+    </div>
+    <div class="flex justify-around my-2">
+      <Ui::Pill
+        @label="M"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Monday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Monday}}
+      />
+      <Ui::Pill
+        @label="T"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Tuesday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Tuesday}}
+      />
+      <Ui::Pill
+        @label="W"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Wednesday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Wednesday}}
+      />
+      <Ui::Pill
+        @label="T"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Thursday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Thursday}}
+      />
+      <Ui::Pill
+        @label="F"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Friday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Friday}}
+      />
+      <Ui::Pill
+        @label="S"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Saturday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Saturday}}
+      />
+      <Ui::Pill
+        @label="S"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnDays this.days.Sunday}}
+        @onChange={{fn this.setRepeatOnDays this.days.Sunday}}
+      />
+    </div>
+    <div class="mt-4 text-sm text-gray-800">
+      Weeks per month
+    </div>
+    <div class="flex justify-around my-2">
+      <Ui::Pill
+        @label="Week 1"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnWeeks this.weeks.Week1}}
+        @onChange={{fn this.setRepeatOnWeeks this.weeks.Week1}}
+      />
+      <Ui::Pill
+        @label="Week 2"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnWeeks this.weeks.Week2}}
+        @onChange={{fn this.setRepeatOnWeeks this.weeks.Week2}}
+      />
+      <Ui::Pill
+        @label="Week 3"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnWeeks this.weeks.Week3}}
+        @onChange={{fn this.setRepeatOnWeeks this.weeks.Week3}}
+      />
+      <Ui::Pill
+        @label="Week 4"
+        @selectedColor="bg-yellow-500"
+        @isSelected={{binary-eq this.training.repeatOnWeeks this.weeks.Week4}}
+        @onChange={{fn this.setRepeatOnWeeks this.weeks.Week4}}
+      />
+    </div>
+    <div class="mt-4">
+      <label class="block pr-2 mb-1 text-gray-800" for="until">
+        Until
+      </label>
+      <input
+        class="w-full px-4 py-2 leading-tight text-gray-700 bg-white border border-gray-500 appearance-none focus:border-yellow-500"
+        id="until"
+        type="date"
+        value={{format-date-input this.training.lastUntil}}
+        min={{format-date-input @date}}
+        {{on "input" this.onInput}}
+      />
+    </div>
+  {{/if}}
+  <div class="grid grid-cols-2 gap-4 mt-4">
+    <Ui::Button
+      class="bg-yellow-800 hover:bg-yellow-700"
+      @onClick={{@onClose}}
+      @label="Cancel"
+    />
+    <Ui::Button
+      class="bg-yellow-500 hover:bg-yellow-400"
+      @onClick={{this.save}}
+      @label="Save"
+    />
+  </div>
+</form>

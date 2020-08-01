@@ -15,11 +15,11 @@ export class TrainingBox implements TrainingObj {
 }
 
 export class MeasuresBox implements MeasuresObj {
-  @tracked weight!: number;
-  @tracked fat!: number;
-  @tracked water!: number;
-  @tracked muscle!: number;
-  @tracked boneDensity!: number;
+  @tracked weight!: string;
+  @tracked fat!: string;
+  @tracked water!: string;
+  @tracked muscle!: string;
+  @tracked boneDensity!: string;
 }
 
 export class StatisticsBox extends MeasuresBox {

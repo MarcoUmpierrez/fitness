@@ -1,7 +1,10 @@
+<p class="text-center text-blue-700">{{format-date this.measure.date}}</p>
 <div class="flex flex-row justify-around py-2 text-blue-700">
-  <MeasuresInline::Measure @icon="weight-scale-24px" @value={{@measures.weight}} />
-  <MeasuresInline::Measure @icon="fat-24px" @value={{@measures.fat}} />
-  <MeasuresInline::Measure @icon="water-24px" @value={{@measures.water}} />
-  <MeasuresInline::Measure @icon="muscle-24px" @value={{@measures.muscle}} />
-  <MeasuresInline::Measure @icon="bone_density-24px" @value={{@measures.boneDensity}} />
+  <button {{on 'click' (fn this.previousMeasure)}}>{{svg-jar "navigate_before-24px" class="fill-current" width="36px" height="36px"}}</button>
+  <MeasuresInline::Measure @icon="weight-scale-24px" @value={{this.measure.weight}} />
+  <MeasuresInline::Measure @icon="fat-24px" @value={{this.measure.fat}} />
+  <MeasuresInline::Measure @icon="water-24px" @value={{this.measure.water}} />
+  <MeasuresInline::Measure @icon="muscle-24px" @value={{this.measure.muscle}} />
+  <MeasuresInline::Measure @icon="bone_density-24px" @value={{this.measure.boneDensity}} />
+  <button {{on 'click' (fn this.nextMeasure)}}>{{svg-jar "navigate_next-24px" class="fill-current" width="36px" height="36px"}}</button>
 </div>

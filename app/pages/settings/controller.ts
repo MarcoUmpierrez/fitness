@@ -12,6 +12,8 @@ import BatchOperationsService from 'efitness/services/batch-operations';
 export default class SettingsController extends Controller {
   @service settings!: SettingsService;
   @service batchOperations!: BatchOperationsService;
+  @tracked invalidHeight: boolean = false;
+  heightPattern = /[0|1]{1}[,|.]\d{1,2}/;
 
   @tracked user!: UserSettings;
 
@@ -24,9 +26,15 @@ export default class SettingsController extends Controller {
 
   @(task(function* (this: SettingsController, { target: { value } }: { target: { value: string } }) {
     yield timeout(500);
-    const height = parseFloat(value);
-    if (!isNaN(height)) {
-      this.settings.save({ id: userId, height: height });
+    this.invalidHeight = false;
+    const sanitizedValue = value.replace(',', '.')
+    if (sanitizedValue.match(this.heightPattern) && sanitizedValue.length <= 4) {
+      const height = parseFloat(sanitizedValue);
+      if (!isNaN(height)) {
+        this.settings.save({ id: userId, height: height });
+      }
+    } else {      
+      this.invalidHeight = true;
     }
   }).restartable()) saveSettings!: Task;
 
@@ -40,8 +48,12 @@ export default class SettingsController extends Controller {
   }
 
   @action async download() {
-    const backup = await this.createBackUp();
-    downloadFile(backup);
+    const today = new Date();
+    let fileName = prompt("Backup file name", `backup-${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
+    if (fileName !== null && fileName !== "" && !/[<>:"/\|?*]/g.test(fileName)) {
+      const backup = await this.createBackUp();
+      downloadFile(backup, fileName);
+    }
   }
 
   private async uploadBackUp(models: BackUp) {

@@ -4,7 +4,7 @@ import Store from '@ember-data/store';
 import { inject as service } from '@ember/service';
 import Routine from 'efitness/models/routine';
 import Training from 'efitness/models/training';
-import { Days, days, Weeks, weeks } from 'efitness/utils/binary-helper';
+import { Days, days, Weeks, weeks, changeFlag } from 'efitness/utils/binary-helper';
 import { TrainingBox } from 'efitness/utils/wrappers';
 
 interface Args {
@@ -44,11 +44,13 @@ export default class TrainingFormComponent extends Component<Args> {
     this.training.isRepeatable = value;
   }
 
-  @action setRepeatOnDays(flags: number) {
+  @action setRepeatOnDays(index: number) {    
+    const flags = changeFlag(this.training.repeatOnDays, index);
     this.training.repeatOnDays = flags;
   }
 
-  @action setRepeatOnWeeks(flags: number) {
+  @action setRepeatOnWeeks(index: number) {
+    const flags = changeFlag(this.training.repeatOnWeeks, index);
     this.training.repeatOnWeeks = flags;
   }
 
