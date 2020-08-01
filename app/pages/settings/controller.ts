@@ -28,8 +28,6 @@ export default class SettingsController extends Controller {
     yield timeout(500);
     this.invalidHeight = false;
     const sanitizedValue = value.replace(',', '.')
-    console.log("sanitize ", sanitizedValue)
-    console.log("validation: ", sanitizedValue.match(this.heightPattern), sanitizedValue.length)
     if (sanitizedValue.match(this.heightPattern) && sanitizedValue.length <= 4) {
       const height = parseFloat(sanitizedValue);
       if (!isNaN(height)) {
