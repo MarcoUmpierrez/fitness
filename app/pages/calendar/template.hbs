@@ -1,25 +1,45 @@
 <div class="h-full">
-  <header class="relative z-10 w-full py-2 text-center bg-white border-b-2 border-yellow-400">
-    <span class="font-sans text-lg font-semibold text-gray-800">{{this.month}}</span>
+  <header
+    class="relative z-10 w-full py-2 text-center bg-white border-b-2 border-yellow-400"
+  >
+    <span class="font-sans text-lg font-semibold text-gray-800">
+      {{this.calendar.month}}
+    </span>
   </header>
   <section class="relative">
-    <CalendarGrid
-      @date={{this.date}}
+    <Calendar::Grid
+      @date={{this.calendar.date}}
       @events={{@model.events}}
-      @increaseMonth={{this.incMonth}}
-      @decreaseMonth={{this.decMonth}}
+      @increaseMonth={{this.calendar.incMonth}}
+      @decreaseMonth={{this.calendar.decMonth}}
       @selectDay={{this.selectDay}}
     />
     {{#if this.showBottomSheet}}
-      <div class="absolute inset-0 z-10 flex flex-col page-height" >
-        <BottomSheet
-          @events={{@model.events}}
-          @date={{this.selectedDate}}
-          @onClose={{this.toggleBottomSheet}}
-          @onSaveMeasure={{this.saveMeasure}}
-          @onSaveTraining={{this.saveTraining}}
-        />
-      </div>
+      <Ui::BottomSheet @onClose={{this.toggleBottomSheet}}>
+        {{#if this.state.isMenuState}}
+          <Calendar::Menu
+            @title="Actions"
+            @setMeasuresState={{this.state.setMeasuresState}}
+            @setTrainingState={{this.state.setTrainingState}}
+          />
+        {{else if this.state.isMeasureState}}          
+          <Calendar::MeasureForm
+            @title="Measures"
+            @date={{this.calendar.selectedDate}}
+            @model={{this.measure}}
+            @onClose={{this.toggleBottomSheet}}
+            @onSave={{this.saveMeasure}}
+          />
+        {{else if this.state.isTrainingState}}
+          <Calendar::TrainingForm
+            @title="Training"
+            @date={{this.calendar.selectedDate}}
+            @model={{this.training}}
+            @onClose={{this.toggleBottomSheet}}
+            @onSave={{this.saveMeasure}}
+          />
+        {{/if}}
+      </Ui::BottomSheet>
     {{/if}}
   </section>
 </div>

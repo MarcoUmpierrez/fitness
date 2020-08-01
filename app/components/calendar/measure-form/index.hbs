@@ -1,0 +1,70 @@
+<h1
+  class="w-full mb-4 font-semibold text-yellow-500 border-b-2 border-yellow-500"
+>
+  {{@title}}
+</h1>
+<form class="w-full px-2">
+  <div class="my-2 text-lg font-semibold text-center">
+    <span>
+      {{format-date @date}}
+    </span>
+  </div>
+  <Calendar::MeasureForm::Input
+    @icon={{svg-jar
+      "weight-scale-24px"
+      class="fill-current"
+      width="36px"
+      height="36px"
+    }}
+    @id="inline-weight"
+    @value={{this.measures.weight}}
+    @onInput={{this.onInput}}
+  />
+  <Calendar::MeasureForm::Input
+    @icon={{svg-jar "fat-24px" class="fill-current" width="36px" height="36px"}}
+    @id="inline-fat"
+    @value={{this.measures.fat}}
+    @onInput={{this.onInput}}
+  />
+  <Calendar::MeasureForm::Input
+    @icon={{svg-jar "water-24px" class="fill-current" width="36px" height="36px"
+    }}
+    @id="inline-water"
+    @value={{this.measures.water}}
+    @onInput={{this.onInput}}
+  />
+  <Calendar::MeasureForm::Input
+    @icon={{svg-jar
+      "muscle-24px"
+      class="fill-current"
+      width="36px"
+      height="36px"
+    }}
+    @id="inline-muscle"
+    @value={{this.measures.muscle}}
+    @onInput={{this.onInput}}
+  />
+  <Calendar::MeasureForm::Input
+    @icon={{svg-jar
+      "bone_density-24px"
+      class="fill-current"
+      width="36px"
+      height="36px"
+    }}
+    @id="inline-bone-density"
+    @value={{this.measures.boneDensity}}
+    @onInput={{this.onInput}}
+  />
+  <div class="grid grid-cols-2 gap-4 mt-4">
+    <Ui::Button
+      class="bg-yellow-800 hover:bg-yellow-700"
+      @onClick={{@onClose}}
+      @label="Cancel"
+    />
+    <Ui::Button
+      class="bg-yellow-500 hover:bg-yellow-400"
+      @onClick={{this.save}}
+      @label="Save"
+    />
+  </div>
+</form>

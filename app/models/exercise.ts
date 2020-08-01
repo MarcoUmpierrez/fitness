@@ -8,7 +8,9 @@ export default class Exercise extends Model {
   @attr() order!: number;
   @attr() name!: string;
   @attr() description?: string;
+  @attr() series?: number;
   @attr() repetitions?: number;
+  @attr() time?: string;
   @attr() image?: string;
 }
 
