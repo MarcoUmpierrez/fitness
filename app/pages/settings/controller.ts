@@ -12,6 +12,8 @@ import BatchOperationsService from 'efitness/services/batch-operations';
 export default class SettingsController extends Controller {
   @service settings!: SettingsService;
   @service batchOperations!: BatchOperationsService;
+  @tracked invalidHeight: boolean = false;
+  heightPattern = /[0|1]{1}[,|.]\d{1,2}/;
 
   @tracked user!: UserSettings;
 
@@ -24,9 +26,17 @@ export default class SettingsController extends Controller {
 
   @(task(function* (this: SettingsController, { target: { value } }: { target: { value: string } }) {
     yield timeout(500);
-    const height = parseFloat(value);
-    if (!isNaN(height)) {
-      this.settings.save({ id: userId, height: height });
+    this.invalidHeight = false;
+    const sanitizedValue = value.replace(',', '.')
+    console.log("sanitize ", sanitizedValue)
+    console.log("validation: ", sanitizedValue.match(this.heightPattern), sanitizedValue.length)
+    if (sanitizedValue.match(this.heightPattern) && sanitizedValue.length <= 4) {
+      const height = parseFloat(sanitizedValue);
+      if (!isNaN(height)) {
+        this.settings.save({ id: userId, height: height });
+      }
+    } else {      
+      this.invalidHeight = true;
     }
   }).restartable()) saveSettings!: Task;
 
