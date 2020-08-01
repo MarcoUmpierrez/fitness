@@ -40,15 +40,14 @@ export class AsyncFileReader {
   }
 }
 
-export const downloadFile = (backup: BackUp) => {
-  const today = new Date();
+export const downloadFile = (backup: BackUp, fileName: string) => {
   // Create a link to download the generated backup file
   const element: HTMLElement = document.createElement('a');
   const link: HTMLLinkElement = element as HTMLLinkElement;
   const blob = new Blob([JSON.stringify(backup)], { type: 'text/plain' });
   link.setAttribute('target', '_blank');
   link.setAttribute('href', URL.createObjectURL(blob));
-  link.setAttribute('download', `backup-${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
+  link.setAttribute('download', fileName);
   link.click();
   link.remove();
 }

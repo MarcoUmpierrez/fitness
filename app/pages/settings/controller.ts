@@ -50,8 +50,12 @@ export default class SettingsController extends Controller {
   }
 
   @action async download() {
-    const backup = await this.createBackUp();
-    downloadFile(backup);
+    const today = new Date();
+    let fileName = prompt("Backup file name", `backup-${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
+    if (fileName !== null && fileName !== "" && !/[<>:"/\|?*]/g.test(fileName)) {
+      const backup = await this.createBackUp();
+      downloadFile(backup, fileName);
+    }
   }
 
   private async uploadBackUp(models: BackUp) {
