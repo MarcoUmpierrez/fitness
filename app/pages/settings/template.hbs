@@ -14,7 +14,8 @@
         <label class="mb-1 text-sm text-gray-800" for="height">Height</label>
         <input class="w-full h-10 px-2 text-right text-gray-700 border border-gray-500 appearance-none focus:border-pink-600"
               id="height"
-              type="tel"
+              type="text"
+              inputmode="decimal"
               pattern="[0|1]{1}[,|.]\d{1,2}"
               placeholder={{0.00}}
               value={{this.user.height}}
