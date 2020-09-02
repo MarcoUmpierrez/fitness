@@ -1283,7 +1283,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/ember-data@^3.16.2":
+"@types/ember-data@*", "@types/ember-data@^3.16.2":
   version "3.16.2"
   resolved "https://registry.yarnpkg.com/@types/ember-data/-/ember-data-3.16.2.tgz#2e53e7340f770c08b1388e7b36347c9fbfb7c162"
   integrity sha512-LilHloPKQ2JhpSRAwreNYMzpviwbDPcItgExsKwXbQ/Ve3zyvdN1CyY2Fj9RQoGsER/3H0Ih6maMMTdTlHIZag==
@@ -1291,6 +1291,27 @@
     "@types/ember" "*"
     "@types/ember__object" "*"
     "@types/rsvp" "*"
+
+"@types/ember-data__adapter@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__adapter/-/ember-data__adapter-3.16.0.tgz#62349481f28b1f4837f492c370b7b00c80774244"
+  integrity sha512-BWWpr7s8AVp6xVGCT+mASxs5W/SkFCKdfPZULgq8yMRF9cr1CoJWc/EV/w3cu/H88ZWxWyqn6U3NwPOxjyEUYg==
+  dependencies:
+    "@types/ember-data" "*"
+
+"@types/ember-data__model@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__model/-/ember-data__model-3.16.0.tgz#b4da5f50b18c2c14f91147f3e0afaaca0e3d28c1"
+  integrity sha512-u12r3BJlN8aEbujTo6TvzRNdY+bVA5VhxndC7wWKwmbBFKMHsoqm8eXSc9RVzIYyR9lk839GGgrW8uuTFMYd5g==
+  dependencies:
+    "@types/ember-data" "*"
+
+"@types/ember-data__store@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__store/-/ember-data__store-3.16.0.tgz#6f05d6ebd6a555ffb0dda15858141ff281c2bb11"
+  integrity sha512-YQkDqinYyuX/afgkDvcqurfu6cVsE8FHG8En8t1PokAZImq4VbD6lKoSpO4BLzvQ1RXLq8pMOoj3ogodfZWXrg==
+  dependencies:
+    "@types/ember-data" "*"
 
 "@types/ember-qunit@^3.4.9":
   version "3.4.9"
@@ -2936,9 +2957,9 @@ bindings@^1.5.0:
     file-uri-to-path "1.0.0"
 
 bl@^4.0.1:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/bl/-/bl-4.0.2.tgz#52b71e9088515d0606d9dd9cc7aa48dc1f98e73a"
-  integrity sha512-j4OH8f6Qg2bGuWfRiltT2HYGx0e1QcBTrK9KAHNMwMZdQnDZFk0ZSYIpADjYCB3U12nicC5tVJwSIhwOWjb4RQ==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/bl/-/bl-4.0.3.tgz#12d6287adc29080e22a705e5764b2a9522cdc489"
+  integrity sha512-fs4G6/Hu4/EE+F75J8DuN/0IpQqNjAdC7aEQv7Qt8MHGUH7Ckv2MwTEEeN9QehD0pfIDkMI1bkHYkKy7xHyKIg==
   dependencies:
     buffer "^5.5.0"
     inherits "^2.0.4"
