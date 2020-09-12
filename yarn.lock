@@ -1283,6 +1283,15 @@
   dependencies:
     "@types/node" "*"
 
+"@types/ember-data@*":
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/@types/ember-data/-/ember-data-3.16.3.tgz#ab1f1e1fa70fc0c72231ccf4a88eb4b4fdf3ff20"
+  integrity sha512-EBjuTBr8XID2H7ReuIFGRKshjc5zj4Kj2HkMQMRE/g2h5OpZ35dWIGJTBEYBORlEX/k7PLzu+xQrhpKnfDN5VA==
+  dependencies:
+    "@types/ember" "*"
+    "@types/ember__object" "*"
+    "@types/rsvp" "*"
+
 "@types/ember-data@^3.16.2":
   version "3.16.2"
   resolved "https://registry.yarnpkg.com/@types/ember-data/-/ember-data-3.16.2.tgz#2e53e7340f770c08b1388e7b36347c9fbfb7c162"
@@ -1291,6 +1300,27 @@
     "@types/ember" "*"
     "@types/ember__object" "*"
     "@types/rsvp" "*"
+
+"@types/ember-data__adapter@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__adapter/-/ember-data__adapter-3.16.0.tgz#62349481f28b1f4837f492c370b7b00c80774244"
+  integrity sha512-BWWpr7s8AVp6xVGCT+mASxs5W/SkFCKdfPZULgq8yMRF9cr1CoJWc/EV/w3cu/H88ZWxWyqn6U3NwPOxjyEUYg==
+  dependencies:
+    "@types/ember-data" "*"
+
+"@types/ember-data__model@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__model/-/ember-data__model-3.16.0.tgz#b4da5f50b18c2c14f91147f3e0afaaca0e3d28c1"
+  integrity sha512-u12r3BJlN8aEbujTo6TvzRNdY+bVA5VhxndC7wWKwmbBFKMHsoqm8eXSc9RVzIYyR9lk839GGgrW8uuTFMYd5g==
+  dependencies:
+    "@types/ember-data" "*"
+
+"@types/ember-data__store@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__store/-/ember-data__store-3.16.0.tgz#6f05d6ebd6a555ffb0dda15858141ff281c2bb11"
+  integrity sha512-YQkDqinYyuX/afgkDvcqurfu6cVsE8FHG8En8t1PokAZImq4VbD6lKoSpO4BLzvQ1RXLq8pMOoj3ogodfZWXrg==
+  dependencies:
+    "@types/ember-data" "*"
 
 "@types/ember-qunit@^3.4.9":
   version "3.4.9"
@@ -9208,9 +9238,9 @@ node-emoji@^1.8.1:
     lodash.toarray "^4.4.0"
 
 node-fetch@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
-  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-int64@^0.4.0:
   version "0.4.0"
