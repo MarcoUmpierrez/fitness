@@ -5,21 +5,21 @@ import { StatisticsBox } from 'efitness/utils/wrappers';
 import { dateHelper } from 'efitness/utils/calendar-helper';
 import { Period, months } from 'efitness/utils/constants';
 
-interface Args {
+interface MeasuresChartArgs {
   model: StatisticsBox[],
 }
 
-export default class MeasuresChartComponent extends Component<Args> {
-  @tracked period!: Period;
-  @tracked date!: Date;
+export default class MeasuresChartComponent extends Component<MeasuresChartArgs> {
+  @tracked public declare period: Period;
+  @tracked public declare date: Date;
 
-  constructor(owner: unknown, args: Args) {
+  constructor(owner: unknown, args: MeasuresChartArgs) {
     super(owner, args);
     this.date = new Date();
     this.period = Period.week;
   }
 
-  get week(): string | null {
+  public get week(): string | null {
     if (this.period === Period.week) {
       let { first, last } = dateHelper.getWeekDays(this.date);
       return `${first.getDate()} ${months[first.getMonth()].substring(0, 3).toUpperCase()} - ${last.getDate()} ${months[last.getMonth()].substring(0, 3).toUpperCase()}`;
@@ -28,7 +28,7 @@ export default class MeasuresChartComponent extends Component<Args> {
     return null;
   }
 
-  get month(): string | null {
+  public get month(): string | null {
     if (this.period === Period.month) {
       return months[this.date.getMonth()];
     }
@@ -36,7 +36,7 @@ export default class MeasuresChartComponent extends Component<Args> {
     return null;
   }
 
-  get year(): string | null {
+  public get year(): string | null {
     if (this.period === Period.year) {
       return this.date.getFullYear().toString();
     }
@@ -44,36 +44,36 @@ export default class MeasuresChartComponent extends Component<Args> {
     return null;
   }
 
-  @action selectPeriod(period: Period): void {
+  @action public selectPeriod(period: Period): void {
     this.period = period;
   }
 
-  @action previousWeek(): void {
+  @action public previousWeek(): void {
     this.date.setDate(this.date.getDate() - 7);
     this.date = this.date;
   }
 
-  @action nextWeek(): void {
+  @action public nextWeek(): void {
     this.date.setDate(this.date.getDate() + 7);
     this.date = this.date;
   }
 
-  @action previousYear(): void {
+  @action public previousYear(): void {
     this.date.setFullYear(this.date.getFullYear() - 1);
     this.date = this.date;
   }
 
-  @action nextYear(): void {
+  @action public nextYear(): void {
     this.date.setFullYear(this.date.getFullYear() + 1);
     this.date = this.date;
   }
 
-  @action previousMonth(): void {
+  @action public previousMonth(): void {
     this.date.setMonth(this.date.getMonth() - 1);
     this.date = this.date;
   }
 
-  @action nextMonth(): void {
+  @action public nextMonth(): void {
     this.date.setMonth(this.date.getMonth() + 1);
     this.date = this.date;
   }

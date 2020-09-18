@@ -2,18 +2,18 @@ import Service from '@ember/service';
 import { openDB, IDBPDatabase } from 'idb';
 
 export default class SettingsService extends Service {
-  version!: number;
-  store!: string;
-  dbName!: string;
+  public declare version: number;
+  public declare store: string;
+  public declare dbName: string;
 
-  init() {
+  public init() {
     super.init();
     this.version = 1;
     this.store = 'user';
     this.dbName = 'SettingsStorage';
   }
 
-  async save(user: UserSettings) {
+  public async save(user: UserSettings) {
     let db = await this.openDatabase();
     let objectStore = await db
       .transaction(this.store, 'readwrite')
@@ -29,7 +29,7 @@ export default class SettingsService extends Service {
     db.close();
   }
 
-  async load(id: string): Promise<UserSettings | null> {
+  public async load(id: string): Promise<UserSettings | null> {
     let db = await this.openDatabase();
     let record: UserSettings = await db
       .transaction(this.store)
@@ -43,7 +43,7 @@ export default class SettingsService extends Service {
     }
   }
 
-  openDatabase(): Promise<IDBPDatabase> {
+  public openDatabase(): Promise<IDBPDatabase> {
     const store = this.store;
     return openDB(this.dbName, this.version, {
       upgrade(db) {

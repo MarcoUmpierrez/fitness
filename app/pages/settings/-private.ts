@@ -1,6 +1,6 @@
 export class AsyncFileReader {
-  input: HTMLInputElement;
-  boundListener!: (this: AsyncFileReader) => void;
+  public input: HTMLInputElement;
+  private declare _boundListener: (this: AsyncFileReader) => void;
 
   constructor() {
     // Create the input to upload a file
@@ -9,10 +9,10 @@ export class AsyncFileReader {
     this.input.setAttribute('type', 'file');
   }
 
-  click(): Promise<string> {
+  public click(): Promise<string> {
     return new Promise<string>((resolve, _) => {
-      this.boundListener = this.onChange.bind(this, resolve);
-      this.input.addEventListener('change', this.boundListener);
+      this._boundListener = this.onChange.bind(this, resolve);
+      this.input.addEventListener('change', this._boundListener);
       this.input.click();
     });
   }
@@ -28,14 +28,14 @@ export class AsyncFileReader {
           resolve('');
         }
 
-        this.input.removeEventListener('change', this.boundListener);
+        this.input.removeEventListener('change', this._boundListener);
       }
 
       reader.readAsText(file);
     }
   }
 
-  dispose() {
+  public dispose() {
     this.input.remove();
   }
 }

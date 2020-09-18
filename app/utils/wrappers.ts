@@ -1,10 +1,10 @@
 import { tracked } from '@glimmer/tracking';
 
 export class TrainingBox implements TrainingObj {
-  @tracked repeatOnDays!: number;
-  @tracked repeatOnWeeks!: number;
-  @tracked isRepeatable!: boolean;
-  @tracked lastUntil?:Date;
+  @tracked public declare repeatOnDays: number;
+  @tracked public declare repeatOnWeeks: number;
+  @tracked public declare isRepeatable: boolean;
+  @tracked public lastUntil?:Date;
 
   constructor(isRepeatable: boolean, repeatOnDays: number, repeatOnWeeks: number, lastUntil?: Date) {
     this.isRepeatable = isRepeatable;
@@ -15,13 +15,13 @@ export class TrainingBox implements TrainingObj {
 }
 
 export class MeasuresBox implements MeasuresObj {
-  @tracked weight!: number;
-  @tracked fat!: number;
-  @tracked water!: number;
-  @tracked muscle!: number;
-  @tracked boneDensity!: number;
+  @tracked public declare weight: number;
+  @tracked public declare fat: number;
+  @tracked public declare water: number;
+  @tracked public declare muscle: number;
+  @tracked public declare boneDensity: number;
 }
 
 export class StatisticsBox extends MeasuresBox {
-  date!: Date;
+  public declare date: Date;
 }

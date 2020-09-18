@@ -5,7 +5,7 @@ import { Swipe } from 'efitness/utils/constants';
 import { monthGenerator } from 'efitness/utils/calendar-helper';
 import GesturesService from 'efitness/services/gestures';
 
-interface Args {
+interface CalendarGridArgs {
   date:Date,
   increaseMonth: () => void,
   decreaseMonth: () => void,
@@ -13,10 +13,10 @@ interface Args {
   selectDay:(date: Date) => void
 }
 
-export default class CalendarGridComponent extends Component<Args> {
-  @service gestures!: GesturesService;
+export default class CalendarGridComponent extends Component<CalendarGridArgs> {
+  @service public declare gestures: GesturesService;
 
-  constructor(owner:unknown, args:Args) {
+  constructor(owner:unknown, args:CalendarGridArgs) {
     super(owner, args);
 
     const { date } = this.args;
@@ -35,14 +35,14 @@ export default class CalendarGridComponent extends Component<Args> {
     }
   }
 
-  willDestroy() {
+  public willDestroy() {
     if (this.gestures) {
       this.gestures.removeSwipeAction(Swipe.Up);
       this.gestures.removeSwipeAction(Swipe.Down);
     }
   }
 
-  rules({ oldItems, newItems }: { oldItems: Date[], newItems : Date[]}) {
+  public rules({ oldItems, newItems }: { oldItems: Date[], newItems : Date[]}) {
     if (oldItems[0] > newItems[0]) {
       return toDown;
     } else {
@@ -50,7 +50,7 @@ export default class CalendarGridComponent extends Component<Args> {
     }
   }
 
-  get month() {
+  public get month() {
     const { date } = this.args;
     if (date) {
       const month = monthGenerator.generate(date);

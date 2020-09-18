@@ -4,9 +4,9 @@ import SettingsService from 'efitness/services/settings';
 import { userId } from 'efitness/utils/constants';
 
 export default class StatisticsRoute extends Route {
-  @service settings!: SettingsService;
+  @service public declare settings: SettingsService;
 
-  async model() {
+  public async model() {
     const [ events, measures, userSettings ] = await Promise.all([
       this.store.findAll('event'),
       this.store.findAll('measure'),

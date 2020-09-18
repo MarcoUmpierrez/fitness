@@ -3,17 +3,17 @@ import { action } from '@ember/object';
 import Measure from 'efitness/models/measure';
 import { MeasuresBox } from 'efitness/utils/wrappers';
 
-interface Args {
+interface MeasureFormArgs {
   date: Date,
   model: Measure | null,
   onClose: () => void,
   onSave: (measures: MeasuresObj) => void,
 }
 
-export default class MeasureFormComponent extends Component<Args> {
-  measures!: MeasuresBox;
+export default class MeasureFormComponent extends Component<MeasureFormArgs> {
+  public declare measures: MeasuresBox;
 
-  constructor(owner: unknown, args: Args) {
+  constructor(owner: unknown, args: MeasureFormArgs) {
     super(owner, args);
 
     this.measures = new MeasuresBox();
@@ -27,7 +27,7 @@ export default class MeasureFormComponent extends Component<Args> {
     }
   }
 
-  @action onInput({ target: { id, value } }:  { target: { id: string, value: string }}) {
+  @action public onInput({ target: { id, value } }:  { target: { id: string, value: string }}) {
     switch (id) {
       case 'inline-weight':
         this.measures.weight = parseFloat(value);
@@ -50,7 +50,7 @@ export default class MeasureFormComponent extends Component<Args> {
     }
   }
 
-  @action save() {
+  @action public save() {
     const { onSave } = this.args;
     onSave(this.measures);
   }

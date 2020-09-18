@@ -1,16 +1,16 @@
 import DS from 'ember-data';
 import { v4 } from 'uuid';
-import StoreService from 'ember-data/store';
+import Store from 'ember-data/store';
 import { openDB, IDBPDatabase } from 'idb';
 import { models, databaseName, databaseVersion } from 'efitness/utils/constants';
 
 export default class ApplicationAdapter extends DS.Adapter {
 
-  generateIdForRecord(store: StoreService, type: typeof DS.Model, inputProperties: Object): string | number {
+  generateIdForRecord(_store: Store, _type: typeof DS.Model, _inputProperties: Object): string | number {
     return v4();
   }
 
-  async createRecord(store: StoreService, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
+  async createRecord(_store: Store, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
     let db = await this.openDatabase();
     let data = this.serialize(snapshot, { includeId: true });
     let modelName = type.modelName.toString();
@@ -22,7 +22,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     return data;
   }
 
-  async findRecord(store: StoreService, type: typeof DS.Model, id: string | number): Promise<any> {
+  async findRecord(_store: Store, type: typeof DS.Model, id: string | number): Promise<any> {
     let db = await this.openDatabase();
     let modelName = type.modelName.toString();
     let record = await db
@@ -33,7 +33,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     return record;
   }
 
-  async findAll(store: StoreService, type: typeof DS.Model) {
+  async findAll(_store: Store, type: typeof DS.Model) {
     let db = await this.openDatabase();
     let data: Array<any> = [];
     let modelName = type.modelName.toString();
@@ -48,7 +48,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     return data;
   }
 
-  async updateRecord(store: StoreService, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
+  async updateRecord(_store: Store, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
     let db = await this.openDatabase();
     let data = this.serialize(snapshot, { includeId: true });
     let modelName = type.modelName.toString();
@@ -65,7 +65,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     return data;
   }
 
-  async deleteRecord(store: StoreService, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
+  async deleteRecord(_store: Store, type: typeof DS.Model, snapshot: DS.Snapshot): Promise<any> {
     let db = await this.openDatabase();
     let data = this.serialize(snapshot, { includeId: true });
     let modelName = type.modelName.toString();
@@ -77,7 +77,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     return data;
   }
 
-  async queryRecord(store: StoreService, type: typeof DS.Model, query: any): Promise<any> {
+  async queryRecord(_store: Store, type: typeof DS.Model, query: any): Promise<any> {
     let db = await this.openDatabase();
     let modelName = type.modelName.toString();
     let queryKeys = Object.keys(query);
@@ -91,7 +91,7 @@ export default class ApplicationAdapter extends DS.Adapter {
         let queryKeyMatchCount = 0;
 
         queryKeys.forEach((key: string) => {
-          if (cursor.value[key] === query[key]) {
+          if (cursor?.value[key] === query[key]) {
             queryKeyMatchCount++;
           }
         });
@@ -109,7 +109,7 @@ export default class ApplicationAdapter extends DS.Adapter {
     }
   }
 
-  async query(store: StoreService, type: typeof DS.Model, query: any): Promise<any> {
+  async query(_store: Store, type: typeof DS.Model, query: any): Promise<any> {
     let db = await this.openDatabase();
     let data: Array<any> = [];
     let modelName = type.modelName.toString();
@@ -124,7 +124,7 @@ export default class ApplicationAdapter extends DS.Adapter {
         let queryKeyMatchCount = 0;
 
         queryKeys.forEach(key => {
-          if (cursor.value[key] === query[key]) {
+          if (cursor?.value[key] === query[key]) {
             queryKeyMatchCount++;
           }
         });

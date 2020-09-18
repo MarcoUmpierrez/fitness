@@ -10,10 +10,10 @@ import { AsyncFileReader, downloadFile } from './-private';
 import BatchOperationsService from 'efitness/services/batch-operations';
 
 export default class SettingsController extends Controller {
-  @service settings!: SettingsService;
-  @service batchOperations!: BatchOperationsService;
+  @service public declare settings: SettingsService;
+  @service public declare batchOperations: BatchOperationsService;
 
-  @tracked user!: UserSettings;
+  @tracked public declare user: UserSettings;
 
   @(task(function* (this: SettingsController) {
     this.user = yield this.settings.load(userId);
@@ -30,7 +30,7 @@ export default class SettingsController extends Controller {
     }
   }).restartable()) saveSettings!: Task;
 
-  @action async upload() {
+  @action public async upload() {
     const input = new AsyncFileReader();
     const result = await input.click();
     const models: BackUp = JSON.parse(result);
@@ -39,7 +39,7 @@ export default class SettingsController extends Controller {
     this.loadSettings.perform();
   }
 
-  @action async download() {
+  @action public async download() {
     const backup = await this.createBackUp();
     downloadFile(backup);
   }

@@ -7,20 +7,20 @@ import Training from 'efitness/models/training';
 import { Days, days, Weeks, weeks } from 'efitness/utils/binary-helper';
 import { TrainingBox } from 'efitness/utils/wrappers';
 
-interface Args {
+interface TrainingFormArgs {
   date: Date,
   model: Training | null,
   onClose: () => void,
   onSave: (training: TrainingObj) => void,
 }
 
-export default class TrainingFormComponent extends Component<Args> {
-  @service store! : StoreService;
-  training!: TrainingBox;
-  weeks!: Weeks;
-  days!: Days;
+export default class TrainingFormComponent extends Component<TrainingFormArgs> {
+  @service public declare store: StoreService;
+  public declare training: TrainingBox;
+  public declare weeks: Weeks;
+  public declare days: Days;
 
-  constructor(owner: unknown, args: Args) {
+  constructor(owner: unknown, args: TrainingFormArgs) {
     super(owner, args);
 
     this.days = days;
@@ -36,27 +36,27 @@ export default class TrainingFormComponent extends Component<Args> {
     }
   }
 
-  get routines(): Routine[] {
+  public get routines(): Routine[] {
     return this.store.peekAll('routine');
   }
 
-  @action setIsRepeatable(value: boolean) {
+  @action public setIsRepeatable(value: boolean) {
     this.training.isRepeatable = value;
   }
 
-  @action setRepeatOnDays(flags: number) {
+  @action public setRepeatOnDays(flags: number) {
     this.training.repeatOnDays = flags;
   }
 
-  @action setRepeatOnWeeks(flags: number) {
+  @action public setRepeatOnWeeks(flags: number) {
     this.training.repeatOnWeeks = flags;
   }
 
-  @action onInput({ target: { valueAsDate } }:  { target: { valueAsDate: Date }}) {
+  @action public onInput({ target: { valueAsDate } }:  { target: { valueAsDate: Date }}) {
     this.training.lastUntil = new Date(valueAsDate.getTime());
   }
 
-  @action save() {
+  @action public save() {
     const { onSave } = this.args;
     onSave(this.training);
   }

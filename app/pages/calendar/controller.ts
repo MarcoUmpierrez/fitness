@@ -10,20 +10,20 @@ import { TrainingBox, MeasuresBox } from 'efitness/utils/wrappers';
 import { dateHelper, comparator } from 'efitness/utils/calendar-helper';
 
 export default class CalendarController extends Controller {
-  @tracked model!: {events: Event[], measures: Measure[], trainings: Training[], routines: Routine[] };
-  event?: Event;
-  selectedDate!:Date;
-  @tracked date?: Date;
-  @tracked showBottomSheet?: Boolean;
+  public declare model: {events: Event[], measures: Measure[], trainings: Training[], routines: Routine[] };
+  @tracked public showBottomSheet?: Boolean;
+  @tracked public date?: Date;
+  public declare selectedDate:Date;
+  public event?: Event;
 
-  init() {
+  public init() {
     super.init();
     this.date = new Date();
     this.selectedDate = new Date();
     this.showBottomSheet = false;
   }
 
-  get month() {
+  public get month() {
     if (this.date) {
       return `${months[this.date.getMonth()]} ${this.date.getFullYear()}`;
     }
@@ -31,28 +31,28 @@ export default class CalendarController extends Controller {
     return null;
   }
 
-  @action incMonth() {
+  @action public incMonth() {
     if (this.date) {
       this.date = dateHelper.increaseMonth(this.date);
     }
   }
 
-  @action decMonth() {
+  @action public decMonth() {
     if (this.date) {
       this.date = dateHelper.decreaseMonth(this.date);
     }
   }
 
-  @action toggleBottomSheet() {
+  @action public toggleBottomSheet() {
     this.showBottomSheet = !this.showBottomSheet;
   }
 
-  @action selectDay(date: Date) {
+  @action public selectDay(date: Date) {
     set(this, 'selectedDate', date);
     this.toggleBottomSheet();
   }
 
-  getRecord<T>(type: string, id?: string): T  {
+  public getRecord<T>(type: string, id?: string): T  {
     if (id) {
       return this.store.peekRecord(type, id);
     } else {
@@ -60,7 +60,7 @@ export default class CalendarController extends Controller {
     }
   }
 
-  getEvent(): Event {
+  public getEvent(): Event {
     let event = this.model.events.find((record: Event) => comparator.eq(record.day, this.selectedDate))
 
     if (!event) {
@@ -72,7 +72,7 @@ export default class CalendarController extends Controller {
     return event;
   }
 
-  @action async saveMeasure(measuresBox: MeasuresBox) {
+  @action public async saveMeasure(measuresBox: MeasuresBox) {
     let event = this.getEvent();
     let measure : Measure = this.getRecord<Measure>('measure', event.measureId);
     measure.weight = measuresBox.weight || 0;
@@ -90,7 +90,7 @@ export default class CalendarController extends Controller {
     this.toggleBottomSheet();
   }
 
-  @action async saveTraining(trainingBox: TrainingBox) {
+  @action public async saveTraining(trainingBox: TrainingBox) {
     let event = this.getEvent();
     let training : Training = this.getRecord<Training>('training', event.trainingId);
     training.isRepeatable = trainingBox.isRepeatable;
