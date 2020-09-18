@@ -24,7 +24,7 @@ export default class StatisticsController extends Controller {
       }
     });
 
-    return statistics.sortBy('date');;
+    return statistics.sortBy('date');
   }
 
   public get userMeasures(): UserMeasures | null {

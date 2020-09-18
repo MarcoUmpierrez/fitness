@@ -1,55 +1,58 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
-import { action, set } from '@ember/object';
+import { action } from '@ember/object';
 import Event from 'efitness/models/event';
 import Measure from 'efitness/models/measure';
 import Training from 'efitness/models/training';
 import Routine from 'efitness/models/routine';
-import { months } from 'efitness/utils/constants';
 import { TrainingBox, MeasuresBox } from 'efitness/utils/wrappers';
-import { dateHelper, comparator } from 'efitness/utils/calendar-helper';
+import { comparator } from 'efitness/utils/calendar-helper';
+import CalendarState from './-private/state';
+import Calendar from './-private/calendar';
 
 export default class CalendarController extends Controller {
-  public declare model: {events: Event[], measures: Measure[], trainings: Training[], routines: Routine[] };
   @tracked public showBottomSheet?: Boolean;
-  @tracked public date?: Date;
-  public declare selectedDate:Date;
+  public declare model: {events: Event[], measures: Measure[], trainings: Training[], routines: Routine[] };
   public event?: Event;
+  public state: CalendarState;
+  public calendar: Calendar;
 
-  public init() {
-    super.init();
-    this.date = new Date();
-    this.selectedDate = new Date();
+  constructor() {
+    super(...arguments);
     this.showBottomSheet = false;
+    this.state = new CalendarState();
+    this.calendar = new Calendar();
   }
 
-  public get month() {
-    if (this.date) {
-      return `${months[this.date.getMonth()]} ${this.date.getFullYear()}`;
+  public get measure(): Measure | null {
+    let event: Event = this.getEvent();
+    if (event && event.measureId) {
+      return this.store.peekRecord('measure', event.measureId)
     }
 
     return null;
   }
 
-  @action public incMonth() {
-    if (this.date) {
-      this.date = dateHelper.increaseMonth(this.date);
+  public get training(): Training | null {
+    let event: Event = this.getEvent();
+    if (event && event.trainingId) {
+      return this.store.peekRecord('training', event.trainingId)
     }
-  }
 
-  @action public decMonth() {
-    if (this.date) {
-      this.date = dateHelper.decreaseMonth(this.date);
-    }
-  }
-
-  @action public toggleBottomSheet() {
-    this.showBottomSheet = !this.showBottomSheet;
+    return null;
   }
 
   @action public selectDay(date: Date) {
-    set(this, 'selectedDate', date);
+    this.calendar.selectedDate = date;
     this.toggleBottomSheet();
+  }  
+
+  @action public toggleBottomSheet() {
+    this.showBottomSheet = !this.showBottomSheet;
+
+    if (!this.showBottomSheet) {
+      this.state.reset();
+    }
   }
 
   public getRecord<T>(type: string, id?: string): T  {
@@ -61,11 +64,11 @@ export default class CalendarController extends Controller {
   }
 
   public getEvent(): Event {
-    let event = this.model.events.find((record: Event) => comparator.eq(record.day, this.selectedDate))
+    let event = this.model.events.find((record: Event) => comparator.eq(record.day, this.calendar.selectedDate))
 
     if (!event) {
       event = this.store.createRecord('event', {
-        day: new Date(this.selectedDate.getTime())
+        day: new Date(this.calendar.selectedDate.getTime())
       }) as Event;
     }
 
@@ -75,11 +78,11 @@ export default class CalendarController extends Controller {
   @action public async saveMeasure(measuresBox: MeasuresBox) {
     let event = this.getEvent();
     let measure : Measure = this.getRecord<Measure>('measure', event.measureId);
-    measure.weight = measuresBox.weight || 0;
-    measure.fat = measuresBox.fat || 0;
-    measure.water = measuresBox.water || 0;
-    measure.muscle = measuresBox.muscle || 0;
-    measure.boneDensity = measuresBox.boneDensity || 0;
+    measure.weight = parseFloat(measuresBox.weight) || 0;
+    measure.fat = parseFloat(measuresBox.fat) || 0;
+    measure.water = parseFloat(measuresBox.water) || 0;
+    measure.muscle = parseFloat(measuresBox.muscle) || 0;
+    measure.boneDensity = parseFloat(measuresBox.boneDensity) || 0;
     measure.eventId = event.id;
     measure.event = event;
     measure.save();

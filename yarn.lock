@@ -1340,7 +1340,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/ember-data@^3.16.4":
+"@types/ember-data@*", "@types/ember-data@^3.16.4":
   version "3.16.4"
   resolved "https://registry.yarnpkg.com/@types/ember-data/-/ember-data-3.16.4.tgz#a55d48e37ccfb3574b79376338fb35f94629d008"
   integrity sha512-OfMcYeeUYbNAz2OgwGMrDEDXuexkqKLzl/emColhv1InLiMhKAKdnFIOXckxReE+453mO6HbiAADaVDi3LZKyw==
@@ -1348,6 +1348,27 @@
     "@types/ember" "*"
     "@types/ember__object" "*"
     "@types/rsvp" "*"
+
+"@types/ember-data__adapter@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__adapter/-/ember-data__adapter-3.16.0.tgz#62349481f28b1f4837f492c370b7b00c80774244"
+  integrity sha512-BWWpr7s8AVp6xVGCT+mASxs5W/SkFCKdfPZULgq8yMRF9cr1CoJWc/EV/w3cu/H88ZWxWyqn6U3NwPOxjyEUYg==
+  dependencies:
+    "@types/ember-data" "*"
+
+"@types/ember-data__model@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__model/-/ember-data__model-3.16.0.tgz#b4da5f50b18c2c14f91147f3e0afaaca0e3d28c1"
+  integrity sha512-u12r3BJlN8aEbujTo6TvzRNdY+bVA5VhxndC7wWKwmbBFKMHsoqm8eXSc9RVzIYyR9lk839GGgrW8uuTFMYd5g==
+  dependencies:
+    "@types/ember-data" "*"
+
+"@types/ember-data__store@^3.16.0":
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/@types/ember-data__store/-/ember-data__store-3.16.0.tgz#6f05d6ebd6a555ffb0dda15858141ff281c2bb11"
+  integrity sha512-YQkDqinYyuX/afgkDvcqurfu6cVsE8FHG8En8t1PokAZImq4VbD6lKoSpO4BLzvQ1RXLq8pMOoj3ogodfZWXrg==
+  dependencies:
+    "@types/ember-data" "*"
 
 "@types/ember-qunit@^3.4.9":
   version "3.4.9"

@@ -15,11 +15,11 @@ declare global {
   }
 
   interface MeasuresObj {
-    weight?: number;
-    fat?: number;
-    water?: number;
-    muscle?: number;
-    boneDensity?: number;
+    weight?: string;
+    fat?: string;
+    water?: string;
+    muscle?: string;
+    boneDensity?: string;
   }
 
   interface TrainingObj {

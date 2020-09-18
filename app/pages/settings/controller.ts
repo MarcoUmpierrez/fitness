@@ -14,6 +14,9 @@ export default class SettingsController extends Controller {
   @service public declare batchOperations: BatchOperationsService;
 
   @tracked public declare user: UserSettings;
+  @tracked public invalidHeight: boolean = false;
+  public heightPattern: RegExp = /[0|1]{1}[,|.]\d{1,2}/;
+
 
   @(task(function* (this: SettingsController) {
     this.user = yield this.settings.load(userId);
@@ -24,9 +27,15 @@ export default class SettingsController extends Controller {
 
   @(task(function* (this: SettingsController, { target: { value } }: { target: { value: string } }) {
     yield timeout(500);
-    const height = parseFloat(value);
-    if (!isNaN(height)) {
-      this.settings.save({ id: userId, height: height });
+    this.invalidHeight = false;
+    const sanitizedValue = value.replace(',', '.')
+    if (sanitizedValue.match(this.heightPattern) && sanitizedValue.length <= 4) {
+      const height = parseFloat(sanitizedValue);
+      if (!isNaN(height)) {
+        this.settings.save({ id: userId, height: height });
+      }
+    } else {      
+      this.invalidHeight = true;
     }
   }).restartable()) saveSettings!: Task;
 
@@ -40,8 +49,12 @@ export default class SettingsController extends Controller {
   }
 
   @action public async download() {
-    const backup = await this.createBackUp();
-    downloadFile(backup);
+    const today = new Date();
+    let fileName = prompt("Backup file name", `backup-${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}-${today.getHours()}.${today.getMinutes()}`);
+    if (fileName !== null && fileName !== "" && !/[<>:"/\|?*]/g.test(fileName)) {
+      const backup = await this.createBackUp();
+      downloadFile(backup, fileName);
+    }
   }
 
   private async uploadBackUp(models: BackUp) {

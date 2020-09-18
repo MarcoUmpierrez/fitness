@@ -20,7 +20,9 @@ module.exports = {
   env: {
     browser: true
   },
-  rules: {},
+  rules: {
+    'ember/no-jquery': 'error'
+  },
   overrides: [
     // node files
     {
@@ -28,6 +30,8 @@ module.exports = {
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
+        "tailwind.config.js",
+        "postcss.config.js",
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',

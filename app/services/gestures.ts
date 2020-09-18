@@ -5,8 +5,8 @@ import { Swipe } from 'efitness/utils/constants';
 export default class GesturesService extends Service {
   gestures?: HammerManager;
 
-  init() {
-    super.init();
+  constructor() {
+    super(...arguments);
     const gestures = new Hammer(document.body);
     gestures.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     this.set('gestures', gestures);
