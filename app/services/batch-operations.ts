@@ -7,7 +7,7 @@ import { models, databaseName, databaseVersion } from 'efitness/utils/constants'
 export default class BatchOperationsService extends Service {
   async saveAll(backup: BackUp) {
     let db = await this.openDatabase();
-    debugger
+    
     for (let property in backup) {
       let models = backup[property] as BackUpModel[];
       if (property !== 'settings' && models && Array.isArray(models) && models.length > 0) {
