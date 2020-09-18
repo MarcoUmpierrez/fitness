@@ -1028,7 +1028,7 @@
     ember-cli-test-info "^1.0.0"
     ember-cli-typescript "^3.1.3"
 
-"@ember-data/store@3.21.0":
+"@ember-data/store@3.21.0", "@ember-data/store@^3.21.0":
   version "3.21.0"
   resolved "https://registry.yarnpkg.com/@ember-data/store/-/store-3.21.0.tgz#3a93a87cdbae37757bc9e009fc654b74b17ccf70"
   integrity sha512-oDoHEw+6fZV7NKq+Kg75KoP6g3RHWF/MHecqqLA8vOanKC2oKMxghFhZJ9YzWuhs9PmmYyqjfFBr10NF6g9CXg==
